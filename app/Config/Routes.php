@@ -68,6 +68,9 @@ $routes->add('/mempelai', 'Mempelai::index');
 $routes->post('/mempelai/save', 'Mempelai::process');
 // $routes->post('/mempelai/upload', 'Mempelai::upload');
 
+// pengaturan
+$routes->add('/pengaturan', 'Pengaturan::index');
+
 
 /*
  * --------------------------------------------------------------------

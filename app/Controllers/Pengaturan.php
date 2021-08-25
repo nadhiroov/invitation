@@ -2,12 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-
-class Pengaturan extends BaseController
+class Pengaturan extends Core
 {
 	public function index()
 	{
-		//
+		$this->view->setData(['menu_website' => 'active', 'sub_pengaturan' => 'active']);
+		return view('setting/fitur/index');
 	}
 }

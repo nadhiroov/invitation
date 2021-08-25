@@ -67,8 +67,8 @@
                                         <span class="sub-item">Tampilan</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="../components/buttons.html">
+                                <li class="<?= @$sub_pengaturan; ?>">
+                                    <a href="pengaturan">
                                         <span class="sub-item">Pengaturan</span>
                                     </a>
                                 </li>
