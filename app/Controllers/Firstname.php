@@ -3,13 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\MFirstname;
+use App\Models\MPengaturan;
 
 class Firstname extends Core
 {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->model = new MFirstname();
+		$this->model = new MPengaturan();
 	}
 
 	public function index()

@@ -83,8 +83,8 @@
                                         <span class="sub-item">Mempelai</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="../components/panels.html">
+                                <li class="<?= @$sub_acara; ?>">
+                                    <a href="acara">
                                         <span class="sub-item">Acara</span>
                                     </a>
                                 </li>
