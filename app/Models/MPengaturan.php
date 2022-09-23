@@ -7,36 +7,78 @@ use CodeIgniter\Model;
 class MPengaturan extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'mpengaturans';
+	protected $table                = 'settings';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = [];
+	protected $allowedFields        = ['id_user', 'to', 'template', 'template', 'sampul', 'mempelai', 'acara', 'ucapan', 'galeri', 'cerita'];
 
-	// Dates
-	protected $useTimestamps        = false;
-	protected $dateFormat           = 'datetime';
-	protected $createdField         = 'created_at';
-	protected $updatedField         = 'updated_at';
-	protected $deletedField         = 'deleted_at';
+	// Method firstname
+	public function getListData($param = '')
+	{
+		$data = $this->where('id_user', $_SESSION['id'])->findAll();
+		$records = [];
+		if ($data != null) {
+			$datas = json_decode($data[0]['to']);
+			foreach ($datas as $row) {
+				$records[] = array(
+					$row[0],
+					'<div class="form-button-action">
+						<a href="#edit" data-toggle="modal" data-id="' . $row[0] . '" class="btn btn-link btn-primary btn-lg" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+						<a onclick="confirmDelete(this)" data-target="firstname/delete/" data-id="' . $row[0] . '" class="btn btn-link btn-danger confirmDelete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-times"></i></a>
+					</div>'
+				);
+			}
+		}		
+		return $records;
+	}
 
-	// Validation
-	protected $validationRules      = [];
-	protected $validationMessages   = [];
-	protected $skipValidation       = false;
-	protected $cleanValidationRules = true;
+	public function getList() // fungsi untuk mendapatkan list guest, data sudah matang
+	{
+		$data = $this->where('id_user', $_SESSION['id'])->findAll();
+		if ($data != null) {
+			$data = [
+				'data' 	=> json_decode($data[0]['to']),
+				'id'	=> $data[0]['id']
+			];
+			return $data;
+		}
+		return null;
+	}
 
-	// Callbacks
-	protected $allowCallbacks       = true;
-	protected $beforeInsert         = [];
-	protected $afterInsert          = [];
-	protected $beforeUpdate         = [];
-	protected $afterUpdate          = [];
-	protected $beforeFind           = [];
-	protected $afterFind            = [];
-	protected $beforeDelete         = [];
-	protected $afterDelete          = [];
+	public function saving($param)
+	{
+		$data = [
+			'id_user'	=> $_SESSION['id'],
+			'to'		=> json_encode(array_values($param['data']))
+		];
+		if (isset($param['id'])) {
+			$data['id'] = intval($param['id']);
+		}
+		try {
+			$this->save($data);
+			$result = [
+				'code' 		=> 1,
+				'message'	=> 'Data saved!!',
+				'title'		=> 'Success'
+			];
+		} catch (\Exception $e) {
+			$result = [
+				'code' 		=> $e->getCode(),
+				'message'	=> $e->getMessage(),
+				'title'		=> 'Error'
+			];
+		}
+		return $result;
+	}
+	
+	//Method setting
+	public function getSetting()
+	{
+		$res = $this->where('id_user', $_SESSION['id'])->findAll();
+		return $res[0];
+	}
 }

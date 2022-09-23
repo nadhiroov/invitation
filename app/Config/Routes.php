@@ -70,6 +70,11 @@ $routes->post('/mempelai/save', 'Mempelai::process');
 
 // pengaturan
 $routes->add('/pengaturan', 'Pengaturan::index');
+$routes->post('/pengaturan/save', 'Pengaturan::process');
+
+// acara
+$routes->add('/acara', 'Acara::index');
+$routes->post('/acara/save', 'Acara::process');
 
 
 /*
