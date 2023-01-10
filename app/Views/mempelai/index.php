@@ -92,7 +92,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= @$content['foto_pria']; ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/public/assets/img/mpria.jpg' ?>'" alt="Card image cap">
+                                    <img class="card-img" src="<?= @$content['foto_pria']; ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mpria.jpg' ?>'" alt="Card image cap">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -143,7 +143,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= @$content['foto_wanita'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/public/assets/img/mwanita.jpg' ?>'" alt="Card image cap">
+                                    <img class="card-img" src="<?= @$content['foto_wanita'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mwanita.jpg' ?>'" alt="Card image cap">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -193,7 +193,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= @$content['foto_sampul']; ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/public/assets/img/couple.jpg' ?>'" alt="Card image cap">
+                                    <img class="card-img" src="<?= @$content['foto_sampul']; ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/couple.jpg' ?>'" alt="Card image cap">
                                 </div>
                             </div>
                             <div class="col-md-3">

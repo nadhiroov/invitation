@@ -1,7 +1,7 @@
 <?= $this->extend('layout/template'); ?>
 
 <?= $this->section('css'); ?>
-<link rel="stylesheet" href="<?= base_url(); ?>/public/template/css/bootstrap4-toggle.css">
+<link rel="stylesheet" href="<?= base_url(); ?>/template/css/bootstrap4-toggle.css">
 <?= $this->endSection(); ?>
 
 <?= $this->section('content'); ?>
@@ -78,7 +78,7 @@
 
 
 <?= $this->section('js'); ?>
-<script src="<?= base_url(); ?>/public/template/js/bootstrap4-toggle.js"></script>
+<script src="<?= base_url(); ?>/template/js/bootstrap4-toggle.js"></script>
 <script>
     $(document).ready(function() {
         $('.form-submit').submit(function(e) {

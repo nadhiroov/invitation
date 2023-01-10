@@ -108,8 +108,8 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('js'); ?>
-<script src="<?= base_url(); ?>/public/template/js/plugin/datatables/datatables.min.js"></script>
-<script src="<?= base_url(); ?>/public/template/js/plugin/sweetalert/sweetalert.min.js"></script>
+<script src="<?= base_url(); ?>/template/js/plugin/datatables/datatables.min.js"></script>
+<script src="<?= base_url(); ?>/template/js/plugin/sweetalert/sweetalert.min.js"></script>
 <script>
     $('#mytable').DataTable({
         "pageLength": 10,

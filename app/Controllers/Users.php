@@ -33,6 +33,16 @@ class Users extends Core
 		return view('user/index', $data);
 	}
 
+	public function edit($id = '')
+	{
+		$data = $this->model->find($id);
+		// $data = $this->model->where('id', $id)->findAll();
+		dd($data);
+		$res = array_search($id, array_column($data['data'], '0'));
+		$edt['content'] = $data['data'][$res];
+		return view('guest/edit', $edt);
+	}
+
 	public function delete($id)
 	{
 		try {

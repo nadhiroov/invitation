@@ -21,21 +21,24 @@ class MGuest extends Model
 	protected $skipValidation       = false;
 	protected $cleanValidationRules = true;
 
-	public function getListData($param = '')
+	public function getListData()
 	{
 		$data = $this->where('id_user', $_SESSION['id'])->findAll();
 		$url = base_url() . '/attendance/' ;
 		$records = [];
 		if ($data != null) {
-			$datas = json_decode($data[0]['visitors_names']);
+			$datas = json_decode($data[0]['visitors_names'], true);
 			foreach ($datas as $row) {
 				$records[] = array(
-					$row[0],
-					$row[1],
-					$url . $row[0],
+					$row['to'],
+					$row['name'],
+					explode('#', $row['event']),
+					$row['gift'] == 0 ? 'Tidak' : 'Ya',
 					'<div class="form-button-action">
-						<a href="#edit" data-toggle="modal" data-id="' . $row[0] . '" class="btn btn-link btn-primary btn-lg" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
-						<a onclick="confirmDelete(this)" data-target="guest/delete/" data-id="' . $row[0] . '" class="btn btn-link btn-danger confirmDelete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-times"></i></a>
+					<input type="hidden" id="link_' . $row['id'] . '" class="form-control" value="' . base_url('attendance/' . $row['id']) . '">
+					<button class="btn btn-link btn-primary btn-lg btn-clipboard" data-clipboard-action="copy" data-clipboard-target="#link_' . $row['id'] . '" data-toggle="tooltip" title="Copy link"><i class="icon-link"></i></button>					
+					<a href="#edit" data-toggle="modal" data-id="' . $row['id'] . '" class="btn btn-link btn-primary btn-lg" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+					<a onclick="confirmDelete(this)" data-target="guest/delete/" data-id="' . $row['id'] . '" class="btn btn-link btn-danger confirmDelete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-times"></i></a>
 					</div>'
 				);
 			}

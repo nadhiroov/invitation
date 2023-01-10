@@ -29,7 +29,6 @@ class Firstname extends Core
 		$data = $this->model->getList();
 		$res = array_search($id, array_column($data['data'], '0'));
 		$edt['content'] = $data['data'][$res];
-		// var_dump($edt['content'][0]);die;
 		return view('setting/nickname/edit', $edt);
 	}
 

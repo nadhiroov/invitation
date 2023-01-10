@@ -7,12 +7,11 @@ $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
-	require SYSTEMPATH . 'Config/Routes.php';
+if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
+    require SYSTEMPATH . 'Config/Routes.php';
 }
 
-/**
+/*
  * --------------------------------------------------------------------
  * Router Setup
  * --------------------------------------------------------------------
@@ -22,7 +21,11 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+// The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
+// where controller filters or CSRF protection are bypassed.
+// If you don't want to define all routes, please use the Auto Routing (Improved).
+// Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
+// $routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -43,6 +46,7 @@ $routes->get('/user', 'Users::index');
 $routes->post('/user/getData', 'Users::getData');
 $routes->get('/admin', 'Users::admin');
 $routes->get('/user/delete/(:num)', 'Users::delete/$1');
+$routes->get('/editUsers/(:num)', 'Users::edit/$1');
 
 
 //user
@@ -52,16 +56,17 @@ $routes->add('/name', 'Firstname::index');
 $routes->get('/name/getData', 'Firstname::getData');
 $routes->get('/name/add', 'Firstname::add');
 $routes->post('/name/save', 'Firstname::process');
-$routes->get('/name/delete(:num)', 'Firstname::delete/$1');
-// $routes->get('/name/edit(:num)', 'Firstname::edit/$1');
+$routes->get('/name/delete/(:num)', 'Firstname::delete/$1');
+$routes->get('/name/edit/(:num)', 'Firstname::edit/$1');
 
 //guest
 $routes->add('/guest', 'Guest::index');
 $routes->get('/guest/getData', 'Guest::getData');
-$routes->post('/guest/save', 'Guest::process');
+$routes->post('/guest/save', 'Guest::processNew');
 $routes->get('/guest/add', 'Guest::add');
-$routes->get('/guest/delete(:num)', 'Guest::delete/$1');
-// $routes->get('/guest/edit(:num)', 'Guest::edit/$1');
+$routes->get('/guest/delete/(:num)', 'Guest::delete/$1');
+$routes->get('/editGuest/(:num)', 'Guest::edit/$1');
+// $routes->get('/editGuest', 'Guest::edit');
 
 //mempelai
 $routes->add('/mempelai', 'Mempelai::index');
@@ -76,7 +81,6 @@ $routes->post('/pengaturan/save', 'Pengaturan::process');
 $routes->add('/acara', 'Acara::index');
 $routes->post('/acara/save', 'Acara::process');
 
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing
@@ -90,7 +94,6 @@ $routes->post('/acara/save', 'Acara::process');
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
-	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
+    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

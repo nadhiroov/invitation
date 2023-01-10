@@ -52,9 +52,10 @@
                             <table id="mytable" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>To</th>
                                         <th>Fullname</th>
-                                        <th>Link</th>
+                                        <th>Event</th>
+                                        <th>Gift</th>
                                         <th style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
@@ -99,16 +100,22 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('js'); ?>
-<script src="<?= base_url(); ?>/public/template/js/plugin/datatables/datatables.min.js"></script>
-<script src="<?= base_url(); ?>/public/template/js/plugin/sweetalert/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+<script src="<?= base_url(); ?>/template/js/plugin/datatables/datatables.min.js"></script>
+<script src="<?= base_url(); ?>/template/js/plugin/sweetalert/sweetalert.min.js"></script>
 <script>
+    $(document).ready(function() {
+        new ClipboardJS('.btn');
+    });
     $('#mytable').DataTable({
         "pageLength": 10,
         "ajax": {
             "url": "guest/getData",
             "type": "GET",
         },
-        "order": [[ 1, "asc" ]]
+        "order": [
+            [1, "asc"]
+        ]
     });
 
     $('#addRowModal').on('show.bs.modal', function(e) {
@@ -131,12 +138,12 @@
     });
 
     $('#edit').on('show.bs.modal', function(e) {
-        var rowid = $(e.relatedTarget).data('id');
+        let rowid = $(e.relatedTarget).data('id');
         if (typeof rowid != 'undefined') {
             //menggunakan fungsi ajax untuk pengambilan data
             $.ajax({
                 type: 'get',
-                url: 'guest/edit/' + rowid,
+                url: 'editGuest/' + rowid,
                 success: function(response) {
                     $('.hasil-data').html(response); //menampilkan data ke dalam modal
                 }

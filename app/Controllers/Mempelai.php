@@ -15,7 +15,7 @@ class Mempelai extends Core
 	public function index()
 	{
 		$res = $this->model->where('id_user', $_SESSION['id'])->find();
-		$data['content'] = $res[0];
+		$data['content'] = @$res[0];
 		$this->view->setData(['menu_website' => 'active', 'sub_mempelai' => 'active']);
 		return view('mempelai/index', $data);
 	}
