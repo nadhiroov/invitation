@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\MGuest;
+use App\Models\MPengaturan;
 
 class Guest extends Core
 {
@@ -10,6 +11,8 @@ class Guest extends Core
 	{
 		parent::__construct();
 		$this->model = new MGuest();
+		$this->setting = new MPengaturan();
+		helper('text');
 	}
 
 	public function index()
@@ -21,12 +24,13 @@ class Guest extends Core
 	public function add()
 	{
 		$data = $this->model->getList();
-		if ($data['data'] == null) {
-			return view('guest/add');
-		}
-
-		if (count((array)$data['data']) < $_SESSION['max_user']) {
-			return view('guest/add');
+		if ($data == null || count((array)$data['data']) < $_SESSION['max_user']) {
+			$to = $this->setting->getList();
+			$setting = $this->setting->getSetting();
+			$this->data['acara'] = json_decode($setting['jenis_acara']);
+			$this->data['to'] = $to;
+			$this->data['id'] = @$data['id'];
+			return view('guest/add', $this->data);
 		}
 		echo '</div>
 		<div class="modal-body">
@@ -34,7 +38,7 @@ class Guest extends Core
 		</div>';
 	}
 
-	public function edit($id)
+	public function edit($id = '')
 	{
 		$data = $this->model->getList();
 		$res = array_search($id, array_column($data['data'], '0'));
@@ -75,6 +79,30 @@ class Guest extends Core
 
 		$res = $this->model->saving($data);
 		echo json_encode($res);
+	}
+
+	public function processNew()
+	{
+		$data = $this->model->getList();
+		$id = intval($this->request->getPost('id'));
+		$param = $this->request->getPost('param');
+		// acara
+		foreach ($param['acara'] as $key => $val) {
+			$event[] = $key;
+		}
+		$new_data = [
+			'id'	=> random_string('alnum', 7) . $_SESSION['id'],
+			'to' => $param['optionTo'],
+			'name' => $param['name'],
+			'event' => implode('#', $event),
+			'gift'	=> $param['hadiah']
+		];
+		if ($data != null) {
+			array_push($data['data'], $new_data);
+		}
+		// $arr = (array) $data['data'];
+		var_dump($data);
+		die;
 	}
 
 	public function delete($id)

@@ -9,18 +9,18 @@
 		<title>AppBox</title>
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.html" />
 
-		<link href="<?= base_url(); ?>/public/template3/css/master.css" rel="stylesheet">
+		<link href="<?= base_url(); ?>/template3/css/master.css" rel="stylesheet">
 
 		<!-- SWITCHER -->
-		<link rel="stylesheet" id="switcher-css" type="text/css" href="<?= base_url(); ?>/public/template3/plugins/switcher/css/switcher.css" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="<?= base_url(); ?>/public/template3/plugins/switcher/css/color1.css" title="color1" media="all" data-default-color="true" />
-		<link rel="alternate stylesheet" type="text/css" href="<?= base_url(); ?>/public/template3/plugins/switcher/css/color2.css" title="color2" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="<?= base_url(); ?>/public/template3/plugins/switcher/css/color3.css" title="color3" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="<?= base_url(); ?>/public/template3/plugins/switcher/css/color4.css" title="color4" media="all" />
+		<link rel="stylesheet" id="switcher-css" type="text/css" href="<?= base_url(); ?>/template3/plugins/switcher/css/switcher.css" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="<?= base_url(); ?>/template3/plugins/switcher/css/color1.css" title="color1" media="all" data-default-color="true" />
+		<link rel="alternate stylesheet" type="text/css" href="<?= base_url(); ?>/template3/plugins/switcher/css/color2.css" title="color2" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="<?= base_url(); ?>/template3/plugins/switcher/css/color3.css" title="color3" media="all" />
+		<link rel="alternate stylesheet" type="text/css" href="<?= base_url(); ?>/template3/plugins/switcher/css/color4.css" title="color4" media="all" />
 
-		<script src="<?= base_url(); ?>/public/template3/js/jquery-1.11.2.min.js"></script>
-		<script src="<?= base_url(); ?>/public/template3/js/bootstrap.min.js"></script>
-		<script src="<?= base_url(); ?>/public/template3/js/modernizr.custom.js"></script>
+		<script src="<?= base_url(); ?>/template3/js/jquery-1.11.2.min.js"></script>
+		<script src="<?= base_url(); ?>/template3/js/bootstrap.min.js"></script>
+		<script src="<?= base_url(); ?>/template3/js/modernizr.custom.js"></script>
 
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -67,12 +67,12 @@
 				</div>
 			</div>
 
-			<script src="<?= base_url(); ?>/public/template3/plugins/switcher/js/bootstrap-select.js"></script> 
-			<script src="<?= base_url(); ?>/public/template3/plugins/switcher/js/evol.colorpicker.min.js" type="text/javascript"></script> 
-			<script src="<?= base_url(); ?>/public/template3/plugins/switcher/js/dmss.js"></script>
+			<script src="<?= base_url(); ?>/template3/plugins/switcher/js/bootstrap-select.js"></script> 
+			<script src="<?= base_url(); ?>/template3/plugins/switcher/js/evol.colorpicker.min.js" type="text/javascript"></script> 
+			<script src="<?= base_url(); ?>/template3/plugins/switcher/js/dmss.js"></script>
 		</div>
 		<!-- End Switcher -->
-		<header class="header pageRow paralax skew skew-bottom" style="background-image: url('<?= base_url(); ?>/public/template3/media/paralax/2.jpg');">
+		<header class="header pageRow paralax skew skew-bottom" style="background-image: url('<?= base_url(); ?>/template3/media/paralax/2.jpg');">
 			<div class="overlay"></div>
 			<div class="wrapper">
 				<div class="header-outer">
@@ -123,7 +123,7 @@
 							<a href="blog-details.html" class="ellipseLink text-uppercase customColorLink whiteTxtColor pull-left robotoMedium hvr-pop" data-wow-delay="3.3s">LEARN MORE</a>
 						</div>
 						<div class="header-right">
-							<img class="wow fadeInRight" data-wow-delay="3.3s" src="<?= base_url(); ?>/public/template3/media/home/5.png" alt="Phone">
+							<img class="wow fadeInRight" data-wow-delay="3.3s" src="<?= base_url(); ?>/template3/media/home/5.png" alt="Phone">
 						</div>
 					</div>
 				</div>
@@ -229,7 +229,7 @@
 						</div>
 					</div>
 					<div class="posterBox col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<img class="wow fadeInRight" src="<?= base_url(); ?>/public/template3/media/home/2.png" alt="Poster" data-wow-delay="0.3s">
+						<img class="wow fadeInRight" src="<?= base_url(); ?>/template3/media/home/2.png" alt="Poster" data-wow-delay="0.3s">
 					</div>
 				</div>
 			</div>
@@ -243,7 +243,7 @@
 						<div class="row">
 							<div class="optionsBox col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
 								<div class="centerPhone col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
-									<img class="wow bounceIn" src="<?= base_url(); ?>/public/template3/media/home/3.png" alt="Phone" data-wow-delay="0.3s">
+									<img class="wow bounceIn" src="<?= base_url(); ?>/template3/media/home/3.png" alt="Phone" data-wow-delay="0.3s">
 								</div>
 								<ul class="optionsList pageRow">
 									<li class="pull-left col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -324,7 +324,7 @@
 									<div class="review-slide_text whiteTxtColor robotoItalic text-center">Eleifend morbi orci velit porttitor sed imperdiet ac ullamcorper Fusce eget tortor vel magna iaculis convallis. Aeneaneros vitae metus pellentesque tincidunt.Cum sociis natoque penatibus et magnis dis parturient montes turpis donec tincidunt tellus.</div>
 									<div class="review-slide_autor center-block">
 										<div class="review-slide_autor-ava circleBox wow rotateIn" data-wow-delay="0.3s">
-											<img src="<?= base_url(); ?>/public/template3/media/54x54/1.jpg" alt="User Ava">
+											<img src="<?= base_url(); ?>/template3/media/54x54/1.jpg" alt="User Ava">
 										</div>
 										<div class="review-slide_autor-name whiteTxtColor robotoCondensed">Oscar Mendis</div>
 										<div class="review-slide_autor-post whiteTxtColor roboto">Director: BoxApp Media Inc.</div>										
@@ -336,7 +336,7 @@
 									<div class="review-slide_text whiteTxtColor robotoItalic text-center">Eleifend morbi orci velit porttitor sed imperdiet ac ullamcorper Fusce eget tortor vel magna iaculis convallis. Aeneaneros vitae metus pellentesque tincidunt.Cum sociis natoque penatibus et magnis dis parturient montes turpis donec tincidunt tellus.</div>
 									<div class="review-slide_autor center-block">
 										<div class="review-slide_autor-ava circleBox wow rotateIn" data-wow-delay="0.3s">
-											<img src="<?= base_url(); ?>/public/template3/media/54x54/1.jpg" alt="User Ava">
+											<img src="<?= base_url(); ?>/template3/media/54x54/1.jpg" alt="User Ava">
 										</div>
 										<div class="review-slide_autor-name whiteTxtColor robotoCondensed">Oscar Mendis</div>
 										<div class="review-slide_autor-post whiteTxtColor roboto">Director: BoxApp Media Inc.</div>										
@@ -348,7 +348,7 @@
 									<div class="review-slide_text whiteTxtColor robotoItalic text-center">Eleifend morbi orci velit porttitor sed imperdiet ac ullamcorper Fusce eget tortor vel magna iaculis convallis. Aeneaneros vitae metus pellentesque tincidunt.Cum sociis natoque penatibus et magnis dis parturient montes turpis donec tincidunt tellus.</div>
 									<div class="review-slide_autor center-block">
 										<div class="review-slide_autor-ava circleBox wow rotateIn" data-wow-delay="0.3s">
-											<img src="<?= base_url(); ?>/public/template3/media/54x54/1.jpg" alt="User Ava">
+											<img src="<?= base_url(); ?>/template3/media/54x54/1.jpg" alt="User Ava">
 										</div>
 										<div class="review-slide_autor-name whiteTxtColor robotoCondensed">Oscar Mendis</div>
 										<div class="review-slide_autor-post whiteTxtColor roboto">Director: BoxApp Media Inc.</div>										
@@ -376,22 +376,22 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
 						<div id="owl-screenshots" class="owl-carousel phone-slider">
 							<div class="screenshot-item wow fadeInLeft" data-wow-delay="0.3s">
-								<img src="<?= base_url(); ?>/public/template3/media/260x455/1.jpg" alt="Screenshot">
+								<img src="<?= base_url(); ?>/template3/media/260x455/1.jpg" alt="Screenshot">
 							</div>
 							<div class="screenshot-item wow fadeInUp" data-wow-delay="0.3s">
-								<img src="<?= base_url(); ?>/public/template3/media/260x455/2.jpg" alt="Screenshot">
+								<img src="<?= base_url(); ?>/template3/media/260x455/2.jpg" alt="Screenshot">
 							</div>
 							<div class="screenshot-item wow fadeInRight" data-wow-delay="0.3s">
-								<img src="<?= base_url(); ?>/public/template3/media/260x455/3.jpg" alt="Screenshot">
+								<img src="<?= base_url(); ?>/template3/media/260x455/3.jpg" alt="Screenshot">
 							</div>
 							<div class="screenshot-item">
-								<img src="<?= base_url(); ?>/public/template3/media/260x455/1.jpg" alt="Screenshot">
+								<img src="<?= base_url(); ?>/template3/media/260x455/1.jpg" alt="Screenshot">
 							</div>
 							<div class="screenshot-item">
-								<img src="<?= base_url(); ?>/public/template3/media/260x455/2.jpg" alt="Screenshot">
+								<img src="<?= base_url(); ?>/template3/media/260x455/2.jpg" alt="Screenshot">
 							</div>
 							<div class="screenshot-item">
-								<img src="<?= base_url(); ?>/public/template3/media/260x455/3.jpg" alt="Screenshot">
+								<img src="<?= base_url(); ?>/template3/media/260x455/3.jpg" alt="Screenshot">
 							</div>
 						</div>
 					</div>
@@ -418,7 +418,7 @@
 			<div class="wrapper">
 				<div class="downloadAppBox row">
 					<div class="phonesImgBox col-lg-5 col-md-5 col-sm-12 col-xs-12 clearfix">
-						<img class="wow fadeInLeft" data-wow-delay="0.3s" src="<?= base_url(); ?>/public/template3/media/home/4.png" alt="Phones">
+						<img class="wow fadeInLeft" data-wow-delay="0.3s" src="<?= base_url(); ?>/template3/media/home/4.png" alt="Phones">
 					</div>
 					<div class="downloadContainer col-lg-7 col-md-7 col-sm-12 col-xs-12 clearfix">
 						<h4 class="download-title ralewayLight blackTxtColor"><span class="ralewayMedium">Download</span> Our App</h4>
@@ -567,49 +567,49 @@
 						<div id="owl-members" class="owl-carousel white-control member-full-width staticBox">
 							<div class="member-item center-block">
 								<div class="member-ava circleBox center-block wow rotateIn" data-wow-delay="0.3s">
-									<img src="<?= base_url(); ?>/public/template3/media/124x124/1.png" alt="Member">
+									<img src="<?= base_url(); ?>/template3/media/124x124/1.png" alt="Member">
 								</div>
 								<div class="member-name robotoCondensed whiteTxtColor text-center">Oscar Mendis</div>
 								<div class="member-specialty roboto whiteTxtColor text-center">AppBox CEO</div>
 							</div>
 							<div class="member-item center-block">
 								<div class="member-ava circleBox center-block wow rotateIn" data-wow-delay="0.3s">
-									<img src="<?= base_url(); ?>/public/template3/media/124x124/2.png" alt="Member">
+									<img src="<?= base_url(); ?>/template3/media/124x124/2.png" alt="Member">
 								</div>
 								<div class="member-name robotoCondensed whiteTxtColor text-center">Thomas Hill</div>
 								<div class="member-specialty roboto whiteTxtColor text-center">UX UI Designer</div>
 							</div>
 							<div class="member-item center-block">
 								<div class="member-ava circleBox center-block wow rotateIn" data-wow-delay="0.3s">
-									<img src="<?= base_url(); ?>/public/template3/media/124x124/3.png" alt="Member">
+									<img src="<?= base_url(); ?>/template3/media/124x124/3.png" alt="Member">
 								</div>
 								<div class="member-name robotoCondensed whiteTxtColor text-center">John Adam</div>
 								<div class="member-specialty roboto whiteTxtColor text-center">Developer</div>
 							</div>
 							<div class="member-item center-block">
 								<div class="member-ava circleBox center-block wow rotateIn" data-wow-delay="0.3s">
-									<img src="<?= base_url(); ?>/public/template3/media/124x124/4.png" alt="Member">
+									<img src="<?= base_url(); ?>/template3/media/124x124/4.png" alt="Member">
 								</div>
 								<div class="member-name robotoCondensed whiteTxtColor text-center">Olivia Jason</div>
 								<div class="member-specialty roboto whiteTxtColor text-center">Javascript</div>
 							</div>
 							<div class="member-item center-block">
 								<div class="member-ava circleBox center-block wow rotateIn" data-wow-delay="0.3s">
-									<img src="<?= base_url(); ?>/public/template3/media/124x124/5.png" alt="Member">
+									<img src="<?= base_url(); ?>/template3/media/124x124/5.png" alt="Member">
 								</div>
 								<div class="member-name robotoCondensed whiteTxtColor text-center">Tom Hasman</div>
 								<div class="member-specialty roboto whiteTxtColor text-center">Beta Tester</div>
 							</div>
 							<div class="member-item center-block">
 								<div class="member-ava circleBox center-block wow rotateIn" data-wow-delay="0.3s">
-									<img src="<?= base_url(); ?>/public/template3/media/124x124/6.png" alt="Member">
+									<img src="<?= base_url(); ?>/template3/media/124x124/6.png" alt="Member">
 								</div>
 								<div class="member-name robotoCondensed whiteTxtColor text-center">Liza Camron</div>
 								<div class="member-specialty roboto whiteTxtColor text-center">Developer</div>
 							</div>
 							<div class="member-item center-block">
 								<div class="member-ava circleBox center-block wow rotateIn" data-wow-delay="0.3s">
-									<img src="<?= base_url(); ?>/public/template3/media/124x124/4.png" alt="Member">
+									<img src="<?= base_url(); ?>/template3/media/124x124/4.png" alt="Member">
 								</div>
 								<div class="member-name robotoCondensed whiteTxtColor text-center">Oscar Mendis</div>
 								<div class="member-specialty roboto whiteTxtColor text-center">Developer</div>
@@ -626,13 +626,13 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
 						<h3 class="sectionTitle text-center ralewayLight balck">AppBox Featured In ...</h3>
 						<ul class="featured-list">
-							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/public/template3/media/featured/1.png" alt="Logo 1"></li>
-							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/public/template3/media/featured/2.png" alt="Logo 2"></li>
-							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/public/template3/media/featured/3.png" alt="Logo 3"></li>
-							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/public/template3/media/featured/4.png" alt="Logo 4"></li>
-							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/public/template3/media/featured/5.png" alt="Logo 5"></li>
-							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/public/template3/media/featured/6.png" alt="Logo 6"></li>
-							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/public/template3/media/featured/7.png" alt="Logo 7"></li>
+							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/template3/media/featured/1.png" alt="Logo 1"></li>
+							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/template3/media/featured/2.png" alt="Logo 2"></li>
+							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/template3/media/featured/3.png" alt="Logo 3"></li>
+							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/template3/media/featured/4.png" alt="Logo 4"></li>
+							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/template3/media/featured/5.png" alt="Logo 5"></li>
+							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/template3/media/featured/6.png" alt="Logo 6"></li>
+							<li><img class="wow zoomIn" data-wow-delay="0.3s" src="<?= base_url(); ?>/template3/media/featured/7.png" alt="Logo 7"></li>
 						</ul>
 					</div>
 				</div>
@@ -715,14 +715,14 @@
 							<h4 class="footer-title customColor ralewayBold">Latest From Blog</h4>
 							<div class="footer_blog-item">
 								<div class="footer_blog-item_img">
-									<a href="blog-details.html" class="footer_blog-item_link"><img src="<?= base_url(); ?>/public/template3/media/70x65/1.jpg" alt="Blog Item"></a>
+									<a href="blog-details.html" class="footer_blog-item_link"><img src="<?= base_url(); ?>/template3/media/70x65/1.jpg" alt="Blog Item"></a>
 								</div>
 								<div class="footer_blog-item_text robotoLight grayTxtColor">Dolore magna aliqua. Ut enimad minim veniam quis nostrud</div>
 								<div class="footer_blog-item_date robotoLight">March 30, 2015</div>
 							</div>
 							<div class="footer_blog-item">
 								<div class="footer_blog-item_img">
-									<a href="blog-details.html" class="footer_blog-item_link"><img src="<?= base_url(); ?>/public/template3/media/70x65/2.jpg" alt="Blog Item"></a>
+									<a href="blog-details.html" class="footer_blog-item_link"><img src="<?= base_url(); ?>/template3/media/70x65/2.jpg" alt="Blog Item"></a>
 								</div>
 								<div class="footer_blog-item_text robotoLight grayTxtColor">Aboris nisi dut aliquip commodo conse quat. Duis aute irure.</div>
 								<div class="footer_blog-item_date robotoLight">March 30, 2015</div>
@@ -747,32 +747,32 @@
 							<ul class="widgets pageRow">
 								<li>
 									<a href="blog.html">
-										<img src="<?= base_url(); ?>/public/template3/media/75x75/1.jpg" alt="Widget">
+										<img src="<?= base_url(); ?>/template3/media/75x75/1.jpg" alt="Widget">
 									</a>
 								</li>
 								<li>
 									<a href="blog.html">
-										<img src="<?= base_url(); ?>/public/template3/media/75x75/2.jpg" alt="Widget">
+										<img src="<?= base_url(); ?>/template3/media/75x75/2.jpg" alt="Widget">
 									</a>
 								</li>
 								<li>
 									<a href="blog.html">
-										<img src="<?= base_url(); ?>/public/template3/media/75x75/3.jpg" alt="Widget">
+										<img src="<?= base_url(); ?>/template3/media/75x75/3.jpg" alt="Widget">
 									</a>
 								</li>
 								<li>
 									<a href="blog.html">
-										<img src="<?= base_url(); ?>/public/template3/media/75x75/4.jpg" alt="Widget">
+										<img src="<?= base_url(); ?>/template3/media/75x75/4.jpg" alt="Widget">
 									</a>
 								</li>
 								<li>
 									<a href="blog.html">
-										<img src="<?= base_url(); ?>/public/template3/media/75x75/5.jpg" alt="Widget">
+										<img src="<?= base_url(); ?>/template3/media/75x75/5.jpg" alt="Widget">
 									</a>
 								</li>
 								<li>
 									<a href="blog.html">
-										<img src="<?= base_url(); ?>/public/template3/media/75x75/6.jpg" alt="Widget">
+										<img src="<?= base_url(); ?>/template3/media/75x75/6.jpg" alt="Widget">
 									</a>
 								</li>
 							</ul>
@@ -803,23 +803,23 @@
 		</footer>
 		</div>
 		
-		<script src="<?= base_url(); ?>/public/template3/js/jquery.placeholder.min.js"></script>
-		<script src="<?= base_url(); ?>/public/template3/js/jquery-ui.min.js"></script>
-		<script src="<?= base_url(); ?>/public/template3/js/smoothscroll.min.js"></script>
+		<script src="<?= base_url(); ?>/template3/js/jquery.placeholder.min.js"></script>
+		<script src="<?= base_url(); ?>/template3/js/jquery-ui.min.js"></script>
+		<script src="<?= base_url(); ?>/template3/js/smoothscroll.min.js"></script>
 		<!-- Loader -->
-		<script src="<?= base_url(); ?>/public/template3/plugins/loader/js/classie.js"></script>
-		<script src="<?= base_url(); ?>/public/template3/plugins/loader/js/pathLoader.js"></script>
-		<script src="<?= base_url(); ?>/public/template3/plugins/loader/js/main.js"></script>
-		<script src="<?= base_url(); ?>/public/template3/js/classie.js"></script>
+		<script src="<?= base_url(); ?>/template3/plugins/loader/js/classie.js"></script>
+		<script src="<?= base_url(); ?>/template3/plugins/loader/js/pathLoader.js"></script>
+		<script src="<?= base_url(); ?>/template3/plugins/loader/js/main.js"></script>
+		<script src="<?= base_url(); ?>/template3/js/classie.js"></script>
 		<!--Owl Carousel-->
-	    <script src="<?= base_url(); ?>/public/template3/plugins/owl-carousel/owl.carousel.min.js"></script>
+	    <script src="<?= base_url(); ?>/template3/plugins/owl-carousel/owl.carousel.min.js"></script>
         <!--Contact form--> 
-        <script src="<?= base_url(); ?>/public/template3/plugins/contact/jqBootstrapValidation.js"></script> 
-        <script src="<?= base_url(); ?>/public/template3/plugins/contact/contact_me.js"></script>
+        <script src="<?= base_url(); ?>/template3/plugins/contact/jqBootstrapValidation.js"></script> 
+        <script src="<?= base_url(); ?>/template3/plugins/contact/contact_me.js"></script>
 		<!--THEME--> 
-		<script src="<?= base_url(); ?>/public/template3/js/wow.min.js"></script>
-		<script src="<?= base_url(); ?>/public/template3/js/cssua.min.js"></script>
-        <script src="<?= base_url(); ?>/public/template3/js/func.js"></script> 
+		<script src="<?= base_url(); ?>/template3/js/wow.min.js"></script>
+		<script src="<?= base_url(); ?>/template3/js/cssua.min.js"></script>
+        <script src="<?= base_url(); ?>/template3/js/func.js"></script> 
 	</body>
 
 <!-- Mirrored from html.templines.com/sokolcov/appbox/home-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 Dec 2016 17:52:45 GMT -->
