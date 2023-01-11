@@ -144,7 +144,7 @@
             //menggunakan fungsi ajax untuk pengambilan data
             $.ajax({
                 type: 'get',
-                url: 'firstname/edit/' + rowid,
+                url: 'name/edit/' + rowid,
                 success: function(response) {
                     $('.hasil-data').html(response); //menampilkan data ke dalam modal
                 }

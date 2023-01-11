@@ -6,12 +6,10 @@ use CodeIgniter\Model;
 
 class MPengaturan extends Model
 {
-	protected $DBGroup              = 'default';
 	protected $table                = 'settings';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
-	protected $insertID             = 0;
-	protected $returnType           = 'array';
+	// protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
 	protected $allowedFields        = ['id_user', 'to', 'template', 'template', 'sampul', 'mempelai', 'acara', 'ucapan', 'galeri', 'cerita'];
@@ -28,7 +26,7 @@ class MPengaturan extends Model
 					$row[0],
 					'<div class="form-button-action">
 						<a href="#edit" data-toggle="modal" data-id="' . $row[0] . '" class="btn btn-link btn-primary btn-lg" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
-						<a onclick="confirmDelete(this)" data-target="firstname/delete/" data-id="' . $row[0] . '" class="btn btn-link btn-danger confirmDelete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-times"></i></a>
+						<a onclick="confirmDelete(this)" data-target="/name/delete" data-id="' . $row[0] . '" class="btn btn-link btn-danger confirmDelete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-times"></i></a>
 					</div>'
 				);
 			}

@@ -56,16 +56,16 @@ $routes->add('/name', 'Firstname::index');
 $routes->get('/name/getData', 'Firstname::getData');
 $routes->get('/name/add', 'Firstname::add');
 $routes->post('/name/save', 'Firstname::process');
-$routes->get('/name/delete/(:num)', 'Firstname::delete/$1');
-$routes->get('/name/edit/(:num)', 'Firstname::edit/$1');
+$routes->get('/name/delete/(:any)', 'Firstname::delete/$1');
+$routes->get('/name/edit/(:any)', 'Firstname::edit/$1');
 
 //guest
 $routes->add('/guest', 'Guest::index');
 $routes->get('/guest/getData', 'Guest::getData');
-$routes->post('/guest/save', 'Guest::processNew');
+$routes->post('/guest/save', 'Guest::process');
 $routes->get('/guest/add', 'Guest::add');
-$routes->get('/guest/delete/(:num)', 'Guest::delete/$1');
-$routes->get('/editGuest/(:num)', 'Guest::edit/$1');
+$routes->get('/guest/delete/(:any)', 'Guest::delete/$1');
+$routes->get('/editGuest/(:any)', 'Guest::edit/$1');
 // $routes->get('/editGuest', 'Guest::edit');
 
 //mempelai
