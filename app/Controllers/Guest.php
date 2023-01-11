@@ -13,6 +13,7 @@ class Guest extends Core
 		$this->model = new MGuest();
 		$this->setting = new MPengaturan();
 		helper('text');
+		helper('array');
 	}
 
 	public function index()
@@ -40,10 +41,19 @@ class Guest extends Core
 
 	public function edit($id = '')
 	{
+		// get selected data
 		$data = $this->model->getList();
-		$res = array_search($id, array_column($data['data'], '0'));
-		$edt['content'] = $data['data'][$res];
-		return view('guest/edit', $edt);
+		$res = array_search($id, array_column($data['data'], 'id'));
+		$this->data['content'] = (array) $data['data'][$res];
+		$this->data['dt_to'] = explode('#', $this->data['content']['event']);
+
+		// get setting
+		$to = $this->setting->getList();
+		$setting = $this->setting->getSetting();
+		$this->data['acara'] = json_decode($setting['jenis_acara']);
+		$this->data['to'] = $to;
+		$this->data['id'] = @$data['id'];
+		return view('guest/edit', $this->data);
 	}
 
 	public function getData()
@@ -55,7 +65,7 @@ class Guest extends Core
 		echo json_encode($output);
 	}
 
-	public function process()
+	/* public function process()
 	{
 		$data = $this->model->getList();
 		$id = intval($this->request->getPost('id'));
@@ -79,9 +89,9 @@ class Guest extends Core
 
 		$res = $this->model->saving($data);
 		echo json_encode($res);
-	}
+	} */
 
-	public function processNew()
+	public function process()
 	{
 		$data = $this->model->getList();
 		$id = intval($this->request->getPost('id'));
@@ -91,18 +101,24 @@ class Guest extends Core
 			$event[] = $key;
 		}
 		$new_data = [
-			'id'	=> random_string('alnum', 7) . $_SESSION['id'],
+			'id'	=> random_string('alnum', 7),
 			'to' => $param['optionTo'],
 			'name' => $param['name'],
 			'event' => implode('#', $event),
 			'gift'	=> $param['hadiah']
 		];
+		$save = [];
 		if ($data != null) {
 			array_push($data['data'], $new_data);
+			$save = [
+				'id'	=> $data['id'],
+				'data'	=> $data['data']
+			];
+		} else {
+			$save['data'] = [$new_data];
 		}
-		// $arr = (array) $data['data'];
-		var_dump($data);
-		die;
+		$res = $this->model->saving($save);
+		echo json_encode($res);
 	}
 
 	public function delete($id)
