@@ -6,13 +6,12 @@ use CodeIgniter\Model;
 
 class MAcara extends Model
 {
-	protected $DBGroup              = 'default';
 	protected $table                = 'acara';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['id_user', 'tanggal_akad', 'jam_akad', 'tempat_akad', 'alamat_akad', 'tanggal_resepsi', 'jam_resepsi', 'tempat_resepsi', 'alamat_resepsi'];
+	protected $allowedFields		= ['id_user', 'acara'];
 
 	// Dates
 	protected $useTimestamps        = false;
@@ -20,4 +19,15 @@ class MAcara extends Model
 	protected $createdField         = 'created_at';
 	protected $updatedField         = 'updated_at';
 	protected $deletedField         = 'deleted_at';
+
+	public function getAcara($param = '')
+	{
+		if (!empty($param)) {
+			$id = $param['id'];
+		} else {
+			$id = $_SESSION['id'];
+		}
+		$res = $this->where('id_user', $id)->findAll();
+		return $res[0];
+	}
 }

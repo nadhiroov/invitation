@@ -63,8 +63,8 @@
 	</div>
 	
 	<!--   Core JS Files   -->
-	<!-- <script src="<?= base_url(); ?>/template/js/core/jquery.3.2.1.min.js"></script> -->
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="<?= base_url(); ?>/template/js/core/jquery.3.2.1.min.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 	<script src="<?= base_url(); ?>/template/js/core/popper.min.js"></script>
 	<script src="<?= base_url(); ?>/template/js/core/bootstrap.min.js"></script>
 	<script src="<?= base_url(); ?>/template/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>

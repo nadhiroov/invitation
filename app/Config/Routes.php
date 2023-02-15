@@ -68,10 +68,13 @@ $routes->get('/guest/delete/(:any)', 'Guest::delete/$1');
 $routes->get('/editGuest/(:any)', 'Guest::edit/$1');
 // $routes->get('/editGuest', 'Guest::edit');
 
+// attendance
+$routes->get('/attend/(:num)/(:any)', 'Attendance::open/$1/$2');
+
 //mempelai
 $routes->add('/mempelai', 'Mempelai::index');
 $routes->post('/mempelai/save', 'Mempelai::process');
-// $routes->post('/mempelai/upload', 'Mempelai::upload');
+$routes->post('/mempelai/upload', 'Mempelai::upload');
 
 // pengaturan
 $routes->add('/pengaturan', 'Pengaturan::index');

@@ -290,6 +290,7 @@
                 reader.readAsDataURL(files[0]);
             }
         });
+        
         $('#upload_image_sampul').change(function(event) {
             $('#jenis').val('sampul');
             var files = event.target.files;
