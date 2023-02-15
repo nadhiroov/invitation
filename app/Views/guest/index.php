@@ -71,7 +71,7 @@
 </div>
 
 <!-- Modal Edit -->
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="edit" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form action="guest/save" class="form-submit" role="form" method="POST">
@@ -105,8 +105,14 @@
 <script src="<?= base_url(); ?>/template/js/plugin/sweetalert/sweetalert.min.js"></script>
 <script>
     $(document).ready(function() {
-        new ClipboardJS('.btn');
+        let clipboard = new ClipboardJS('.btn-clipboard');
+        clipboard.on('success', function(e) {
+
+            e.clearSelection();
+        });
     });
+
+
     $('#mytable').DataTable({
         "pageLength": 10,
         "ajax": {
@@ -124,7 +130,6 @@
             url: 'guest/add',
             success: function(data) {
                 $('.hasil-data').html(data);
-                var x = document.getElementById("addName").autofocus;
             }
         });
     });

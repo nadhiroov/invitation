@@ -12,7 +12,7 @@ class MPengaturan extends Model
 	// protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['id_user', 'to', 'template', 'template', 'sampul', 'mempelai', 'acara', 'ucapan', 'galeri', 'cerita'];
+	protected $allowedFields        = ['id_user', 'to', 'template', 'template', 'sampul', 'mempelai', 'acara', 'ucapan', 'galeri', 'cerita', 'lokasi', 'cerita'];
 
 	// Method firstname
 	public function getListData($param = '')
@@ -74,9 +74,14 @@ class MPengaturan extends Model
 	}
 	
 	//Method setting
-	public function getSetting()
+	public function getSetting($param = '')
 	{
-		$res = $this->where('id_user', $_SESSION['id'])->findAll();
+		if (!empty($param)) {
+			$id = $param['id'];
+		}else{
+			$id = $_SESSION['id'];
+		}
+		$res = $this->where('id_user', $id)->findAll();
 		return $res[0];
 	}
 }

@@ -8,9 +8,6 @@ class MGuest extends Model
 {
 	protected $table                = 'visitors';
 	protected $primaryKey           = 'id';
-	protected $useAutoIncrement     = true;
-	protected $insertID             = 0;
-	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
 	protected $allowedFields        = ['id_user', 'visitors_names'];
@@ -24,7 +21,6 @@ class MGuest extends Model
 	public function getListData()
 	{
 		$data = $this->where('id_user', $_SESSION['id'])->findAll();
-		$url = base_url() . '/attendance/' ;
 		$records = [];
 		if ($data != null) {
 			$datas = json_decode($data[0]['visitors_names'], true);
@@ -35,17 +31,16 @@ class MGuest extends Model
 					explode('#', $row['event']),
 					$row['gift'] == 0 ? 'Tidak' : 'Ya',
 					'<div class="form-button-action">
-					<input type="hidden" id="link_' . $row['id'] . '" class="form-control" value="' . base_url('attendance/' . $row['id']) . '">
-					<button class="btn btn-link btn-primary btn-lg btn-clipboard" data-clipboard-action="copy" data-clipboard-target="#link_' . $row['id'] . '" data-toggle="tooltip" title="Copy link"><i class="icon-link"></i></button>					
+					<button class="btn btn-link btn-primary btn-lg btn-clipboard" data-clipboard-text="' . base_url('attend/' . $data[0]['id_user'] . '/' . $row['id']) . '"><i class="icon-link"></i></button>
 					<a href="#edit" data-toggle="modal" data-id="' . $row['id'] . '" class="btn btn-link btn-primary btn-lg" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
 					<a onclick="confirmDelete(this)" data-target="guest/delete/" data-id="' . $row['id'] . '" class="btn btn-link btn-danger confirmDelete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-times"></i></a>
 					</div>'
 				);
 			}
-		}		
+		}
 		return $records;
 	}
-
+	// data-toggle="tooltip" title="Copy link"
 	public function getList() // fungsi untuk mendapatkan list guest, data sudah matang
 	{
 		$data = $this->where('id_user', $_SESSION['id'])->findAll();
@@ -83,5 +78,21 @@ class MGuest extends Model
 			];
 		}
 		return $result;
+	}
+
+	public function attend($id, $code)
+	{
+		$data = $this->where('id_user', $id)->findAll();
+		$datas = [];
+		if ($data != null) {
+			foreach (json_decode($data[0]['visitors_names'], true) as $key) {
+				if ($key['id'] == $code) {
+					$datas = $key;
+					break;
+				}
+			}
+			return $datas;
+		}
+		return null;
 	}
 }

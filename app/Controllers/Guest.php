@@ -22,6 +22,12 @@ class Guest extends Core
 		return view('guest/index');
 	}
 
+	public function open_inv($id, $code)
+	{
+		$data = $this->model->attend($id, $code);
+		return view('themes/tealflower', $data);
+	}
+
 	public function add()
 	{
 		$data = $this->model->getList();
@@ -52,7 +58,7 @@ class Guest extends Core
 		$setting = $this->setting->getSetting();
 		$this->data['acara'] = json_decode($setting['jenis_acara']);
 		$this->data['to'] = $to;
-		$this->data['id'] = @$data['id'];
+		$this->data['id_guest'] = $id;
 		return view('guest/edit', $this->data);
 	}
 
@@ -94,19 +100,39 @@ class Guest extends Core
 	public function process()
 	{
 		$data = $this->model->getList();
-		$id = intval($this->request->getPost('id'));
 		$param = $this->request->getPost('param');
 		// acara
 		foreach ($param['acara'] as $key => $val) {
 			$event[] = $key;
 		}
-		$new_data = [
-			'id'	=> random_string('alnum', 7),
-			'to' => $param['optionTo'],
-			'name' => $param['name'],
-			'event' => implode('#', $event),
-			'gift'	=> $param['hadiah']
-		];
+		if (isset($param['id_guest'])) {
+			$new_data = [
+				'id'	=> $param['id_guest'],
+				'to' => $param['optionTo'],
+				'name' => $param['name'],
+				'event' => implode('#', $event),
+				'gift'	=> $param['hadiah']
+			];
+			$i = 0;
+			foreach ($data['data'] as $key => $value) {
+				if ($param['id_guest'] == $value->id) {
+					unset($data['data'][$i]);
+					// $data['data'][$i] = $new_data;
+					break;
+				}
+				$i++;
+			}
+			// var_dump($data['data']);die;
+		} else {
+			$new_data = [
+				'id'	=> random_string('alnum', 7),
+				'to' => $param['optionTo'],
+				'name' => $param['name'],
+				'event' => implode('#', $event),
+				'gift'	=> $param['hadiah']
+			];
+		}
+
 		$save = [];
 		if ($data != null) {
 			array_push($data['data'], $new_data);
@@ -124,7 +150,7 @@ class Guest extends Core
 	public function delete($id)
 	{
 		$data = $this->model->getList();
-		$res = array_search($id, array_column($data['data'], '0')); // mencari index tamu
+		$res = array_search($id, array_column($data['data'], 'id')); // mencari index tamu
 		unset($data['data'][$res]); // menghapus array by index
 		$res = $this->model->saving($data);
 		return json_encode($res);
