@@ -68,6 +68,9 @@ $routes->get('/guest/delete/(:any)', 'Guest::delete/$1');
 $routes->get('/editGuest/(:any)', 'Guest::edit/$1');
 // $routes->get('/editGuest', 'Guest::edit');
 
+// Ucapan
+$routes->post('/add_komentar', 'Ucapan::add_komen');
+
 // attendance
 $routes->get('/attend/(:num)/(:any)', 'Attendance::open/$1/$2');
 
