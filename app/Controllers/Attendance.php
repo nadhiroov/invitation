@@ -6,6 +6,7 @@ use App\Models\MAcara;
 use App\Models\MGuest;
 use App\Models\MMempelai;
 use App\Models\MPengaturan;
+use App\Models\MUcapan;
 
 class Attendance extends Core
 {
@@ -16,6 +17,7 @@ class Attendance extends Core
         $this->setting = new MPengaturan();
         $this->mempelai = new MMempelai();
         $this->acara = new MAcara();
+        $this->ucapan = new MUcapan();
         helper('text');
         helper('array');
     }
@@ -30,7 +32,11 @@ class Attendance extends Core
             $this->data['setting'] = $this->setting->getSetting($param);
             $this->data['acara'] = $this->acara->getAcara($param);
             $this->data['acara'] = json_decode($this->data['acara']['acara'], true)[0];
-            // dd($this->data['data']['event']);
+            $this->data['response'] = $this->ucapan->getUcapan($param);
+            $param['name'] = $this->data['data']['name'];
+            $this->data['ucapan'] = $this->ucapan->getUcapan($param);
+            $this->data['ucapan'] = empty($this->data['ucapan']) ? null : $this->data['ucapan'][0];
+            // dd($this->data['ucapan']);
             return view('themes/tealflower', $this->data);
         } else {
             echo 'Link tidak valid';

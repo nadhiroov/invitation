@@ -178,6 +178,55 @@
 			</div>
 		</div>
 
+		<!-- ============== UACAPAN/KOMENTAR =============== -->
+		<div id="ucapan-konten" style="display: none;" class="konten">
+
+			<div class="col-12 ucapan-field">
+				<div class="section-title">
+					<h2>Beri Ucapan</h2>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="form-group">
+							<input type="hidden" value="<?= $mempelai['id_user'] ?>" id="id">
+							<input id="nama" type="text" class="form-control mt-2" placeholder="Nama Anda" value="<?= $data['name'] ?>" required readonly>
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-group">
+							<textarea id="komentar" class="form-control" id="exampleFormControlTextarea1" placeholder="Pesan anda.." rows="3" required><?= @$ucapan['komen']; ?></textarea>
+						</div>
+					</div>
+					<div class="col-12">
+						<button id="submitKomen" <?= @$ucapan != null ? 'disabled' : '' ?> class="btn btn-primary btn-block">Kirim</button>
+						<img src="<?= base_url() ?>/base/img/loadinga.svg" height="30px" style="display:none;" id="loading_">
+					</div>
+				</div>
+			</div>
+			<div class="komen-netizen">
+				<div class="layout-komen">
+					<?php foreach ($response as $row) { ?>
+						<div class="komen">
+							<div class="col-12 komen-nama">
+								<?= \esc($row['name']); ?>
+							</div>
+							<div class="col-12 komen-isi">
+								<?= \esc($row['komen']); ?>
+							</div>
+							<?php if (isset($row['resp']) && ($row['resp'] != null || $row['resp'] != '')) : ?>
+								<div class="col-12 komen-isi">
+									<?= \esc($row['resp']); ?>
+								</div>
+							<?php endif; ?>
+						</div>
+					<?php } ?>
+				</div>
+				<a href="#" id="loadMore" class="btn btn-primary btn-block" role="button">Lebih Banyak.</a>
+			</div>
+
+
+		</div>
+
 		<!-- ============== LOKASI =============== -->
 		<div id="lokasi-konten" style="display: none;" class="konten">
 			<?php foreach ($data['event'] as $row) : ?>
@@ -257,12 +306,15 @@
 						</div>
 					</div>
 
-					<div class="mobile-bottom-nav__item" id="ucapan">
-						<div class="mobile-bottom-nav__item-content icons">
-							<i class="navbar-icon mdi mdi-message-bulleted"></i>
-							Ucapan
+					<?php if ($setting['ucapan'] == 1) : ?>
+						<div class="mobile-bottom-nav__item" id="ucapan">
+							<div class="mobile-bottom-nav__item-content icons">
+								<i class="navbar-icon mdi mdi-message-bulleted"></i>
+								Ucapan
+							</div>
 						</div>
-					</div>
+					<?php endif; ?>
+
 				</div>
 			</div>
 		</div>
@@ -270,19 +322,23 @@
 		<div class="container-fluid px-0">
 			<div class="row no-gutters">
 				<div class="col-12" style="display: flex;margin-bottom: 5px;margin-top: 5px;">
-					<div class="mobile-bottom-nav__item" id="album">
-						<div class="mobile-bottom-nav__item-content icons">
-							<i class="navbar-icon mdi mdi-image"></i>
-							Album
+					<?php if ($setting['galeri'] == 1) : ?>
+						<div class="mobile-bottom-nav__item" id="album">
+							<div class="mobile-bottom-nav__item-content icons">
+								<i class="navbar-icon mdi mdi-image"></i>
+								Album
+							</div>
 						</div>
-					</div>
+					<?php endif; ?>
 
-					<div class="mobile-bottom-nav__item" id="cerita">
-						<div class="mobile-bottom-nav__item-content icons">
-							<i class="navbar-icon mdi mdi-chart-bubble"></i>
-							Cerita Kita
+					<?php if ($setting['cerita'] == 1) : ?>
+						<div class="mobile-bottom-nav__item" id="cerita">
+							<div class="mobile-bottom-nav__item-content icons">
+								<i class="navbar-icon mdi mdi-chart-bubble"></i>
+								Cerita Kita
+							</div>
 						</div>
-					</div>
+					<?php endif; ?>
 
 
 					<div class="mobile-bottom-nav__item" id="lokasi">
