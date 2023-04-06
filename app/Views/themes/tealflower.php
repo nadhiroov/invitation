@@ -39,11 +39,7 @@
 
 		<div class="salam">
 			<a style="font-weight: bold;font-size: 30px;color: #2f3640;">Hello!</a><br>
-			<a style="font-weight: normal;font-size:18px;"><?php
-															if (!empty($invite)) {
-																echo $invite;
-															}
-															?></a><br>
+			<a style="font-weight: normal;font-size:18px;"><?= $data['name'] ?></a><br>
 			<a style="font-weight: normal;font-size:18px;color: #2f3640;font-family: sans-serif;">You are invited to our wedding party!</a>
 		</div>
 		<a style="font-weight: bold;font-size: 16px;color: #2f3640;position: absolute;bottom: 20px;right: 0;left: 0;">klik untuk membuka undangan</a>
