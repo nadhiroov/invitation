@@ -36,7 +36,6 @@ class Attendance extends Core
             $param['name'] = $this->data['data']['name'];
             $this->data['ucapan'] = $this->ucapan->getUcapan($param);
             $this->data['ucapan'] = empty($this->data['ucapan']) ? null : $this->data['ucapan'][0];
-            // dd($this->data['ucapan']);
             return view('themes/tealflower', $this->data);
         } else {
             echo 'Link tidak valid';
