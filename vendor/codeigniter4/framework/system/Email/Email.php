@@ -12,6 +12,7 @@
 namespace CodeIgniter\Email;
 
 use CodeIgniter\Events\Events;
+use CodeIgniter\I18n\Time;
 use Config\Mimes;
 use ErrorException;
 
@@ -19,6 +20,8 @@ use ErrorException;
  * CodeIgniter Email Class
  *
  * Permits email to be sent using Mail, Sendmail, or SMTP.
+ *
+ * @see \CodeIgniter\Email\EmailTest
  */
 class Email
 {
@@ -68,7 +71,7 @@ class Email
     public $protocol = 'mail';
 
     /**
-     * STMP Server host
+     * STMP Server Hostname
      *
      * @var string
      */
@@ -112,7 +115,9 @@ class Email
     /**
      * SMTP Encryption
      *
-     * @var string Empty, 'tls' or 'ssl'
+     * @var string '', 'tls' or 'ssl'. 'tls' will issue a STARTTLS command
+     *             to the server. 'ssl' means implicit SSL. Connection on port
+     *             465 should set this to ''.
      */
     public $SMTPCrypto = '';
 
@@ -347,7 +352,7 @@ class Email
      * Character sets valid for 7-bit encoding,
      * excluding language suffix.
      *
-     * @var array
+     * @var list<string>
      */
     protected $baseCharsets = [
         'us-ascii',
@@ -391,7 +396,7 @@ class Email
     protected static $func_overload;
 
     /**
-     * @param array|null $config
+     * @param array|\Config\Email|null $config
      */
     public function __construct($config = null)
     {
@@ -404,7 +409,7 @@ class Email
     /**
      * Initialize preferences
      *
-     * @param array|\Config\Email $config
+     * @param array|\Config\Email|null $config
      *
      * @return Email
      */
@@ -700,10 +705,20 @@ class Email
     public function setAttachmentCID($filename)
     {
         foreach ($this->attachments as $i => $attachment) {
+            // For file path.
             if ($attachment['name'][0] === $filename) {
                 $this->attachments[$i]['multipart'] = 'related';
 
                 $this->attachments[$i]['cid'] = uniqid(basename($attachment['name'][0]) . '@', true);
+
+                return $this->attachments[$i]['cid'];
+            }
+
+            // For buffer string.
+            if ($attachment['name'][1] === $filename) {
+                $this->attachments[$i]['multipart'] = 'related';
+
+                $this->attachments[$i]['cid'] = uniqid(basename($attachment['name'][1]) . '@', true);
 
                 return $this->attachments[$i]['cid'];
             }
@@ -726,7 +741,7 @@ class Email
     }
 
     /**
-     * @param string $email
+     * @param array|string $email
      *
      * @return array
      */
@@ -1063,6 +1078,8 @@ class Email
 
     /**
      * Build final headers
+     *
+     * @return void
      */
     protected function buildHeaders()
     {
@@ -1076,6 +1093,8 @@ class Email
 
     /**
      * Write Headers as a string
+     *
+     * @return void
      */
     protected function writeHeaders()
     {
@@ -1102,6 +1121,8 @@ class Email
 
     /**
      * Build Final Body and attachments
+     *
+     * @return void
      */
     protected function buildMessage()
     {
@@ -1225,13 +1246,13 @@ class Email
                     . $this->prepQuotedPrintable($this->body) . $this->newline . $this->newline
                     . '--' . $altBoundary . '--' . $this->newline . $this->newline;
 
-                if (! empty($relBoundary)) {
+                if (isset($relBoundary)) {
                     $body .= $this->newline . $this->newline;
                     $this->appendAttachments($body, $relBoundary, 'related');
                 }
 
                 // multipart/mixed attachments
-                if (! empty($atcBoundary)) {
+                if (isset($atcBoundary)) {
                     $body .= $this->newline . $this->newline;
                     $this->appendAttachments($body, $atcBoundary, 'mixed');
                 }
@@ -1262,6 +1283,8 @@ class Email
      * @param string      $body      Message body to append to
      * @param string      $boundary  Multipart boundary
      * @param string|null $multipart When provided, only attachments of this type will be processed
+     *
+     * @return void
      */
     protected function appendAttachments(&$body, $boundary, $multipart = null)
     {
@@ -1538,7 +1561,11 @@ class Email
             $this->setReplyTo($this->headers['From']);
         }
 
-        if (empty($this->recipients) && ! isset($this->headers['To']) && empty($this->BCCArray) && ! isset($this->headers['Bcc']) && ! isset($this->headers['Cc'])) {
+        if (
+            empty($this->recipients) && ! isset($this->headers['To'])
+            && empty($this->BCCArray) && ! isset($this->headers['Bcc'])
+            && ! isset($this->headers['Cc'])
+        ) {
             $this->setErrorMessage(lang('Email.noRecipients'));
 
             return false;
@@ -1574,6 +1601,8 @@ class Email
 
     /**
      * Batch Bcc Send. Sends groups of BCCs in batches
+     *
+     * @return void
      */
     public function batchBCCSend()
     {
@@ -1618,6 +1647,8 @@ class Email
 
     /**
      * Unwrap special elements
+     *
+     * @return void
      */
     protected function unwrapSpecials()
     {
@@ -1634,7 +1665,9 @@ class Email
     /**
      * Strip line-breaks via callback
      *
-     * @param string $matches
+     * @used-by unwrapSpecials()
+     *
+     * @param list<string> $matches
      *
      * @return string
      */
@@ -1832,6 +1865,8 @@ class Email
 
     /**
      * Shortcut to send RSET or QUIT depending on keep-alive
+     *
+     * @return void
      */
     protected function SMTPEnd()
     {
@@ -1849,9 +1884,13 @@ class Email
 
         $ssl = '';
 
+        // Connection to port 465 should use implicit TLS (without STARTTLS)
+        // as per RFC 8314.
         if ($this->SMTPPort === 465) {
             $ssl = 'tls://';
-        } elseif ($this->SMTPCrypto === 'ssl') {
+        }
+        // But if $SMTPCrypto is set to `ssl`, SSL can be used.
+        if ($this->SMTPCrypto === 'ssl') {
             $ssl = 'ssl://';
         }
 
@@ -1878,7 +1917,10 @@ class Email
             $crypto = stream_socket_enable_crypto(
                 $this->SMTPConnect,
                 true,
-                STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT
+                STREAM_CRYPTO_METHOD_TLSv1_0_CLIENT
+                | STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT
+                | STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT
+                | STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT
             );
 
             if ($crypto !== true) {
@@ -2038,8 +2080,8 @@ class Email
             // See https://bugs.php.net/bug.php?id=39598 and http://php.net/manual/en/function.fwrite.php#96951
             if ($result === 0) {
                 if ($timestamp === 0) {
-                    $timestamp = time();
-                } elseif ($timestamp < (time() - $this->SMTPTimeout)) {
+                    $timestamp = Time::now()->getTimestamp();
+                } elseif ($timestamp < (Time::now()->getTimestamp() - $this->SMTPTimeout)) {
                     $result = false;
 
                     break;
@@ -2100,6 +2142,11 @@ class Email
             return '[' . $_SERVER['SERVER_ADDR'] . ']';
         }
 
+        $hostname = gethostname();
+        if ($hostname !== false) {
+            return $hostname;
+        }
+
         return '[127.0.0.1]';
     }
 
@@ -2143,10 +2190,12 @@ class Email
 
     /**
      * @param string $msg
+     *
+     * @return void
      */
     protected function setErrorMessage($msg)
     {
-        $this->debugMessage[]    = $msg . '<br />';
+        $this->debugMessage[]    = $msg . '<br>';
         $this->debugMessageRaw[] = $msg;
     }
 

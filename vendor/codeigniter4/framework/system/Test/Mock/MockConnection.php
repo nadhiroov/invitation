@@ -16,6 +16,9 @@ use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Database\Query;
 
+/**
+ * @extends BaseConnection<object|resource, object|resource>
+ */
 class MockConnection extends BaseConnection
 {
     protected $returnValues = [];
@@ -59,7 +62,7 @@ class MockConnection extends BaseConnection
 
         $query->setQuery($sql, $binds, $setEscapeFlags);
 
-        if (! empty($this->swapPre) && ! empty($this->DBPrefix)) {
+        if ($this->swapPre !== '' && $this->DBPrefix !== '') {
             $query->swapPrefix($this->DBPrefix, $this->swapPre);
         }
 

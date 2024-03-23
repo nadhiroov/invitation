@@ -140,6 +140,14 @@
   white-space: nowrap;
   z-index: 10000;
 }
+#debug-bar .toolbar .rotate {
+  animation: toolbar-rotate 9s linear infinite;
+}
+@keyframes toolbar-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
 #debug-bar.fixed-top {
   bottom: auto;
   top: 0;
@@ -279,6 +287,9 @@
   font-style: italic;
   padding-left: 1em;
   text-align: right;
+}
+#debug-bar > .debug-bar-dblock {
+  display: block;
 }
 
 .debug-view.show-view {
@@ -427,8 +438,8 @@
     -webkit-box-shadow: 0 0 4px #DFDFDF;
   }
   #debug-icon a:active,
-#debug-icon a:link,
-#debug-icon a:visited {
+  #debug-icon a:link,
+  #debug-icon a:visited {
     color: #DD8615;
   }
   #debug-bar {
@@ -436,17 +447,17 @@
     color: #DFDFDF;
   }
   #debug-bar h1,
-#debug-bar h2,
-#debug-bar h3,
-#debug-bar p,
-#debug-bar a,
-#debug-bar button,
-#debug-bar table,
-#debug-bar thead,
-#debug-bar tr,
-#debug-bar td,
-#debug-bar button,
-#debug-bar .toolbar {
+  #debug-bar h2,
+  #debug-bar h3,
+  #debug-bar p,
+  #debug-bar a,
+  #debug-bar button,
+  #debug-bar table,
+  #debug-bar thead,
+  #debug-bar tr,
+  #debug-bar td,
+  #debug-bar button,
+  #debug-bar .toolbar {
     background-color: transparent;
     color: #DFDFDF;
   }
@@ -498,7 +509,7 @@
     color: #DFDFDF;
   }
   #debug-bar #toolbar-position,
-#debug-bar #toolbar-theme {
+  #debug-bar #toolbar-theme {
     filter: brightness(0) invert(0.6);
   }
   #debug-bar .ci-label.active {
@@ -518,7 +529,7 @@
     -webkit-box-shadow: 0 -1px 4px #434343;
   }
   #debug-bar .timeline th,
-#debug-bar .timeline td {
+  #debug-bar .timeline td {
     border-color: #434343;
   }
   #debug-bar .timeline .timer {
@@ -795,4 +806,48 @@
 
 .debug-bar-noverflow {
   overflow: hidden;
+}
+
+.debug-bar-dtableRow {
+  display: table-row;
+}
+
+.debug-bar-dinlineBlock {
+  display: inline-block;
+}
+
+.debug-bar-pointer {
+  cursor: pointer;
+}
+
+.debug-bar-mleft4 {
+  margin-left: 4px;
+}
+
+.debug-bar-level-0 {
+  --level: 0;
+}
+
+.debug-bar-level-1 {
+  --level: 1;
+}
+
+.debug-bar-level-2 {
+  --level: 2;
+}
+
+.debug-bar-level-3 {
+  --level: 3;
+}
+
+.debug-bar-level-4 {
+  --level: 4;
+}
+
+.debug-bar-level-5 {
+  --level: 5;
+}
+
+.debug-bar-level-6 {
+  --level: 6;
 }

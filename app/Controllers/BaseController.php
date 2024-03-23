@@ -19,13 +19,12 @@ use Psr\Log\LoggerInterface;
  *
  * For security be sure to declare any new methods as protected or private.
  */
-
-class BaseController extends Controller
+abstract class BaseController extends Controller
 {
 	/**
 	 * Instance of the main Request object.
 	 *
-	 * @var IncomingRequest|CLIRequest
+	 * @var CLIRequest|IncomingRequest
 	 */
 	protected $request;
 
@@ -39,20 +38,21 @@ class BaseController extends Controller
 	protected $helpers = [];
 
 	/**
-	 * Constructor.
-	 *
-	 * @param RequestInterface  $request
-	 * @param ResponseInterface $response
-	 * @param LoggerInterface   $logger
+	 * Be sure to declare properties for any property fetch you initialized.
+	 * The creation of dynamic property is deprecated in PHP 8.2.
+	 */
+	// protected $session;
+
+	/**
+	 * @return void
 	 */
 	public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
 	{
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
 
-		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
-		//--------------------------------------------------------------------
+
 		// E.g.: $this->session = \Config\Services::session();
 	}
 }

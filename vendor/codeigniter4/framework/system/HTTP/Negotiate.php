@@ -21,6 +21,7 @@ use CodeIgniter\HTTP\Exceptions\HTTPException;
  * server wants.
  *
  * @see http://tools.ietf.org/html/rfc7231#section-5.3
+ * @see \CodeIgniter\HTTP\NegotiateTest
  */
 class Negotiate
 {
@@ -83,11 +84,16 @@ class Negotiate
      */
     public function charset(array $supported): string
     {
-        $match = $this->getBestMatch($supported, $this->request->getHeaderLine('accept-charset'), false, true);
+        $match = $this->getBestMatch(
+            $supported,
+            $this->request->getHeaderLine('accept-charset'),
+            false,
+            true
+        );
 
         // If no charset is shown as a match, ignore the directive
         // as allowed by the RFC, and tell it a default value.
-        if (empty($match)) {
+        if ($match === '') {
             return 'utf-8';
         }
 
@@ -141,13 +147,18 @@ class Negotiate
      *
      * @return string Best match
      */
-    protected function getBestMatch(array $supported, ?string $header = null, bool $enforceTypes = false, bool $strictMatch = false, bool $matchLocales = false): string
-    {
-        if (empty($supported)) {
+    protected function getBestMatch(
+        array $supported,
+        ?string $header = null,
+        bool $enforceTypes = false,
+        bool $strictMatch = false,
+        bool $matchLocales = false
+    ): string {
+        if ($supported === []) {
             throw HTTPException::forEmptySupportedNegotiations();
         }
 
-        if (empty($header)) {
+        if ($header === null || $header === '') {
             return $strictMatch ? '' : $supported[0];
         }
 

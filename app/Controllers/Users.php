@@ -19,7 +19,7 @@ class Users extends Core
 			'result'	=> $this->model->where('permission', 2)->findAll(),
 			'permission' => 'User'
 		];
-		$this->view->setData(['sub_user' => 'active', 'menu_user' => 'active']);		
+		$this->view->setData(['sub_user' => 'active', 'menu_user' => 'active']);
 		return view('user/index', $data);
 	}
 

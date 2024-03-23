@@ -11,8 +11,8 @@
 
 namespace CodeIgniter\Session\Handlers;
 
-use Config\App as AppConfig;
 use Config\Cookie as CookieConfig;
+use Config\Session as SessionConfig;
 use Psr\Log\LoggerAwareTrait;
 use SessionHandlerInterface;
 
@@ -33,7 +33,7 @@ abstract class BaseHandler implements SessionHandlerInterface
     /**
      * Lock placeholder.
      *
-     * @var mixed
+     * @var bool|string
      */
     protected $lock = false;
 
@@ -41,7 +41,7 @@ abstract class BaseHandler implements SessionHandlerInterface
      * Cookie prefix
      *
      * The Config\Cookie::$prefix setting is completely ignored.
-     * See https://codeigniter4.github.io/CodeIgniter4/libraries/sessions.html#session-preferences
+     * See https://codeigniter.com/user_guide/libraries/sessions.html#session-preferences
      *
      * @var string
      */
@@ -104,29 +104,21 @@ abstract class BaseHandler implements SessionHandlerInterface
      */
     protected $ipAddress;
 
-    public function __construct(AppConfig $config, string $ipAddress)
+    public function __construct(SessionConfig $config, string $ipAddress)
     {
-        /** @var CookieConfig|null $cookie */
-        $cookie = config('Cookie');
+        // Store Session configurations
+        $this->cookieName = $config->cookieName;
+        $this->matchIP    = $config->matchIP;
+        $this->savePath   = $config->savePath;
 
-        if ($cookie instanceof CookieConfig) {
-            // Session cookies have no prefix.
-            $this->cookieDomain = $cookie->domain;
-            $this->cookiePath   = $cookie->path;
-            $this->cookieSecure = $cookie->secure;
-        } else {
-            // @TODO Remove this fallback when deprecated `App` members are removed.
-            // `Config/Cookie.php` is absence
-            // Session cookies have no prefix.
-            $this->cookieDomain = $config->cookieDomain;
-            $this->cookiePath   = $config->cookiePath;
-            $this->cookieSecure = $config->cookieSecure;
-        }
+        $cookie = config(CookieConfig::class);
 
-        $this->cookieName = $config->sessionCookieName;
-        $this->matchIP    = $config->sessionMatchIP;
-        $this->savePath   = $config->sessionSavePath;
-        $this->ipAddress  = $ipAddress;
+        // Session cookies have no prefix.
+        $this->cookieDomain = $cookie->domain;
+        $this->cookiePath   = $cookie->path;
+        $this->cookieSecure = $cookie->secure;
+
+        $this->ipAddress = $ipAddress;
     }
 
     /**
