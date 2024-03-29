@@ -105,6 +105,8 @@ class Guest extends Core
 		foreach ($param['acara'] as $key => $val) {
 			$event[] = $key;
 		}
+		var_dump(implode('#', $event));
+		die;
 		if (isset($param['id_guest'])) {
 			$new_data = [
 				'id'	=> $param['id_guest'],
@@ -125,13 +127,15 @@ class Guest extends Core
 			// var_dump($data['data']);die;
 		} else {
 			$new_data = [
-				'id'	=> random_string('alnum', 7),
+				'id'	=> random_string('alnum', 3),
 				'to' => $param['optionTo'],
 				'name' => $param['name'],
 				'event' => implode('#', $event),
 				'gift'	=> $param['hadiah']
 			];
 		}
+		// var_dump($new_data);
+		// die;
 
 		$save = [];
 		if ($data != null) {
