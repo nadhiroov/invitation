@@ -24,8 +24,8 @@
             <label>Acara</label><br />
             <div class="form-check-label">
                 <?php foreach ($acara as $row) : ?>
-                    <input type="checkbox" class="form-check-input" name="param[acara][<?= $row[0]; ?>]" <?= in_array($row[0], $dt_to) ? 'checked' : ''; ?>>
-                    <label class="form-check-sign"><?= $row[0]; ?></label>
+                    <input type="checkbox" class="form-check-input" name="param[acara][<?= $row[0]; ?>]" id="<?= $row[0]; ?>" <?= in_array($row[0], $dt_to) ? 'checked' : ''; ?>>
+                    <label class="form-check-sign" for="<?= $row[0]; ?>"><?= $row[0]; ?></label>
                 <?php endforeach; ?>
             </div>
         </div>

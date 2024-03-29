@@ -30,7 +30,7 @@ class MPengaturan extends Model
 					</div>'
 				);
 			}
-		}		
+		}
 		return $records;
 	}
 
@@ -72,16 +72,22 @@ class MPengaturan extends Model
 		}
 		return $result;
 	}
-	
+
 	//Method setting
 	public function getSetting($param = '')
 	{
 		if (!empty($param)) {
 			$id = $param['id'];
-		}else{
+		} else {
 			$id = $_SESSION['id'];
 		}
-		$res = $this->where('id_user', $id)->findAll();
-		return $res[0];
+		$res = $this->where('id_user', $id)->first();
+		if (empty($res)) {
+			$data = [
+				'id_user' => $_SESSION['id']
+			];
+			$res = $this->insert($data, true);
+		}
+		return $res;
 	}
 }
