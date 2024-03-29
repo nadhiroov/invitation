@@ -15,6 +15,7 @@ use CodeIgniter\Router\RouteCollection;
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('welcom', 'Home::welcome');
 $routes->get('signin', 'Signin::index');
 $routes->get('/hash/(:any)', 'Signin::hashPassword/$1');
 $routes->post('/signin/auth', 'Signin::auth');
