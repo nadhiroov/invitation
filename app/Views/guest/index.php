@@ -100,17 +100,11 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('js'); ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+<script src="<?= base_url(); ?>/assets/js/addition.js"></script>
 <script src="<?= base_url(); ?>/template/js/plugin/datatables/datatables.min.js"></script>
 <script src="<?= base_url(); ?>/template/js/plugin/sweetalert/sweetalert.min.js"></script>
 <script>
-    $(document).ready(function() {
-        let clipboard = new ClipboardJS('.btn-clipboard');
-        clipboard.on('success', function(e) {
-            e.clearSelection();
-        });
-    });
-
+    $(document).ready(function() {});
 
     $('#mytable').DataTable({
         "pageLength": 10,
@@ -121,6 +115,17 @@
         "order": [
             [1, "asc"]
         ]
+    })
+
+    let clipboard = new ClipboardJS('.btn-clipboard')
+    clipboard.on('success', function(e) {
+        e.clearSelection()
+        var button = $(e.trigger);
+        var messageElement = button.siblings('.copy-message');
+        messageElement.text('Copied!');
+        setTimeout(function() {
+            messageElement.text('');
+        }, 1500);
     });
 
     $('#addRowModal').on('show.bs.modal', function(e) {
@@ -130,29 +135,28 @@
             success: function(data) {
                 $('.hasil-data').html(data);
             }
-        });
-    });
+        })
+    })
 
     $('.form-submit').submit(function(e) {
         e.preventDefault();
         updateData(this, function(res) {
             $(".form-submit #close_modal").click();
             $('.form-submit').find('input:text, textarea').val('');
-        });
-    });
+        })
+    })
 
     $('#edit').on('show.bs.modal', function(e) {
-        let rowid = $(e.relatedTarget).data('id');
+        let rowid = $(e.relatedTarget).data('id')
         if (typeof rowid != 'undefined') {
-            //menggunakan fungsi ajax untuk pengambilan data
             $.ajax({
                 type: 'get',
                 url: 'editGuest/' + rowid,
                 success: function(response) {
                     $('.hasil-data').html(response); //menampilkan data ke dalam modal
                 }
-            });
+            })
         }
-    });
+    })
 </script>
 <?= $this->endSection(); ?>
