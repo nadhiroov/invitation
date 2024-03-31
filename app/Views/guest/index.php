@@ -90,7 +90,7 @@
                 <div class="modal-body hasil-data">
                 </div>
                 <div class="modal-footer no-bd">
-                    <button type="submit" id="addRowButton" class="btn btn-primary">Save</button>
+                    <button type="submit" id="btnSave" class="btn btn-primary">Save</button>
                     <button type="button" id="close_modal" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </form>
@@ -107,7 +107,6 @@
     $(document).ready(function() {
         let clipboard = new ClipboardJS('.btn-clipboard');
         clipboard.on('success', function(e) {
-
             e.clearSelection();
         });
     });

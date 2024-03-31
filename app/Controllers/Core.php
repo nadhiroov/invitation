@@ -11,8 +11,5 @@ class Core extends BaseController
 	{
 		\Config\Services::session();
 		$this->view = \Config\Services::renderer();
-		if (!isset($_SESSION['logged_in'])) {
-			return redirect()->to('signin');
-		}
 	}
 }

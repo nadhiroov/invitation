@@ -37,35 +37,37 @@
                     </div>
                     <div class="card-body">
                         <form action="pengaturan/save" class="form-submit" method="POST">
+                            <?= csrf_field() ?>
                             <div class="form-check pl-0">
-                                <input type="checkbox" id="sampul" name="form[sampul]" value="1" <?= @$content['sampul'] == 1 ? 'checked' : ''; ?> data-toggle="toggle" data-size="xs" disabled>
+                                <input type="checkbox" id="sampul" name="form[sampul]" value="1" checked data-toggle="toggle" data-size="xs" disabled>
                                 <label for="sampul" class="form-check-label"> Halaman Sampul</label>
                             </div>
                             <div class="form-check pl-0">
-                                <input type="checkbox" id="mempelai" name="form[mempelai]" value="1" <?= @$content['mempelai'] == 1 ? 'checked' : ''; ?> data-toggle="toggle" data-size="xs" disabled>
+                                <input type="checkbox" id="mempelai" name="form[mempelai]" value="1" checked data-toggle="toggle" data-size="xs" disabled>
                                 <label for="mempelai" class="form-check-label"> Halaman mempelai</label>
                             </div>
                             <div class="form-check pl-0">
-                                <input type="checkbox" id="acara" name="form[acara]" value="1" <?= @$content['acara'] == 1 ? 'checked' : ''; ?> data-toggle="toggle" data-size="xs" disabled>
+                                <input type="checkbox" id="acara" name="form[acara]" value="1" checked data-toggle="toggle" data-size="xs" disabled>
                                 <label for="acara" class="form-check-label"> Halaman acara</label>
                             </div>
                             <div class="form-check pl-0">
-                                <input type="checkbox" id="ucapan" name="form[ucapan]" value="1" <?= @$content['ucapan'] == 1 ? 'checked' : ''; ?> data-toggle="toggle" data-size="xs">
+                                <input type="checkbox" id="ucapan" name="form[ucapan]" value="1" <?= $content['ucapan'] == 1 ? 'checked' : ''; ?> data-toggle="toggle" data-size="xs">
                                 <label for="ucapan" class="form-check-label"> Halaman ucapan</label>
                             </div>
                             <div class="form-check pl-0">
-                                <input type="checkbox" id="galeri" name="form[galeri]" value="1" <?= @$content['galeri'] == 1 ? 'checked' : ''; ?> data-toggle="toggle" data-size="xs">
+                                <input type="checkbox" id="galeri" name="form[galeri]" value="1" <?= $content['galeri'] == 1 ? 'checked' : ''; ?> data-toggle="toggle" data-size="xs">
                                 <label for="galeri" class="form-check-label"> Halaman galeri</label>
                             </div>
                             <div class="form-check pl-0">
-                                <input type="checkbox" id="cerita" name="form[cerita]" value="1" <?= @$content['cerita'] == 1 ? 'checked' : ''; ?> data-toggle="toggle" data-size="xs">
+                                <input type="checkbox" id="cerita" name="form[cerita]" value="1" <?= $content['cerita'] == 1 ? 'checked' : ''; ?> data-toggle="toggle" data-size="xs">
                                 <label for="cerita" class="form-check-label"> Halaman cerita</label>
                             </div>
-                            <button class="btn btn-primary" type="submit">
+                            <input type="hidden" name="form[id]" id="" value="<?= $content['id']; ?>">
+                            <button class="btn btn-primary" type="submit" id="btnSave">
                                 <span class="btn-label">
                                     <i class="icon-action-redo"></i>
                                 </span>
-                                Simpan
+                                Save
                             </button>
                         </form>
                     </div>
@@ -75,7 +77,6 @@
     </div>
 </div>
 <?= $this->endSection(); ?>
-
 
 <?= $this->section('js'); ?>
 <script src="<?= base_url(); ?>/template/js/bootstrap4-toggle.js"></script>

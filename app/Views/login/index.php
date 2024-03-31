@@ -34,19 +34,22 @@
 
     <div id="login-page">
         <div class="container">
-            <form class="form-login" action="signin/auth" method="post">
+            <form class="form-login" action="auth" method="post">
                 <h2 class="form-login-heading">sign in now</h2>
                 <div class="login-wrap">
+                    <?= csrf_field() ?>
                     <input type="text" class="form-control" placeholder="User ID" autofocus name="username">
                     <br>
                     <input type="password" class="form-control" placeholder="Password" name="password">
-                    <?php if (session()->getFlashdata('msg_emp')) : ?> <!-- username / password kosong -->
+                    <?php if (session()->getFlashdata('msg_emp')) : ?>
+                        <!-- username / password kosong -->
                         <div class="alert alert-danger alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <?= session()->getFlashdata('msg_emp') ?>
                         </div>
                     <?php endif; ?>
-                    <?php if (session()->getFlashdata('msg_pass')) : ?> <!-- username / password salah -->
+                    <?php if (session()->getFlashdata('msg_pass')) : ?>
+                        <!-- username / password salah -->
                         <div class="alert alert-danger alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <?= session()->getFlashdata('msg_pass') ?>

@@ -1,3 +1,4 @@
+<?= csrf_field() ?>
 <div class="modal-header no-bd">
     <h5 class="modal-title">
         <span class="fw-mediumbold">
@@ -17,10 +18,10 @@
             <div class="form-check">
                 <label>Kepada</label><br />
                 <?php foreach ($to['data'] as $row) : ?>
-                    <label class="form-radio-label">
-                        <input class="form-radio-input" type="radio" name="param[optionTo]" value="<?= $row[0]; ?>" checked="" required>
-                        <span class="form-radio-sign"><?= $row[0]; ?></span>
-                    </label>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="<?= $row[0]; ?>" name="param[optionTo]" class="custom-control-input" value="<?= $row[0]; ?>" required>
+                        <label class="custom-control-label" for="<?= $row[0]; ?>"><?= $row[0]; ?></label>
+                    </div>
                 <?php endforeach; ?>
             </div>
             <div class="form-check">
@@ -47,7 +48,7 @@
     </div>
     <input type="hidden" name="id" value="<?= $id; ?>">
     <div class="modal-footer no-bd">
-        <button type="submit" id="addRowButton" class="btn btn-primary">Add</button>
+        <button type="submit" id="btnSave" class="btn btn-primary">Add</button>
         <button type="button" id="close_modal" class="btn btn-danger" data-dismiss="modal">Close</button>
     </div>
 </div>

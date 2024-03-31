@@ -1,7 +1,7 @@
 // $('.confirmDelete').click(function(selection, e) {
 function confirmDelete(selection) {
-  var id = $(selection).attr("data-id");
-  var url = $(selection).attr("data-target");
+  let id = $(selection).attr("data-id");
+  let url = $(selection).attr("data-target");
   swal({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -26,11 +26,10 @@ function confirmDelete(selection) {
         dataType: "json",
         success: function (res) {
           if (res.code === 1) {
-            var content = {};
+            let content = {};
             content.message = "Data Deleted !";
             content.title = res.title;
             content.icon = "fas fa-check-circle";
-
             $.notify(content, {
               type: "success",
               placement: {
@@ -57,19 +56,25 @@ function confirmDelete(selection) {
 }
 
 function updateData(formSelection) {
-  var form = $(formSelection);
-  var data = $(form).serialize();
-  var action = $(form).attr("action");
+  let form = $(formSelection);
+  let data = $(form).serialize();
+  let action = $(form).attr("action");
   $.ajax({
     type: "POST",
     url: action,
     data: data,
     dataType: "json",
-    beforeSend: function () {},
+    beforeSend: function () {
+      $("#btnSave").text("");
+      $("#btnSave").prop("disabled", true);
+      $("#btnSave").append(
+        '<span class="spinner-border spinner-border-sm" id="loadingSpinner" role="status" aria-hidden="true"></span> Loading...'
+      );
+    },
     success: function (res = "") {
       $(".form-submit #close_modal").click();
       if (res.code === 1) {
-        var content = {};
+        let content = {};
         content.message = res.message;
         content.title = res.title;
         content.icon = "fas fa-check-circle";
@@ -93,15 +98,23 @@ function updateData(formSelection) {
           },
         });
       }
+      $("#btnSave").prop("disabled", false);
+      $("#btnSave").text("Save");
+      $("#loadingSpinner").remove();
+    },
+    error: function () {
+      $("#btnSave").prop("disabled", false);
+      $("#btnSave").text("Save");
+      $("#loadingSpinner").remove();
     },
   });
 }
 
 function saveData(formSelection) {
-  var form = $(formSelection);
-  var data = $(form).serialize();
-  var action = $(form).attr("action");
-  var url = window.location.href;
+  let form = $(formSelection);
+  let data = $(form).serialize();
+  let action = $(form).attr("action");
+  let url = window.location.href;
   if (url.indexOf("?") > -1) {
     url += "&param=1";
   } else {
@@ -112,10 +125,16 @@ function saveData(formSelection) {
     url: action,
     data: data,
     dataType: "json",
-    // beforeSend: function () {},
+    beforeSend: function () {
+      $("#btnSave").text("");
+      $("#btnSave").prop("disabled", true);
+      $("#btnSave").append(
+        '<span class="spinner-border spinner-border-sm" id="loadingSpinner" role="status" aria-hidden="true"></span> Loading...'
+      );
+    },
     success: function (res = "") {
       if (res.code === 1) {
-        var content = {};
+        let content = {};
         content.message = res.message;
         content.title = res.title;
         content.icon = "fas fa-check-circle";
@@ -143,6 +162,14 @@ function saveData(formSelection) {
           delay: 2000,
         });
       }
+      $("#btnSave").prop("disabled", false);
+      $("#btnSave").text("Save");
+      $("#loadingSpinner").remove();
+    },
+    error: function () {
+      $("#btnSave").prop("disabled", false);
+      $("#btnSave").text("Save");
+      $("#loadingSpinner").remove();
     },
   });
 }
@@ -155,7 +182,7 @@ function uploadimage(img, jns, id) {
     dataType: "json",
     success: function (res = "") {
       if (res.code === 1) {
-        var content = {};
+        let content = {};
         content.message = res.message;
         content.title = res.title;
         content.icon = "fas fa-check-circle";
