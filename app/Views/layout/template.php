@@ -30,7 +30,6 @@
 	<link rel="stylesheet" href="<?= base_url(); ?>/assets/css/addition.css">
 	<!-- CSS per Page -->
 	<?= $this->renderSection('css'); ?>
-	<!-- CSS Just for demo purpose, don't include it in your project -->
 </head>
 
 <body>

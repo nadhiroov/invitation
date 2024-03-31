@@ -31,7 +31,7 @@ class MGuest extends Model
 					explode('#', $row['event']),
 					$row['gift'] == 0 ? 'Tidak' : 'Ya',
 					'<div class="form-button-action">
-					<button class="btn btn-link btn-primary btn-lg btn-clipboard" data-clipboard-text="' . base_url('attend/' . $data[0]['id_user'] . '/' . $row['id']) . '"><i class="icon-link"></i></button>
+					<button class="btn btn-link btn-primary btn-lg btn-clipboard" data-clipboard-text="' . base_url('attend/' . $data[0]['id_user'] . '/' . $row['id']) . '"><i class="icon-link"></i></button><span class="copy-message"></span>
 					<a href="#edit" data-toggle="modal" data-id="' . $row['id'] . '" class="btn btn-link btn-primary btn-lg" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
 					<a onclick="confirmDelete(this)" data-target="guest/delete/" data-id="' . $row['id'] . '" class="btn btn-link btn-danger confirmDelete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-times"></i></a>
 					</div>'

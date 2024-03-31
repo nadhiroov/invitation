@@ -13,6 +13,10 @@
                     <input class="form-radio-input " type="radio" name="param[optionTo]" value="<?= $row[0]; ?>" <?= $content['to'] == $row['0'] ? 'checked' : ''; ?> required>
                     <span class="form-radio-sign"><?= $row[0]; ?></span>
                 </label>
+                <!-- <div class="custom-control custom-radio">
+                    <input class="custom-control-input" type="radio" name="param[optionTo]" value="<?= $row[0]; ?>" <?= $content['to'] == $row['0'] ? 'checked' : ''; ?> required id="<?= $row[0]; ?>">
+                    <label class="custom-control-label" for="<?= $row[0]; ?>"><?= $row[0]; ?></label>
+                </div> -->
             <?php endforeach; ?>
         </div>
         <div class="form-check">

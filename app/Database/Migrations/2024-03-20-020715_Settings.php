@@ -49,16 +49,17 @@ class Settings extends Migration
             'ucapan' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
-                'default' => 0,
+                'default' => 1,
             ],
             'galeri' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
-                'default' => 0,
+                'default' => 1,
             ],
             'cerita' => [
                 'type' => 'LONGTEXT',
                 'null' => true,
+                'default' => 1,
             ],
             'salam_pembuka' => [
                 'type' => 'LONGTEXT',

@@ -3,7 +3,7 @@
         <nav class="pull-left">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://www.themekita.com">
+                    <a class="nav-link" href="https://github.com/nadhiroov">
                         ThemeKita
                     </a>
                 </li>
@@ -20,7 +20,7 @@
             </ul>
         </nav>
         <div class="copyright ml-auto">
-            2018, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://www.themekita.com">ThemeKita</a>
+            2018, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://github.com/nadhiroov">Nadhiroov</a>
         </div>
     </div>
 </footer>

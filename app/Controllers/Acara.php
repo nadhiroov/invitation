@@ -14,7 +14,9 @@ class Acara extends BaseController
 	public function index()
 	{
 		$res = $this->model->where('id_user', $_SESSION['id'])->find();
-		if (count($res) >= 0) {
+		// dd(empty($res));
+		$data = [];
+		if (!empty($res)) {
 			$data['content'] = $res[0];
 		}
 		$this->view->setData(['menu_website' => 'active', 'sub_acara' => 'active']);
@@ -26,10 +28,10 @@ class Acara extends BaseController
 		$form = $this->request->getPost('form');
 		$data = [
 			'id_user'					=> $_SESSION['id'],
-			'tanggal_'.$form['jenis']	=> $form['tanggal'],
-			'jam_'.$form['jenis']		=> $form['jam'],
-			'tempat_'.$form['jenis']	=> $form['tempat'],
-			'alamat_'.$form['jenis']	=> $form['alamat']
+			'tanggal_' . $form['jenis']	=> $form['tanggal'],
+			'jam_' . $form['jenis']		=> $form['jam'],
+			'tempat_' . $form['jenis']	=> $form['tempat'],
+			'alamat_' . $form['jenis']	=> $form['alamat']
 		];
 		if ($form['id'] != null) {
 			$data['id'] = intval($form['id']);
