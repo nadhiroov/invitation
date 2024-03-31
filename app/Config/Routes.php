@@ -18,7 +18,7 @@ $routes->get('/', 'Home::index');
 $routes->get('welcom', 'Home::welcome');
 $routes->get('signin', 'Signin::index');
 $routes->get('/hash/(:any)', 'Signin::hashPassword/$1');
-$routes->post('/signin/auth', 'Signin::auth');
+$routes->post('auth', 'Signin::auth');
 $routes->get('/logout', 'Signin::logout');
 //admin
 $routes->get('/dashboard', 'Dashboard::index');
@@ -60,8 +60,8 @@ $routes->post('/mempelai/save', 'Mempelai::process');
 $routes->post('/mempelai/upload', 'Mempelai::upload');
 
 // pengaturan
-$routes->add('/pengaturan', 'Pengaturan::index');
-$routes->post('/pengaturan/save', 'Pengaturan::process');
+$routes->add('pengaturan', 'Pengaturan::index');
+$routes->post('pengaturan/save', 'Pengaturan::process');
 
 // acara
 $routes->add('/acara', 'Acara::index');

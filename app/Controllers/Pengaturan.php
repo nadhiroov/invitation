@@ -4,14 +4,13 @@ namespace App\Controllers;
 
 use App\Models\MPengaturan;
 
-class Pengaturan extends Core
+class Pengaturan extends BaseController
 {
 	public function __construct()
 	{
-		parent::__construct();
 		$this->model = new MPengaturan();
 	}
-	
+
 	public function index()
 	{
 		$data['content'] = $this->model->getSetting();
@@ -22,6 +21,28 @@ class Pengaturan extends Core
 	public function process()
 	{
 		$form = $this->request->getPost('form');
-		var_dump($form);
+		$data = [
+			'ucapan' => $form['ucapan'] ?? 0,
+			'galeri' => $form['galeri'] ?? 0,
+			'cerita' => $form['cerita'] ?? 0,
+			'id'	 => $form['id']
+		];
+		// var_dump($data);
+		// die;
+		try {
+			$this->model->save($data);
+			$result = [
+				'code' 		=> 1,
+				'message'	=> 'Data saved!!',
+				'title'		=> 'Success'
+			];
+		} catch (\Exception $e) {
+			$result = [
+				'code' 		=> $e->getCode(),
+				'message'	=> $e->getMessage(),
+				'title'		=> 'Error'
+			];
+		}
+		echo json_encode($result);
 	}
 }

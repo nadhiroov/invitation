@@ -29,7 +29,7 @@ class User extends Migration
             'max_user' => [
                 'type' => 'INT',
                 'constraint' => 11,
-                'default' => 30,
+                'default' => 10,
             ],
             'password' => [
                 'type' => 'VARCHAR',
