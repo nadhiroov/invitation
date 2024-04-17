@@ -2,7 +2,6 @@
 
 <?= $this->section('css'); ?>
 <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet" />
-<script src="https://unpkg.com/cropperjs"></script>
 <style>
     .image_area {
         position: relative;
@@ -122,11 +121,11 @@
                             <input type="text" class="form-control" name="form[nama_ibu]" placeholder="nama ibu" value="<?= @$content['nama_ibu_pria']; ?>">
 
                             <br><br>
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" id="btnSave" type="submit">
                                 <span class="btn-label">
                                     <i class="icon-action-redo"></i>
                                 </span>
-                                Simpan
+                                Save
                             </button>
                         </form>
 
@@ -157,7 +156,7 @@
                             </div>
                         </div>
                         <hr>
-                        <form action="mempelai/save" class="form-submit" method="POST">
+                        <form action="mempelai/save" class="form-submit-female" method="POST">
                             <input type="hidden" name="form[jenis]" value="wanita">
                             <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
                             <p class="lead"> Nama Lengkap </p>
@@ -173,11 +172,11 @@
                             <input type="text" class="form-control" name="form[nama_ibu]" placeholder="nama ibu" value="<?= @$content['nama_ibu_wanita']; ?>">
 
                             <br><br>
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" id="btnSaveFemale" type="submit">
                                 <span class="btn-label">
                                     <i class="icon-action-redo"></i>
                                 </span>
-                                Simpan
+                                Save
                             </button>
                         </form>
                     </div>
@@ -222,7 +221,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title">Sesuaikan gambar sebelum di upload</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">x</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -239,7 +238,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" id="crop" class="btn btn-primary">Crop</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </form>
@@ -248,6 +247,7 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('js'); ?>
+<script src="https://unpkg.com/cropperjs"></script>
 <script>
     $(document).ready(function() {
 
@@ -290,7 +290,7 @@
                 reader.readAsDataURL(files[0]);
             }
         });
-        
+
         $('#upload_image_sampul').change(function(event) {
             $('#jenis').val('sampul');
             var files = event.target.files;
@@ -312,7 +312,7 @@
             var jns = $('#jenis').val();
             if (jns === 'sampul') {
                 cropper = new Cropper(image, {
-                    aspectRatio: 2/1,
+                    aspectRatio: 2 / 1,
                     viewMode: 1,
                     preview: '.preview'
                 });
@@ -345,22 +345,35 @@
             }
 
             canvas.toBlob(function(blob) {
-                url = URL.createObjectURL(blob);
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);
-                var id = <?= @$content['id']; ?>;
-                reader.onloadend = function() {
-                    var base64data = reader.result;
-                    $modal.modal('hide');
-                    uploadimage(base64data, jns, id);
-                };
-            });
-        });
-    });
+                // Create a FormData object and append the Blob
+                var formData = new FormData();
+                formData.append('image', blob, 'cropped.png')
+                uploadimage(formData, jns, <?= @$content['id'] ?>)
+            }, 'image/png');
+
+
+            // canvas.toBlob(function(blob) {
+            //     url = URL.createObjectURL(blob)
+            //     var reader = new FileReader()
+            //     reader.readAsDataURL(blob)
+            //     var id = <?= @$content['id']; ?>;
+            //     reader.onloadend = function() {
+            //         var base64data = reader.result
+            //         $modal.modal('hide')
+            //         uploadimage(base64data, jns, id)
+            //     }
+            // })
+        })
+    })
 
     $('.form-submit').submit(function(e) {
         e.preventDefault();
-        saveData(this);
+        saveData(this)
+    });
+
+    $('.form-submit-female').submit(function(e) {
+        e.preventDefault()
+        saveData(this, 'btnSaveFemale')
     });
 </script>
 <?= $this->endSection(); ?>
