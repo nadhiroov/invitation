@@ -41,7 +41,7 @@ class Acara extends BaseController
 			$this->model->save($data);
 			$result = [
 				'code' 		=> 1,
-				'message'	=> 'succes',
+				'message'	=> 'success',
 				'title'		=> 'Data saved !!'
 			];
 		} catch (\Exception $e) {

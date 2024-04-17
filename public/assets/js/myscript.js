@@ -110,15 +110,12 @@ function updateData(formSelection) {
   });
 }
 
-function saveData(formSelection) {
+function saveData(formSelection, idBtnSave = '') {
   let form = $(formSelection);
   let data = $(form).serialize();
   let action = $(form).attr("action");
-  let url = window.location.href;
-  if (url.indexOf("?") > -1) {
-    url += "&param=1";
-  } else {
-    url += "?param=1";
+  if (idBtnSave == "") {
+    idBtnSave = 'btnSave';
   }
   $.ajax({
     type: "POST",
@@ -126,9 +123,9 @@ function saveData(formSelection) {
     data: data,
     dataType: "json",
     beforeSend: function () {
-      $("#btnSave").text("");
-      $("#btnSave").prop("disabled", true);
-      $("#btnSave").append(
+      $(`#${idBtnSave}`).text("");
+      $(`#${idBtnSave}`).prop("disabled", true);
+      $(`#${idBtnSave}`).append(
         '<span class="spinner-border spinner-border-sm" id="loadingSpinner" role="status" aria-hidden="true"></span> Loading...'
       );
     },
@@ -147,7 +144,7 @@ function saveData(formSelection) {
           delay: 2000,
         });
         setTimeout(function () {
-          window.location.href = url;
+          window.location.reload();
         }, 2000);
       } else {
         content.message = res.message;
@@ -162,13 +159,13 @@ function saveData(formSelection) {
           delay: 2000,
         });
       }
-      $("#btnSave").prop("disabled", false);
-      $("#btnSave").text("Save");
+      $(`#${idBtnSave}`).prop("disabled", false);
+      $(`#${idBtnSave}`).text("Save");
       $("#loadingSpinner").remove();
     },
     error: function () {
-      $("#btnSave").prop("disabled", false);
-      $("#btnSave").text("Save");
+      $(`#${idBtnSave}`).prop("disabled", false);
+      $(`#${idBtnSave}`).text("Save");
       $("#loadingSpinner").remove();
     },
   });

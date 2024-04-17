@@ -3,19 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\MMempelai;
+use CodeIgniter\Files\File;
 
-class Mempelai extends Core
+class Mempelai extends BaseController
 {
 	public function __construct()
 	{
-		parent::__construct();
 		$this->model = new MMempelai();
 	}
 
 	public function index()
 	{
-		$res = $this->model->where('id_user', $_SESSION['id'])->find();
-		$data['content'] = @$res[0];
+		$res = $this->model->where('id_user', session()->id)->first();
+		$data['content'] = $res;
 		$this->view->setData(['menu_website' => 'active', 'sub_mempelai' => 'active']);
 		return view('mempelai/index', $data);
 	}
@@ -41,11 +41,12 @@ class Mempelai extends Core
 		if ($form['id'] != null) {
 			$data['id'] = intval($form['id']);
 		}
+		$data['id_user'] = session()->id;
 		try {
 			$this->model->save($data);
 			$result = [
 				'code' 		=> 1,
-				'message'	=> 'succes',
+				'message'	=> 'success',
 				'title'		=> 'Data saved !!'
 			];
 		} catch (\Exception $e) {
@@ -60,12 +61,41 @@ class Mempelai extends Core
 
 	public function upload()
 	{
-		// dd($this->request->getPost('aidi'));
-		$img = $this->request->getPost('image');
+		$img = $this->request->getFile('image');
 		$id = $this->request->getPost('aidi');
 		$jns = $this->request->getPost('jenis');
 		// dd($jns);
 		// var_dump($jns);die;
+		$validationRule = [
+			'image' => [
+				'rules' => [
+					'uploaded[image]',
+					'is_image[image]',
+					'mime_in[image,image/jpg,image/jpeg,image/gif,image/png]',
+					'max_size[image,40]',
+				],
+			],
+		];
+		if (!$this->validate($validationRule)) {
+			$result = [
+				'code'		=> $this->validator->getValidated(),
+				'message'	=> $this->validator->getErrors(),
+				'title'		=> 'error'
+			];
+			echo json_encode($result);
+			return false;
+		}
+
+		$img = $this->request->getFile('image');
+
+		if (!$img->hasMoved()) {
+			$filepath = WRITEPATH . 'assets/mempelai/' . $img->store();
+
+			$data = ['uploaded_fileinfo' => new File($filepath)];
+
+			return view('upload_success', $data);
+		}
+
 
 		$data['id'] = intval($id);
 		if ($jns == 'pria') {
