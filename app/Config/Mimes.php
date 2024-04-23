@@ -22,6 +22,8 @@ class Mimes
 {
     /**
      * Map of extensions to mime types.
+     *
+     * @var array<string, list<string>|string>
      */
     public static array $mimes = [
         'hqx' => [
@@ -492,7 +494,7 @@ class Mimes
     {
         $extension = trim(strtolower($extension), '. ');
 
-        if (! array_key_exists($extension, static::$mimes)) {
+        if (!array_key_exists($extension, static::$mimes)) {
             return null;
         }
 
