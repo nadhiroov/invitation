@@ -5,8 +5,9 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\MUser;
 
-class Signin extends BaseController
+class Signin extends Core
 {
+	protected $session;
 	public function __construct()
 	{
 		$this->model = new MUser();

@@ -10,6 +10,11 @@ use App\Models\MUcapan;
 
 class Attendance extends Core
 {
+    protected $setting;
+    protected $mempelai;
+    protected $acara;
+    protected $ucapan;
+    
     public function __construct()
     {
         parent::__construct();

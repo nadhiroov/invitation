@@ -35,10 +35,103 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Data Akad Nikah</h4>
+                        <h4 class="card-title">Jadwal Akad Nikah</h4>
                     </div>
                     <div class="card-body">
                         <form action="acara/save" class="form-submit" method="POST">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="form[jenis]" value="akad">
+                            <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
+                            <div class="form-group">
+                                <label for="reservationDate">Tanggal</label>
+                                <div class="datepicker date input-group shadow-sm">
+                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$content['tanggal_akad']; ?>">
+                                    <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_end_time">Waktu</label>
+                                <div class="input-group date timepicker">
+                                    <input type="text" name="end_time" placeholder="pilih waktu" class="form-control" placeholder="End time" title="" required id="id_end_time" />
+                                    <div class="input-group-addon input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Tempat/Lokasi</label>
+                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$content['tempat_akad']; ?>">
+                                <small id="emailHelp2" class="form-text text-muted">Contoh: Kediaman memepelai wanita</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Koordinat logtitude dan latitude</label>
+                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$content['longlat_akad']; ?>">
+                                <small id="emailHelp2" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
+                            </div>
+                            <button class="btn btn-primary" type="submit" id="btnSave">
+                                <span class="btn-label">
+                                    <i class="icon-action-redo"></i>
+                                </span>
+                                Simpan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Jadwal Resepsi</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="acara/save" class="form-submit" method="POST">
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="form[jenis]" value="resepsi">
+                            <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
+                            <div class="form-group">
+                                <label for="reservationDate">Tanggal</label>
+                                <div class="datepicker date input-group shadow-sm">
+                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$content['tanggal_resepsi']; ?>">
+                                    <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Waktu</label>
+                                <input type="text" class="form-control" name="form[jam]" placeholder="Masukkan waktu" value="<?= @$content['jam_resepsi']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Tempat/Lokasi</label>
+                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$content['tempat_resepsi']; ?>">
+                                <small id="emailHelp2" class="form-text text-muted">Contoh: Kediaman memepelai wanita</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Alamat</label>
+                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$content['alamat_resepsi']; ?>">
+                            </div>
+                            <button class="btn btn-primary" type="submit" id="btnSave">
+                                <span class="btn-label">
+                                    <i class="icon-action-redo"></i>
+                                </span>
+                                Simpan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Jadwal Unduh Mantu</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="acara/save" class="form-submit" method="POST">
+                            <?= csrf_field() ?>
                             <input type="hidden" name="form[jenis]" value="akad">
                             <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
                             <div class="form-group">
@@ -68,47 +161,7 @@
                                 <label>Alamat</label>
                                 <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$content['alamat_akad']; ?>">
                             </div>
-                            <button class="btn btn-primary" type="submit">
-                                <span class="btn-label">
-                                    <i class="icon-action-redo"></i>
-                                </span>
-                                Simpan
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Data Resepsi</h4>
-                    </div>
-                    <div class="card-body">
-                        <form action="acara/save" class="form-submit" method="POST">
-                            <input type="hidden" name="form[jenis]" value="resepsi">
-                            <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
-                            <div class="form-group">
-                                <label for="reservationDate">Tanggal</label>
-                                <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$content['tanggal_resepsi']; ?>">
-                                    <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Waktu</label>
-                                <input type="text" class="form-control" name="form[jam]" placeholder="Masukkan waktu" value="<?= @$content['jam_resepsi']; ?>">
-                            </div>
-                            <div class="form-group">
-                                <label>Tempat/Lokasi</label>
-                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$content['tempat_resepsi']; ?>">
-                                <small id="emailHelp2" class="form-text text-muted">Contoh: Kediaman memepelai wanita</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Alamat</label>
-                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$content['alamat_resepsi']; ?>">
-                            </div>
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" type="submit" id="btnSave">
                                 <span class="btn-label">
                                     <i class="icon-action-redo"></i>
                                 </span>

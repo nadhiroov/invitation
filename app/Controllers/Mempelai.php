@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\MMempelai;
 use CodeIgniter\Files\File;
 
-class Mempelai extends BaseController
+class Mempelai extends Core
 {
 	public function __construct()
 	{

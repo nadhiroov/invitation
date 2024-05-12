@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\MPengaturan;
 
-class Pengaturan extends BaseController
+class Pengaturan extends Core
 {
 	public function __construct()
 	{

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\MAcara;
 
-class Acara extends BaseController
+class Acara extends Core
 {
 	public function __construct()
 	{
@@ -14,7 +14,7 @@ class Acara extends BaseController
 	public function index()
 	{
 		$res = $this->model->where('id_user', $_SESSION['id'])->find();
-		// dd(empty($res));
+		// dd($res);
 		$data = [];
 		if (!empty($res)) {
 			$data['content'] = $res[0];
@@ -33,6 +33,7 @@ class Acara extends BaseController
 			'tempat_' . $form['jenis']	=> $form['tempat'],
 			'alamat_' . $form['jenis']	=> $form['alamat']
 		];
+		dd($form);
 		if ($form['id'] != null) {
 			$data['id'] = intval($form['id']);
 		}

@@ -7,6 +7,8 @@ use App\Models\MPengaturan;
 
 class Guest extends Core
 {
+	protected $setting;
+
 	public function __construct()
 	{
 		parent::__construct();
