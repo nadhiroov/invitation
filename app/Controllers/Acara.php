@@ -13,11 +13,17 @@ class Acara extends Core
 
 	public function index()
 	{
-		$res = $this->model->where('id_user', $_SESSION['id'])->find();
+		$res = $this->model->where('id_user', session()->id)->first();
+		// $this->model->delete(2);
 		// dd($res);
 		$data = [];
-		if (!empty($res)) {
-			$data['content'] = $res[0];
+		if ($res != null) {
+			$res['acara'] = json_decode($res['acara'], true);
+			$data['akad'] = $res['acara']['akad'] ?? '';
+			$data['resepsi'] = $res['acara']['resepsi'] ?? '';
+			$data['unduh'] = $res['acara']['unduh'] ?? '';
+			// dd(date('Y-m-d', strtotime('04 May 2025')));
+			// dd($res['acara']['akad']['tanggal']);
 		}
 		$this->view->setData(['menu_website' => 'active', 'sub_acara' => 'active']);
 		return view('acara/index', $data);
@@ -27,19 +33,27 @@ class Acara extends Core
 	{
 		$form = $this->request->getPost('form');
 		$data = [
-			'id_user'					=> $_SESSION['id'],
-			'tanggal_' . $form['jenis']	=> $form['tanggal'],
-			'jam_' . $form['jenis']		=> $form['jam'],
-			'tempat_' . $form['jenis']	=> $form['tempat'],
-			'alamat_' . $form['jenis']	=> $form['alamat']
+			'tanggal'	=> $form['tanggal'],
+			'jam'		=> $form['jam'],
+			'tempat'	=> $form['tempat'],
+			'alamat'	=> $form['alamat']
 		];
-		dd($form);
-		if ($form['id'] != null) {
-			$data['id'] = intval($form['id']);
+		// var_dump($form);die;
+		$cekData = $this->model->where('id_user', session()->id)->first();
+		if ($cekData == null) {
+			$acara[$form['jenis']] = $data;
+			$saveData['acara'] = json_encode($acara);
+			$saveData['id_user'] = session()->id;
+		}else{
+			$cekData['acara'] = json_decode($cekData['acara'], true);
+			$acara[$form['jenis']] = $data;
+			$cekData['acara'] = json_encode(array_merge($cekData['acara'], $acara));
+			$saveData = $cekData;
 		}
+		// var_dump($cekData);die;
 
 		try {
-			$this->model->save($data);
+			$this->model->save($saveData);
 			$result = [
 				'code' 		=> 1,
 				'message'	=> 'success',

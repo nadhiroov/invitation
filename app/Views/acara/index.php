@@ -45,14 +45,14 @@
                             <div class="form-group">
                                 <label for="reservationDate">Tanggal</label>
                                 <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$content['tanggal_akad']; ?>">
+                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= $akad['tanggal'] ?? date('d m Y', strtotime($akad['tanggal'])); ?>">
                                     <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="id_end_time">Waktu</label>
                                 <div class="input-group date timepicker">
-                                    <input type="text" name="end_time" placeholder="pilih waktu" class="form-control" placeholder="End time" title="" required id="id_end_time" />
+                                    <input type="text" name="form[jam]" value="<?= @$akad['jam']; ?>" placeholder="pilih waktu" class="form-control" placeholder="End time" title="" required id="id_end_time" />
                                     <div class="input-group-addon input-group-append">
                                         <div class="input-group-text">
                                             <i class="fas fa-clock"></i>
@@ -62,13 +62,14 @@
                             </div>
                             <div class="form-group">
                                 <label>Tempat/Lokasi</label>
-                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$content['tempat_akad']; ?>">
+                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$akad['tempat']; ?>">
                                 <small id="emailHelp2" class="form-text text-muted">Contoh: Kediaman memepelai wanita</small>
                             </div>
                             <div class="form-group">
                                 <label>Koordinat logtitude dan latitude</label>
-                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$content['longlat_akad']; ?>">
+                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$akad['alamat']; ?>">
                                 <small id="emailHelp2" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
+                                <small id="emailHelp2" class="form-text text-muted">Pastikan benar karena untuk lokasi di Google map</small>
                             </div>
                             <button class="btn btn-primary" type="submit" id="btnSave">
                                 <span class="btn-label">
@@ -94,22 +95,31 @@
                             <div class="form-group">
                                 <label for="reservationDate">Tanggal</label>
                                 <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$content['tanggal_resepsi']; ?>">
+                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$resepsi['tanggal']; ?>">
                                     <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Waktu</label>
-                                <input type="text" class="form-control" name="form[jam]" placeholder="Masukkan waktu" value="<?= @$content['jam_resepsi']; ?>">
+                                <label for="id_end_time">Waktu</label>
+                                <div class="input-group date timepicker">
+                                    <input type="text" name="form[jam]" value="<?= @$resepsi['jam']; ?>" placeholder="pilih waktu" class="form-control" placeholder="End time" title="" required id="id_end_time" />
+                                    <div class="input-group-addon input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Tempat/Lokasi</label>
-                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$content['tempat_resepsi']; ?>">
+                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$resepsi['tempat']; ?>">
                                 <small id="emailHelp2" class="form-text text-muted">Contoh: Kediaman memepelai wanita</small>
                             </div>
                             <div class="form-group">
-                                <label>Alamat</label>
-                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$content['alamat_resepsi']; ?>">
+                                <label>Koordinat logtitude dan latitude</label>
+                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$resepsi['alamat']; ?>">
+                                <small id="emailHelp2" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
+                                <small id="emailHelp2" class="form-text text-muted">Pastikan benar karena untuk lokasi di Google map</small>
                             </div>
                             <button class="btn btn-primary" type="submit" id="btnSave">
                                 <span class="btn-label">
@@ -132,19 +142,19 @@
                     <div class="card-body">
                         <form action="acara/save" class="form-submit" method="POST">
                             <?= csrf_field() ?>
-                            <input type="hidden" name="form[jenis]" value="akad">
+                            <input type="hidden" name="form[jenis]" value="unduh">
                             <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
                             <div class="form-group">
                                 <label for="reservationDate">Tanggal</label>
                                 <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$content['tanggal_akad']; ?>">
+                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$unduh['tanggal']; ?>">
                                     <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="id_end_time">Waktu</label>
                                 <div class="input-group date timepicker">
-                                    <input type="text" name="end_time" placeholder="pilih waktu" class="form-control" placeholder="End time" title="" required id="id_end_time" />
+                                    <input type="text" name="form[jam]" value="<?= @$unduh['jam']; ?>" placeholder="pilih waktu" class="form-control" placeholder="End time" title="" required id="id_end_time" />
                                     <div class="input-group-addon input-group-append">
                                         <div class="input-group-text">
                                             <i class="fas fa-clock"></i>
@@ -154,12 +164,14 @@
                             </div>
                             <div class="form-group">
                                 <label>Tempat/Lokasi</label>
-                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$content['tempat_akad']; ?>">
+                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$unduh['tempat']; ?>">
                                 <small id="emailHelp2" class="form-text text-muted">Contoh: Kediaman memepelai wanita</small>
                             </div>
                             <div class="form-group">
-                                <label>Alamat</label>
-                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$content['alamat_akad']; ?>">
+                                <label>Koordinat logtitude dan latitude</label>
+                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$unduh['alamat']; ?>">
+                                <small id="emailHelp2" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
+                                <small id="emailHelp2" class="form-text text-muted">Pastikan benar karena untuk lokasi di Google map</small>
                             </div>
                             <button class="btn btn-primary" type="submit" id="btnSave">
                                 <span class="btn-label">
@@ -183,19 +195,20 @@
 <script src="<?= base_url() ?>/template/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 <script src="<?= base_url(); ?>/assets/datetime/js/bootstrap-datetimepicker.min.js"></script>
 <script>
-    $('.datepicker').datetimepicker({
-        allowInputToggle: true,
-        format: "DD MMMM YYYY",
-        locale: 'id',
-        keepOpen: false
-    });
-
-    $('.timepicker').datetimepicker({
-        allowInputToggle: true,
-        "format": "HH:mm",
-    });
-
     $(document).ready(function() {
+
+        $('.datepicker').datetimepicker({
+            allowInputToggle: true,
+            format: "DD MMMM YYYY",
+            locale: 'id',
+            keepOpen: false
+        });
+
+        $('.timepicker').datetimepicker({
+            allowInputToggle: true,
+            format: "HH:mm"
+        });
+
         $('.form-submit').submit(function(e) {
             e.preventDefault();
             saveData(this);
