@@ -99,12 +99,12 @@ function updateData(formSelection) {
         });
       }
       $("#btnSave").prop("disabled", false);
-      $("#btnSave").text("Save");
+      $("#btnSave").text("Simpan");
       $("#loadingSpinner").remove();
     },
     error: function () {
       $("#btnSave").prop("disabled", false);
-      $("#btnSave").text("Save");
+      $("#btnSave").text("Simpan");
       $("#loadingSpinner").remove();
     },
   });
@@ -160,12 +160,12 @@ function saveData(formSelection, idBtnSave = '') {
         });
       }
       $(`#${idBtnSave}`).prop("disabled", false);
-      $(`#${idBtnSave}`).text("Save");
+      $(`#${idBtnSave}`).text("Simpan");
       $("#loadingSpinner").remove();
     },
     error: function () {
       $(`#${idBtnSave}`).prop("disabled", false);
-      $(`#${idBtnSave}`).text("Save");
+      $(`#${idBtnSave}`).text("Simpan");
       $("#loadingSpinner").remove();
     },
   });

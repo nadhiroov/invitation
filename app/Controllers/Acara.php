@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\MAcara;
+use CodeIgniter\I18n\Time;
 
 class Acara extends Core
 {
@@ -14,14 +15,15 @@ class Acara extends Core
 	public function index()
 	{
 		$res = $this->model->where('id_user', session()->id)->first();
-		// $this->model->delete(2);
+		// $this->model->delete(4);
 		// dd($res);
 		$data = [];
 		if ($res != null) {
 			$res['acara'] = json_decode($res['acara'], true);
 			$data['akad'] = $res['acara']['akad'] ?? '';
-			$data['resepsi'] = $res['acara']['resepsi'] ?? '';
-			$data['unduh'] = $res['acara']['unduh'] ?? '';
+			$data['resepsi'] = $res['acara']['resepsi'] ?? null;
+			$data['unduh'] = $res['acara']['unduh'] ?? null;
+			// dd($data);
 			// dd(date('Y-m-d', strtotime('04 May 2025')));
 			// dd($res['acara']['akad']['tanggal']);
 		}
@@ -32,26 +34,30 @@ class Acara extends Core
 	public function process()
 	{
 		$form = $this->request->getPost('form');
+		$time = Time::parse($form['tanggal'], 'Asia/Jakarta');
 		$data = [
-			'tanggal'	=> $form['tanggal'],
+			'tgl'		=> $time->toLocalizedString('MMM d, yyyy'),
+			'tanggal'	=> date('d m Y', strtotime($form['tanggal'])),
 			'jam'		=> $form['jam'],
 			'tempat'	=> $form['tempat'],
 			'alamat'	=> $form['alamat']
 		];
-		// var_dump($form);die;
+		var_dump($data);
+		die;
+
 		$cekData = $this->model->where('id_user', session()->id)->first();
 		if ($cekData == null) {
 			$acara[$form['jenis']] = $data;
 			$saveData['acara'] = json_encode($acara);
 			$saveData['id_user'] = session()->id;
-		}else{
+		} else {
 			$cekData['acara'] = json_decode($cekData['acara'], true);
 			$acara[$form['jenis']] = $data;
 			$cekData['acara'] = json_encode(array_merge($cekData['acara'], $acara));
 			$saveData = $cekData;
 		}
-		// var_dump($cekData);die;
-
+		var_dump($saveData);
+		die;
 		try {
 			$this->model->save($saveData);
 			$result = [

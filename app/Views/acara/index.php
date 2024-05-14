@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label for="reservationDate">Tanggal</label>
                                 <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= $akad['tanggal'] ?? date('d m Y', strtotime($akad['tanggal'])); ?>">
+                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= isset($akad['tanggal']) ? date('d m Y', strtotime($akad['tanggal'])) : '' ?>">
                                     <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                             <div class="form-group">
                                 <label for="reservationDate">Tanggal</label>
                                 <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$resepsi['tanggal']; ?>">
+                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= isset($resepsi['tanggal']) ? date('d m Y', strtotime($resepsi['tanggal'])) : '' ?>">
                                     <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                             <div class="form-group">
                                 <label for="reservationDate">Tanggal</label>
                                 <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= @$unduh['tanggal']; ?>">
+                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= isset($unduh['tanggal']) ? date('d m Y', strtotime($unduh['tanggal'])) : '' ?>">
                                     <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
                                 </div>
                             </div>
