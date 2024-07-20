@@ -42,8 +42,8 @@
                     </div>
                     <div class="card-body">
                         <!-- Modal -->
-                        <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
+                        <div class="modal fade" id="addRowModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header no-bd">
                                         <h5 class="modal-title">
@@ -57,35 +57,36 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <p class="small">Create a new row using this form, make sure you fill them all</p>
-                                        <form>
+                                    <form method="post" action="/user/process">
+                                        <div class="modal-body">
+                                            <p class="small">Create a new row using this form, make sure you fill them all</p>
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group form-group-default">
+                                                        <label>Fullname</label>
+                                                        <input name="form[fullname]" type="text" class="form-control" placeholder="fill fullname">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group form-group-default">
                                                         <label>Name</label>
-                                                        <input id="addName" type="text" class="form-control" placeholder="fill name">
+                                                        <input name="form[username]" type="text" class="form-control" placeholder="fill username">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 pr-0">
+                                                <div class="col-sm-12">
                                                     <div class="form-group form-group-default">
-                                                        <label>Position</label>
-                                                        <input id="addPosition" type="text" class="form-control" placeholder="fill position">
+                                                        <label>Password</label>
+                                                        <input name="form[password]" type="text" class="form-control" placeholder="fill a secure password">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Office</label>
-                                                        <input id="addOffice" type="text" class="form-control" placeholder="fill office">
-                                                    </div>
-                                                </div>
+
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer no-bd">
-                                        <button type="button" id="addRowButton" class="btn btn-primary">Add</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer no-bd">
+                                            <button type="submit" id="addRowButton" class="btn btn-primary">Add</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

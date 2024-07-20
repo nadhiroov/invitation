@@ -27,7 +27,7 @@ class Signin extends Core
 		$username = $this->request->getPost('username');
 		$password = $this->request->getPost('password');
 		
-		if (!empty($username) && empty(!$password)) {
+		if (!empty($username) && !empty($password)) {
 			$data = $this->model->where('username', $username)->first();
 			// dd($data);
 			if ($data) {

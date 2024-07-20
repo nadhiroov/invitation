@@ -27,6 +27,7 @@ $routes->post('/user/getData', 'Users::getData');
 $routes->get('/admin', 'Users::admin');
 $routes->get('/user/delete/(:num)', 'Users::delete/$1');
 $routes->get('/editUsers/(:num)', 'Users::edit/$1');
+$routes->post('user/process', 'Users::process');
 
 
 //user
@@ -58,6 +59,7 @@ $routes->get('/attend/(:num)/(:any)', 'Attendance::open/$1/$2');
 $routes->add('/mempelai', 'Mempelai::index');
 $routes->post('/mempelai/save', 'Mempelai::process');
 $routes->post('/mempelai/upload', 'Mempelai::upload');
+$routes->get('image/serveImage/(:any)', 'Mempelai::serveImage/$1');
 
 // pengaturan
 $routes->add('pengaturan', 'Pengaturan::index');

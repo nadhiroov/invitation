@@ -192,7 +192,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= @$content['foto_sampul']; ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/couple.jpg' ?>'" alt="Card image cap">
+                                    <img class="card-img" src="<?= @$content['foto_sampul']; ?>" onerror="this.onerror=null;this.src='<?= base_url('image/serveImage/abc.jpg') ?>'" alt="Card image cap">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -213,8 +213,8 @@
 </div>
 
 <!-- Modal Croping image -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <form method="post" class="imageSubmit" action="mempelai/upload">
             <input type="hidden" name="jenis" id="jenis">
             <div class="modal-content">
@@ -251,18 +251,18 @@
 <script>
     $(document).ready(function() {
 
-        var $modal = $('#modal');
+        let modal = $('#modal');
 
-        var image = document.getElementById('sample_image');
+        let image = document.getElementById('sample_image');
 
-        var cropper;
+        let cropper;
 
         $('#upload_image').change(function(event) {
             $('#jenis').val('pria');
-            var files = event.target.files;
-            var done = function(url) {
+            let files = event.target.files;
+            let done = function(url) {
                 image.src = url;
-                $modal.modal('show');
+                modal.modal('show');
             };
 
             if (files && files.length > 0) {
@@ -276,10 +276,10 @@
 
         $('#upload_image_wanita').change(function(event) {
             $('#jenis').val('wanita');
-            var files = event.target.files;
-            var done = function(url) {
+            let files = event.target.files;
+            let done = function(url) {
                 image.src = url;
-                $modal.modal('show');
+                modal.modal('show');
             };
 
             if (files && files.length > 0) {
@@ -293,23 +293,25 @@
 
         $('#upload_image_sampul').change(function(event) {
             $('#jenis').val('sampul');
-            var files = event.target.files;
-            var done = function(url) {
+            let files = event.target.files;
+            let done = function(url) {
                 image.src = url;
-                $modal.modal('show');
+                image.style.display = 'block';
+                modal.modal('show');
             };
 
             if (files && files.length > 0) {
+                const file = files[0];
                 reader = new FileReader();
                 reader.onload = function(event) {
                     done(reader.result);
                 };
-                reader.readAsDataURL(files[0]);
+                reader.readAsDataURL(file);
             }
         });
 
-        $modal.on('shown.bs.modal', function() {
-            var jns = $('#jenis').val();
+        modal.on('shown.bs.modal', function() {
+            let jns = $('#jenis').val();
             if (jns === 'sampul') {
                 cropper = new Cropper(image, {
                     aspectRatio: 2 / 1,
@@ -331,7 +333,7 @@
 
         $('.imageSubmit').submit(function(e) {
             e.preventDefault();
-            var jns = $('#jenis').val();
+            let jns = $('#jenis').val();
             if (jns === 'sampul') {
                 canvas = cropper.getCroppedCanvas({
                     width: 600,
@@ -344,25 +346,66 @@
                 });
             }
 
-            canvas.toBlob(function(blob) {
-                // Create a FormData object and append the Blob
-                var formData = new FormData();
-                formData.append('image', blob, 'cropped.png')
+            /* canvas.toBlob((blob) => {
+                const formData = new FormData();
+                const file = new File([blob], 'croppedImage.jpg', {
+                    type: 'image/jpeg'
+                });
+                formData.append('image', file);
                 uploadimage(formData, jns, <?= @$content['id'] ?>)
-            }, 'image/png');
+            }, 'image/jpeg'); */
+
+            /* canvas.toBlob((blob) => {
+                const formData = new FormData();
+                formData.append('croppedImage', blob);
+
+                $.ajax('/your-controller/uploadCroppedImage', {
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success() {
+                        console.log('Upload success');
+                    },
+                    error() {
+                        console.error('Upload error');
+                    },
+                });
+            }); */
 
 
-            // canvas.toBlob(function(blob) {
-            //     url = URL.createObjectURL(blob)
-            //     var reader = new FileReader()
-            //     reader.readAsDataURL(blob)
-            //     var id = <?= @$content['id']; ?>;
-            //     reader.onloadend = function() {
-            //         var base64data = reader.result
-            //         $modal.modal('hide')
-            //         uploadimage(base64data, jns, id)
-            //     }
-            // })
+            /* canvas.toBlob(function(blob) {
+                const formData = new FormData();
+                const file = new File([blob], 'image.png', {
+                    type: blob.type,
+                });
+                formData.append('image', file)
+                console.log(formData)
+                uploadimage(formData, jns, <?= @$content['id'] ?>)
+            }, 'image/png') */
+
+            canvas.toBlob((blob) => {
+                const formData = new FormData();
+                const file = new File([blob], 'croppedImage.jpg', {
+                    type: 'image/jpeg'
+                });
+                formData.append('image', file);
+                formData.append('jenis', jns);
+                formData.append('aidi', '<?= @$content['id'] ?>');
+
+                $.ajax('mempelai/upload', {
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function() {
+                        console.log('Upload success');
+                    },
+                    error: function() {
+                        console.error('Upload error');
+                    },
+                });
+            }, 'image/jpeg');
         })
     })
 

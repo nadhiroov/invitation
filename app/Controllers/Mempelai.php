@@ -64,15 +64,15 @@ class Mempelai extends Core
 		$img = $this->request->getFile('image');
 		$id = $this->request->getPost('aidi');
 		$jns = $this->request->getPost('jenis');
-		// dd($jns);
-		// var_dump($jns);die;
+		// dd($img);
+		// var_dump($img);die;
 		$validationRule = [
 			'image' => [
 				'rules' => [
 					'uploaded[image]',
 					'is_image[image]',
 					'mime_in[image,image/jpg,image/jpeg,image/gif,image/png]',
-					'max_size[image,40]',
+					'max_size[image,2048]',
 				],
 			],
 		];
@@ -86,14 +86,9 @@ class Mempelai extends Core
 			return false;
 		}
 
-		$img = $this->request->getFile('image');
-
 		if (!$img->hasMoved()) {
-			$filepath = WRITEPATH . 'assets/mempelai/' . $img->store();
-
-			$data = ['uploaded_fileinfo' => new File($filepath)];
-
-			return view('upload_success', $data);
+			$newName = $img->getRandomName();
+			$img->move(WRITEPATH . 'uploads/mempelai', $newName);
 		}
 
 
@@ -121,5 +116,16 @@ class Mempelai extends Core
 			];
 		}
 		echo json_encode($result);
+	}
+
+	public function serveImage($filename)
+	{
+		$path = WRITEPATH . 'uploads/mempelai/' . $filename;
+
+		if (file_exists($path)) {
+			return $this->response
+				->setHeader('Content-Type', mime_content_type($path))
+				->setBody(file_get_contents($path));
+		}
 	}
 }

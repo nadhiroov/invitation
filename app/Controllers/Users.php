@@ -33,6 +33,28 @@ class Users extends Core
 		return view('user/index', $data);
 	}
 
+	public function process()
+	{
+		$form = $this->request->getPost('form');
+		if (isset($form['password'])) {
+			$form['password'] = password_hash($form['password'], PASSWORD_DEFAULT);
+		}
+		try {
+			$this->model->save($form);
+			return json_encode([
+				'code' 		=> 1,
+				'message'	=> 'success',
+				'title'		=> 'Data saved !!'
+			]);
+		} catch (\Throwable $th) {
+			return json_encode([
+				'code' 		=> 0,
+				'title'		=> 'Error ',
+				'message'	=> $th->getMessage()
+			]);
+		}
+	}
+
 	public function edit($id = '')
 	{
 		$data = $this->model->find($id);

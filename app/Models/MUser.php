@@ -11,7 +11,7 @@ class Muser extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = [];
+	protected $allowedFields        = ['fullname', 'username', 'password', ''];
 
 	// Dates
 	protected $useTimestamps        = true;
