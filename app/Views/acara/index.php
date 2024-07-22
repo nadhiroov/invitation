@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label for="reservationDate">Tanggal</label>
                                 <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= isset($akad['tanggal']) ? date('d m Y', strtotime($akad['tanggal'])) : '' ?>">
+                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= isset($akad['tanggal']) ? $akad['tanggal'] : '' ?>">
                                     <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
                                 </div>
                             </div>
@@ -198,10 +198,10 @@
     $(document).ready(function() {
 
         $('.datepicker').datetimepicker({
-            allowInputToggle: true,
-            format: "DD MMMM YYYY",
-            locale: 'id',
-            keepOpen: false
+            // allowInputToggle: true,
+            // format: "YYYY MMMM DD",
+            // // locale: 'id',
+            // keepOpen: false
         });
 
         $('.timepicker').datetimepicker({

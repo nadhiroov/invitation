@@ -91,7 +91,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= @$content['foto_pria']; ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mpria.jpg' ?>'" alt="Card image cap">
+                                    <img class="card-img" src="<?= base_url('image/serveImage/') . @$content['foto_pria'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mpria.jpg' ?>'" alt="Card image cap">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -142,7 +142,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= @$content['foto_wanita'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mwanita.jpg' ?>'" alt="Card image cap">
+                                    <img class="card-img" src="<?= base_url('image/serveImage/') . @$content['foto_wanita'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mwanita.jpg' ?>'" alt="Card image cap">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -192,7 +192,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= @$content['foto_sampul']; ?>" onerror="this.onerror=null;this.src='<?= base_url('image/serveImage/abc.jpg') ?>'" alt="Card image cap">
+                                    <img class="card-img" src="<?= base_url('image/serveImage/') . @$content['foto_sampul'] ?>" onerror="this.onerror=null;this.src='<?= base_url('/assets/img/couple.jpg') ?>'" alt="Card image cap">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -238,7 +238,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" id="crop" class="btn btn-primary">Crop</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="modalCropper" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </form>
@@ -346,44 +346,6 @@
                 });
             }
 
-            /* canvas.toBlob((blob) => {
-                const formData = new FormData();
-                const file = new File([blob], 'croppedImage.jpg', {
-                    type: 'image/jpeg'
-                });
-                formData.append('image', file);
-                uploadimage(formData, jns, <?= @$content['id'] ?>)
-            }, 'image/jpeg'); */
-
-            /* canvas.toBlob((blob) => {
-                const formData = new FormData();
-                formData.append('croppedImage', blob);
-
-                $.ajax('/your-controller/uploadCroppedImage', {
-                    method: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success() {
-                        console.log('Upload success');
-                    },
-                    error() {
-                        console.error('Upload error');
-                    },
-                });
-            }); */
-
-
-            /* canvas.toBlob(function(blob) {
-                const formData = new FormData();
-                const file = new File([blob], 'image.png', {
-                    type: blob.type,
-                });
-                formData.append('image', file)
-                console.log(formData)
-                uploadimage(formData, jns, <?= @$content['id'] ?>)
-            }, 'image/png') */
-
             canvas.toBlob((blob) => {
                 const formData = new FormData();
                 const file = new File([blob], 'croppedImage.jpg', {
@@ -395,11 +357,41 @@
 
                 $.ajax('mempelai/upload', {
                     method: 'POST',
+                    dataType: "json",
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function() {
-                        console.log('Upload success');
+                    success: function(res) {
+                        if (res.code == 1) {
+                            let content = {};
+                            content.message = res.message;
+                            content.title = res.title;
+                            content.icon = "fas fa-check-circle";
+                            $("#modalCropper").trigger("click");
+                            $.notify(content, {
+                                type: "success",
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                delay: 2000,
+                            });
+                            setTimeout(function() {
+                                window.location.href = "mempelai";
+                            }, 1500);
+                        } else {
+                            content.message = res.message;
+                            content.title = res.title;
+                            content.icon = "fas fa-window-close";
+                            $.notify(content, {
+                                type: "danger",
+                                placement: {
+                                    from: "top",
+                                    align: "right",
+                                },
+                                delay: 2000,
+                            });
+                        }
                     },
                     error: function() {
                         console.error('Upload error');

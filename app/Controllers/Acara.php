@@ -20,15 +20,14 @@ class Acara extends Core
 		// dd(date('Y-M-d', strtotime($time)));
 		$res = $this->model->where('id_user', session()->id)->first();
 		// $this->model->delete(6);
-		// dd($res);
 		$data = [];
 		if ($res != null) {
 			$res['acara'] = json_decode($res['acara'], true);
 			$data['akad'] = $res['acara']['akad'] ?? '';
-			$data['akad']['tanggal'] = date('d m Y', strtotime($data['akad']['tanggal']));
 			$data['resepsi'] = $res['acara']['resepsi'] ?? null;
 			$data['unduh'] = $res['acara']['unduh'] ?? null;
-		}
+			}
+		// dd($data['akad']['tanggal']);
 		$this->view->setData(['menu_website' => 'active', 'sub_acara' => 'active']);
 		return view('acara/index', $data);
 	}
@@ -37,10 +36,11 @@ class Acara extends Core
 	{
 		$form = $this->request->getPost('form');
 		// $form['tanggal']   = new \DateTime($form['tanggal']);
-		$time = Time::parse($form['tanggal'], 'id_ID');
-		dd($time->toLocalizedString('d MMM yyyy'));
+		// 32.08574324875034, 34.7824822488608
+		// $time = Time::parse($form['tanggal'], 'Asia/Jakarta');
+		// var_dump(date('Y-m-d', strtotime($form['tanggal'])));die;
 		$data = [
-			'tanggal'	=> date('d m Y', strtotime($form['tanggal'])),
+			'tanggal'	=> date('Y-m-d', strtotime($form['tanggal'])),
 			'jam'		=> $form['jam'],
 			'tempat'	=> $form['tempat'],
 			'alamat'	=> $form['alamat']

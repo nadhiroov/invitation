@@ -64,8 +64,6 @@ class Mempelai extends Core
 		$img = $this->request->getFile('image');
 		$id = $this->request->getPost('aidi');
 		$jns = $this->request->getPost('jenis');
-		// dd($img);
-		// var_dump($img);die;
 		$validationRule = [
 			'image' => [
 				'rules' => [
@@ -90,16 +88,39 @@ class Mempelai extends Core
 			$newName = $img->getRandomName();
 			$img->move(WRITEPATH . 'uploads/mempelai', $newName);
 		}
-
-
-		$data['id'] = intval($id);
-		if ($jns == 'pria') {
-			$data['foto_pria'] = $img;
-		} elseif ($jns == 'wanita') {
-			$data['foto_wanita'] = $img;
+		if ($id == '') {
+			$data['id_user'] = session()->id;
 		} else {
-			$data['foto_sampul'] = $img;
+			$data['id'] = intval($id);
+			$res = $this->model->find($id);
+			if ($jns == 'pria' && $res['foto_pria'] != null) {
+				try {
+					unlink(WRITEPATH . 'uploads/mempelai/' . $res['foto_pria']);
+				} catch (\Exception $th) {
+					echo "Error delete file because :{$th->getMessage()}";
+				}
+			} elseif ($jns == 'wanita' && $res['foto_wanita'] != null) {
+				try {
+					unlink(WRITEPATH . 'uploads/mempelai/' . $res['foto_wanita']);
+				} catch (\Exception $th) {
+					echo "Error delete file because :{$th->getMessage()}";
+				}
+			} elseif($jns == 'sampul' &&  $res['foto_sampul'] != null) {
+				try {
+					unlink(WRITEPATH . 'uploads/mempelai/' . $res['foto_sampul']);
+				} catch (\Exception $th) {
+					echo "Error delete file because :{$th->getMessage()}";
+				}
+			}
 		}
+		if ($jns == 'pria') {
+			$data['foto_pria'] = $newName;
+		} elseif ($jns == 'wanita') {
+			$data['foto_wanita'] = $newName;
+		} else {
+			$data['foto_sampul'] = $newName;
+		}
+		// var_dump($data);die;
 
 		try {
 			$this->model->save($data);
