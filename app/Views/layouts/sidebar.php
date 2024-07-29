@@ -58,7 +58,7 @@
                             <span>
                                 <i class="ti ti-aperture"></i>
                             </span>
-                            <span class="hide-menu">Landing Page</span>
+                            <span class="hide-menu">Dashboard</span>
                         </a>
                     </li>
                     <!-- ---------------------------------- -->
@@ -71,7 +71,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                             <span class="d-flex">
-                                <i class="ti ti-chart-donut-3"></i>
+                                <i class="ti ti-device-laptop"></i>
                             </span>
                             <span class="hide-menu">Website</span>
                         </a>
@@ -92,16 +92,18 @@
                                     <span class="hide-menu">Pengaturan</span>
                                 </a>
                             </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                            <span class="d-flex">
+                                <i class="ti ti-calendar-event"></i>
+                            </span>
+                            <span class="hide-menu">Data acara</span>
+                        </a>
+                        <ul aria-expanded="false" class="collapse first-level">
                             <li class="sidebar-item">
-                                <a href="../main/blog-detail.html" class="sidebar-link">
-                                    <div class="round-16 d-flex align-items-center justify-content-center">
-                                        <i class="ti ti-circle"></i>
-                                    </div>
-                                    <span class="hide-menu">Data website</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="../main/blog-detail.html" class="sidebar-link">
+                                <a href="mempelai" class="sidebar-link">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-circle"></i>
                                     </div>
@@ -109,7 +111,7 @@
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="../main/blog-detail.html" class="sidebar-link">
+                                <a href="acara" class="sidebar-link">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-circle"></i>
                                     </div>
@@ -137,13 +139,13 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                             <span class="d-flex">
-                                <i class="ti ti-chart-donut-3"></i>
+                                <i class="ti ti-friends"></i>
                             </span>
-                            <span class="hide-menu">Pengunjung</span>
+                            <span class="hide-menu">Undangan</span>
                         </a>
                         <ul aria-expanded="false" class="collapse first-level">
                             <li class="sidebar-item">
-                                <a href="../main/blog-posts.html" class="sidebar-link">
+                                <a href="name" class="sidebar-link">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-circle"></i>
                                     </div>
@@ -151,7 +153,7 @@
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="../main/blog-detail.html" class="sidebar-link">
+                                <a href="guest" class="sidebar-link">
                                     <div class="round-16 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-circle"></i>
                                     </div>

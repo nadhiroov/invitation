@@ -1,186 +1,171 @@
-<?= $this->extend('layout/template'); ?>
+<?= $this->extend('layouts/template'); ?>
 
 <?= $this->section('css'); ?>
-<link rel="stylesheet" type="css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css.map">
-<link rel="stylesheet" type="css" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<link rel="stylesheet" href="<?= base_url() ?>/assets/datetime/css/bootstrap-datetimepicker.min.css" type="text/css" media="all" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
 <?= $this->endSection(); ?>
 
 <?= $this->section('content'); ?>
-<div class="content">
-    <div class="page-inner">
-        <div class="page-header">
-            <h4 class="page-title">Pengaturan</h4>
-            <ul class="breadcrumbs">
-                <li class="nav-home">
-                    <a href="#">
-                        <i class="flaticon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Website</a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Pengaturan</a>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Jadwal Akad Nikah</h4>
-                    </div>
-                    <div class="card-body">
-                        <form action="acara/save" class="form-submit" method="POST">
-                            <?= csrf_field() ?>
-                            <input type="hidden" name="form[jenis]" value="akad">
-                            <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
-                            <div class="form-group">
-                                <label for="reservationDate">Tanggal</label>
-                                <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= isset($akad['tanggal']) ? $akad['tanggal'] : '' ?>">
-                                    <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="id_end_time">Waktu</label>
-                                <div class="input-group date timepicker">
-                                    <input type="text" name="form[jam]" value="<?= @$akad['jam']; ?>" placeholder="pilih waktu" class="form-control" placeholder="End time" title="" required id="id_end_time" />
-                                    <div class="input-group-addon input-group-append">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-clock"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Tempat/Lokasi</label>
-                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$akad['tempat']; ?>">
-                                <small id="emailHelp2" class="form-text text-muted">Contoh: Kediaman memepelai wanita</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Koordinat logtitude dan latitude</label>
-                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$akad['alamat']; ?>">
-                                <small id="emailHelp2" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
-                                <small id="emailHelp2" class="form-text text-muted">Pastikan benar karena untuk lokasi di Google map</small>
-                            </div>
-                            <button class="btn btn-primary" type="submit" id="btnSave">
-                                <span class="btn-label">
-                                    <i class="icon-action-redo"></i>
-                                </span>
-                                Simpan
-                            </button>
-                        </form>
-                    </div>
-                </div>
+<div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+    <div class="card-body px-4 py-3">
+        <div class="row align-items-center">
+            <div class="col-9">
+                <h4 class="fw-semibold mb-8">Pengaturan Acara</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a class="text-muted text-decoration-none" href="dashboard">Home</a>
+                        </li>
+                        <li class="breadcrumb-item" aria-current="page">Acara</li>
+                    </ol>
+                </nav>
             </div>
-
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Jadwal Resepsi</h4>
-                    </div>
-                    <div class="card-body">
-                        <form action="acara/save" class="form-submit" method="POST">
-                            <?= csrf_field() ?>
-                            <input type="hidden" name="form[jenis]" value="resepsi">
-                            <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
-                            <div class="form-group">
-                                <label for="reservationDate">Tanggal</label>
-                                <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= isset($resepsi['tanggal']) ? date('d m Y', strtotime($resepsi['tanggal'])) : '' ?>">
-                                    <div class="input-group-append"><span class="input-group-text"><i class="fas fa-clock"></i></span></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="id_end_time">Waktu</label>
-                                <div class="input-group date timepicker">
-                                    <input type="text" name="form[jam]" value="<?= @$resepsi['jam']; ?>" placeholder="pilih waktu" class="form-control" placeholder="End time" title="" required id="id_end_time" />
-                                    <div class="input-group-addon input-group-append">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-clock"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Tempat/Lokasi</label>
-                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$resepsi['tempat']; ?>">
-                                <small id="emailHelp2" class="form-text text-muted">Contoh: Kediaman memepelai wanita</small>
-                            </div>
-                            <div class="form-group">
-                                <label>Koordinat logtitude dan latitude</label>
-                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$resepsi['alamat']; ?>">
-                                <small id="emailHelp2" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
-                                <small id="emailHelp2" class="form-text text-muted">Pastikan benar karena untuk lokasi di Google map</small>
-                            </div>
-                            <button class="btn btn-primary" type="submit" id="btnSave">
-                                <span class="btn-label">
-                                    <i class="icon-action-redo"></i>
-                                </span>
-                                Simpan
-                            </button>
-                        </form>
-                    </div>
+            <div class="col-3">
+                <div class="text-center mb-n5">
+                    <img src="<?= base_url(); ?>cms/images/breadcrumb/ChatBc.png" alt="modernize-img" class="img-fluid mb-n4" />
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-6 d-flex align-items-stretch">
+        <div class="card">
+            <div class="border-bottom title-part-padding">
+                <h4 class="card-title mb-0">Jadwal Akad Nikah</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <form action="acara/save" class="formAkad" method="post">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="form[jenis]" value="akad">
+                        <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
+                        <div class="col-12">
+                            <label class="form-label mt-3">Tanggal</label>
+                            <input type="text" class="form-control" placeholder="Pilih tanggal" name="form[tanggal]" id="tanggalAkad" value="<?= isset($akad['tanggal']) ? date('d F Y', strtotime($akad['tanggal'])) : '' ?>" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mt-3">Waktu</label>
+                            <input class="form-control" placeholder="Pilih waktu" name="form[jam]" id="waktuAkad" value="<?= $akad['jam'] ?? ''; ?>" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mt-3">Tempat/Lokasi</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Masukkan lokasi" name="form[tempat]" value="<?= $akad['tempat'] ?? ''; ?>">
+                                <small id="name" class="form-text text-muted">Contoh: Kediaman memepelai wanita, gedung serbaguna</small>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label mt-3">Koordinat logtitude dan latitude</label>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Masukkan koordinat lokasi" name="form[alamat]" value="<?= $akad['alamat'] ?? ''; ?>">
+                                <small id="name" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
+                                <small id="name" class="form-text text-muted">, pastikan benar karena untuk lokasi di Google map</small>
+                            </div>
+                        </div>
+                        <div class="d-md-flex align-items-center">
+                            <div class="mt-3 mt-md-0 ms-auto">
+                                <button type="submit" class="justify-content-center w-100 btn mb-1 btn-rounded btn-primary d-flex align-items-center" id="btnSave">
+                                    Simpan
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Jadwal Unduh Mantu</h4>
-                    </div>
-                    <div class="card-body">
-                        <form action="acara/save" class="form-submit" method="POST">
-                            <?= csrf_field() ?>
-                            <input type="hidden" name="form[jenis]" value="unduh">
-                            <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
+    <div class="col-md-6 col-lg-6 d-flex align-items-stretch">
+        <div class="card">
+            <div class="border-bottom title-part-padding">
+                <h4 class="card-title mb-0">Jadwal Resepsi</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <form action="acara/save" class="formResepsi" method="post">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="form[jenis]" value="resepsi">
+                        <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
+                        <div class="col-12">
+                            <label class="form-label mt-3">Tanggal</label>
+                            <input type="text" class="form-control" placeholder="Pilih tanggal" name="form[tanggal]" id="tanggalResepsi" value="<?= isset($resepsi['tanggal']) ? date('d F Y', strtotime($resepsi['tanggal'])) : '' ?>" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mt-3">Waktu</label>
+                            <input class="form-control" placeholder="Pilih waktu" name="form[jam]" id="waktuResepsi" value="<?= $resepsi['jam'] ?? ''; ?>" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mt-3">Tempat/Lokasi</label>
                             <div class="form-group">
-                                <label for="reservationDate">Tanggal</label>
-                                <div class="datepicker date input-group shadow-sm">
-                                    <input type="text" name="form[tanggal]" placeholder="Pilih tanggal" class="form-control" value="<?= isset($unduh['tanggal']) ? date('d m Y', strtotime($unduh['tanggal'])) : '' ?>">
-                                    <div class="input-group-append"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
-                                </div>
+                                <input type="text" class="form-control" placeholder="Masukkan lokasi" name="form[tempat]" value="<?= $resepsi['tempat'] ?? ''; ?>">
+                                <small id="name" class="form-text text-muted">Contoh: Kediaman memepelai wanita, gedung serbaguna</small>
                             </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label mt-3">Koordinat logtitude dan latitude</label>
                             <div class="form-group">
-                                <label for="id_end_time">Waktu</label>
-                                <div class="input-group date timepicker">
-                                    <input type="text" name="form[jam]" value="<?= @$unduh['jam']; ?>" placeholder="pilih waktu" class="form-control" placeholder="End time" title="" required id="id_end_time" />
-                                    <div class="input-group-addon input-group-append">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-clock"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                <input type="text" class="form-control" placeholder="Masukkan koordinat lokasi" name="form[alamat]" value="<?= $resepsi['alamat'] ?? ''; ?>">
+                                <small id="name" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
+                                <small id="name" class="form-text text-muted">, pastikan benar karena untuk lokasi di Google map</small>
                             </div>
+                        </div>
+                        <div class="d-md-flex align-items-center">
+                            <div class="mt-3 mt-md-0 ms-auto">
+                                <button type="submit" class="justify-content-center w-100 btn mb-1 btn-rounded btn-primary d-flex align-items-center" id="btnSaveResepsi">
+                                    Simpan
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-lg-6 d-flex align-items-stretch">
+        <div class="card">
+            <div class="border-bottom title-part-padding">
+                <h4 class="card-title mb-0">Jadwal Unduh Mantu</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <form action="acara/save" class="formUnduh" method="post">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="form[jenis]" value="unduh">
+                        <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
+                        <div class="col-12">
+                            <label class="form-label mt-3">Tanggal</label>
+                            <input type="text" class="form-control" placeholder="Pilih tanggal" name="form[tanggal]" id="tanggalUnduh" value="<?= isset($unduh['tanggal']) ? date('d F Y', strtotime($unduh['tanggal'])) : '' ?>" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mt-3">Waktu</label>
+                            <input class="form-control" placeholder="Pilih waktu" name="form[jam]" id="waktuUnduh" value="<?= $unduh['jam'] ?? ''; ?>" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label mt-3">Tempat/Lokasi</label>
                             <div class="form-group">
-                                <label>Tempat/Lokasi</label>
-                                <input type="text" name="form[tempat]" class="form-control" placeholder="Masukkan lokasi" value="<?= @$unduh['tempat']; ?>">
-                                <small id="emailHelp2" class="form-text text-muted">Contoh: Kediaman memepelai wanita</small>
+                                <input type="text" class="form-control" placeholder="Masukkan lokasi" name="form[tempat]" value="<?= $unduh['tempat'] ?? ''; ?>">
+                                <small id="name" class="form-text text-muted">Contoh: Kediaman memepelai wanita, gedung serbaguna</small>
                             </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label mt-3">Koordinat logtitude dan latitude</label>
                             <div class="form-group">
-                                <label>Koordinat logtitude dan latitude</label>
-                                <input type="text" name="form[alamat]" class="form-control" placeholder="Masukkan alamat lokasi" value="<?= @$unduh['alamat']; ?>">
-                                <small id="emailHelp2" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
-                                <small id="emailHelp2" class="form-text text-muted">Pastikan benar karena untuk lokasi di Google map</small>
+                                <input type="text" class="form-control" placeholder="Masukkan koordinat lokasi" name="form[alamat]" value="<?= $unduh['alamat'] ?? ''; ?>">
+                                <small id="name" class="form-text text-muted">Contoh: 6473824432, -843927434</small>
+                                <small id="name" class="form-text text-muted">, pastikan benar karena untuk lokasi di Google map</small>
                             </div>
-                            <button class="btn btn-primary" type="submit" id="btnSave">
-                                <span class="btn-label">
-                                    <i class="icon-action-redo"></i>
-                                </span>
-                                Simpan
-                            </button>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="d-md-flex align-items-center">
+                            <div class="mt-3 mt-md-0 ms-auto">
+                                <button type="submit" class="justify-content-center w-100 btn mb-1 btn-rounded btn-primary d-flex align-items-center" id="btnSaveUnduh">
+                                    Simpan
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -189,29 +174,35 @@
 <?= $this->endSection(); ?>
 
 
+
 <?= $this->section('js'); ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
-<script src="<?= base_url() ?>/template/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script src="<?= base_url() ?>/template/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
-<script src="<?= base_url(); ?>/assets/datetime/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+<script src="<?= base_url(); ?>cms/js/extra-libs/moment/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/js/bootstrap-material-datetimepicker.min.js"></script>
 <script>
     $(document).ready(function() {
-
-        $('.datepicker').datetimepicker({
-            // allowInputToggle: true,
-            // format: "YYYY MMMM DD",
-            // // locale: 'id',
-            // keepOpen: false
+        $("#tanggalAkad, #tanggalResepsi, #tanggalUnduh").bootstrapMaterialDatePicker({
+            format: "DD MMMM YYYY",
+            weekStart: 0,
+            time: false,
+            language: "id",
         });
-
-        $('.timepicker').datetimepicker({
-            allowInputToggle: true,
-            format: "HH:mm"
+        $("#waktuAkad, #waktuResepsi, #waktuUnduh").bootstrapMaterialDatePicker({
+            format: "HH:mm",
+            time: true,
+            date: false,
         });
-
-        $('.form-submit').submit(function(e) {
+        $('.formAkad').submit(function(e) {
             e.preventDefault();
-            saveData(this);
+            saveDataV2(this)
+        });
+        $('.formResepsi').submit(function(e) {
+            e.preventDefault();
+            saveDataV2(this, 'btnSaveResepsi')
+        });
+        $('.formUnduh').submit(function(e) {
+            e.preventDefault();
+            saveDataV2(this, 'btnSaveUnduh')
         });
     });
 </script>

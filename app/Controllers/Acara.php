@@ -35,10 +35,6 @@ class Acara extends Core
 	public function process()
 	{
 		$form = $this->request->getPost('form');
-		// $form['tanggal']   = new \DateTime($form['tanggal']);
-		// 32.08574324875034, 34.7824822488608
-		// $time = Time::parse($form['tanggal'], 'Asia/Jakarta');
-		// var_dump(date('Y-m-d', strtotime($form['tanggal'])));die;
 		$data = [
 			'tanggal'	=> date('Y-m-d', strtotime($form['tanggal'])),
 			'jam'		=> $form['jam'],
@@ -71,6 +67,6 @@ class Acara extends Core
 				'title'		=> 'Error'
 			];
 		}
-		echo json_encode($result);
+		return json_encode($result);
 	}
 }

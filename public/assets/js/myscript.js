@@ -110,12 +110,12 @@ function updateData(formSelection) {
   });
 }
 
-function saveData(formSelection, idBtnSave = '') {
+function saveData(formSelection, idBtnSave = "") {
   let form = $(formSelection);
   let data = $(form).serialize();
   let action = $(form).attr("action");
   if (idBtnSave == "") {
-    idBtnSave = 'btnSave';
+    idBtnSave = "btnSave";
   }
   $.ajax({
     type: "POST",
@@ -208,5 +208,137 @@ function uploadimage(img, jns, id) {
         });
       }
     },
+  });
+}
+
+function saveDataV2(formSelection, idBtnSave = "btnSave") {
+  let form = $(formSelection);
+  let data = $(form).serialize();
+  let action = $(form).attr("action");
+  $.ajax({
+    type: "POST",
+    url: action,
+    data: data,
+    dataType: "json",
+    beforeSend: function () {
+      $(`#${idBtnSave}`).prop("disabled", true);
+      $(`#${idBtnSave}`).html(`
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+       Memuat...
+      `);
+    },
+    success: function (res = "") {
+      if (res.code == 1) {
+        toastr.success(res.message, res.title);
+        if ($("#mytable").length) {
+          $("#mytable").DataTable().ajax.reload(null, false);
+        } else {
+          setTimeout(function () {
+            window.location.reload();
+          }, 2000);
+        }
+      } else {
+        toastr.error(res.message, res.title);
+      }
+      setTimeout(() => {
+        $(`#${idBtnSave}`).prop("disabled", false);
+        $(`#${idBtnSave}`).html(`
+        Simpan
+        `);
+      }, 500);
+    },
+    error: function (res) {
+      toastr.error(res.message, res.title);
+      setTimeout(() => {
+        $(`#${idBtnSave}`).prop("disabled", false);
+        $(`#${idBtnSave}`).html(`
+        Simpan
+        `);
+      }, 500);
+    },
+  });
+}
+
+function uploadImageV2(formData, action, idBtnSave = "") {
+  if (idBtnSave == "") {
+    idBtnSave = "btnSave";
+  }
+  $.ajax(action, {
+    method: "POST",
+    dataType: "json",
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function () {
+      $(`#${idBtnSave}`).prop("disabled", true);
+      $(`#${idBtnSave}`).html(`
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+       Mengunggah ...
+      `);
+    },
+    success: function (res) {
+      if (res.code == 1) {
+        toastr.success(res.message, res.title);
+        setTimeout(function () {
+          window.location.reload();
+        }, 2000);
+      } else {
+        toastr.error(res.message, res.title);
+      }
+      setTimeout(() => {
+        $(`#${idBtnSave}`).prop("disabled", false);
+        $(`#${idBtnSave}`).html(`
+        Upload
+        `);
+      }, 500);
+    },
+    error: function (res) {
+      toastr.error(res.message, res.title);
+      setTimeout(() => {
+        $(`#${idBtnSave}`).prop("disabled", false);
+        $(`#${idBtnSave}`).html(`
+        Upload
+        `);
+      }, 500);
+    },
+  });
+}
+
+function confirmDeleteV2(selection, func = "") {
+  let id = $(selection).attr("data-id");
+  let url = $(selection).attr("data-target");
+  Swal.fire({
+    title: "Apakah anda yakin?",
+    text: "Anda tidak bisa mengembalikan data yang dihapus",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Hapus",
+    cancelButtonText: "Batal",
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: url + "/" + id,
+        type: "GET",
+        dataType: "json",
+        success: function (res) {
+          if (res.code === 1) {
+            toastr.success(res.message, res.title);
+            if (func == "reload") {
+              setTimeout(() => {
+                window.location.reload();
+              }, 500);
+            } else if (func != "") {
+              func;
+            } else {
+              $("#mytable").DataTable().ajax.reload(null, false);
+            }
+          } else {
+            toastr.error(res.message, res.title);
+          }
+        },
+      });
+    }
   });
 }

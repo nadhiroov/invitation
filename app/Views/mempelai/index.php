@@ -1,4 +1,4 @@
-<?= $this->extend('layout/template'); ?>
+<?= $this->extend('layouts/template'); ?>
 
 <?= $this->section('css'); ?>
 <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet" />
@@ -7,7 +7,7 @@
         position: relative;
     }
 
-    img {
+    #sample_image {
         display: block;
         max-width: 100%;
     }
@@ -56,153 +56,88 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('content'); ?>
-
-<div class="content">
-    <div class="page-inner">
-        <div class="page-header">
-            <h4 class="page-title">Data mempelai</h4>
-            <ul class="breadcrumbs">
-                <li class="nav-home">
-                    <a href="#">
-                        <i class="flaticon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Website</a>
-                </li>
-                <li class="separator">
-                    <i class="flaticon-right-arrow"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Data mempelai</a>
-                </li>
-            </ul>
+<div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+    <div class="card-body px-4 py-3">
+        <div class="row align-items-center">
+            <div class="col-9">
+                <h4 class="fw-semibold mb-8">Pengaturan Data Mempelai</h4>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a class="text-muted text-decoration-none" href="dashboard">Home</a>
+                        </li>
+                        <li class="breadcrumb-item" aria-current="page">Mempelai</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-3">
+                <div class="text-center mb-n5">
+                    <img src="<?= base_url(); ?>cms/images/breadcrumb/ChatBc.png" alt="modernize-img" class="img-fluid mb-n4" />
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card full-height">
-                    <div class="card-header">
-                        <div class="card-title">Mempelai Pria</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= base_url('image/serveImage/') . @$content['foto_pria'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mpria.jpg' ?>'" alt="Card image cap">
+    </div>
+</div>
+<!-- mempelai pria -->
+<div class="row">
+    <div class="card-body">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab">
+                <div class="row">
+                    <div class="col-lg-6 d-flex align-items-stretch">
+                        <div class="card w-100 border position-relative overflow-hidden">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Mempelai Pria</h4>
+                                <div class="text-center">
+                                    <img src="<?= base_url('image/serveImage/') . @$content['foto_pria'] ?>" onerror="this.onerror=null;this.src='<?= base_url(); ?>cms/images/profile/user-1.jpg'" alt="modernize-img" class="img-fluid rounded-circle" width="240" height="240">
+                                    <div class="d-flex align-items-center justify-content-center my-4 gap-6">
+                                        <button class="btn btn-primary" id="btnUploadPria">Upload</button>
+                                        <input class="form-control" type="file" style="display:none" id="upload_image" accept="image/png, image/jpeg, image/jpg" />
+                                    </div>
+                                    <p class="mb-0">Allowed JPG, JPEG or PNG. Max size of 800K</p>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="upload_image" class="btn btn-primary">
-                                    <span class="btn-label text-light">
-                                        <i class="icon-cloud-upload"></i>
-                                    </span>
-                                    <span class="text-light">Upload foto</span>
-                                    <input type="file" class="form-control-file" id="upload_image" style="display:none">
-                                </label>
                             </div>
                         </div>
-                        <hr>
-                        <form action="mempelai/save" class="form-submit" method="POST">
-                            <input type="hidden" name="form[jenis]" value="pria">
-                            <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
-                            <p class="lead"> Nama Lengkap </p>
-                            <input type="text" class="form-control" name="form[nama_lengkap]" placeholder="nama lengkap" value="<?= @$content['nama_pria']; ?>">
-
-                            <p class="lead"> Nama Panggilan </p>
-                            <input type="text" class="form-control" name="form[nama_panggilan]" placeholder="nama panggilan" value="<?= @$content['nama_panggilan_pria']; ?>">
-
-                            <p class="lead"> Nama Ayah </p>
-                            <input type="text" class="form-control" name="form[nama_ayah]" placeholder="nama ayah" value="<?= @$content['nama_ayah_pria']; ?>">
-
-                            <p class="lead"> Nama Ibu </p>
-                            <input type="text" class="form-control" name="form[nama_ibu]" placeholder="nama ibu" value="<?= @$content['nama_ibu_pria']; ?>">
-
-                            <br><br>
-                            <button class="btn btn-primary" id="btnSave" type="submit">
-                                <span class="btn-label">
-                                    <i class="icon-action-redo"></i>
-                                </span>
-                                Save
-                            </button>
-                        </form>
-
                     </div>
-                </div>
-            </div>
-            <!-- Mempelai Wanita -->
-            <div class="col-md-6">
-                <div class="card full-height">
-                    <div class="card-header">
-                        <div class="card-title">Mempelai Wanita</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= base_url('image/serveImage/') . @$content['foto_wanita'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mwanita.jpg' ?>'" alt="Card image cap">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="upload_image_wanita" class="btn btn-primary">
-                                    <span class="btn-label text-light">
-                                        <i class="icon-cloud-upload"></i>
-                                    </span>
-                                    <span class="text-light">Upload foto</span>
-                                    <input type="file" class="form-control-file" id="upload_image_wanita" style="display:none">
-                                </label>
-                            </div>
-                        </div>
-                        <hr>
-                        <form action="mempelai/save" class="form-submit-female" method="POST">
-                            <input type="hidden" name="form[jenis]" value="wanita">
-                            <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
-                            <p class="lead"> Nama Lengkap </p>
-                            <input type="text" class="form-control" name="form[nama_lengkap]" placeholder="nama lengkap" value="<?= @$content['nama_wanita']; ?>">
-
-                            <p class="lead"> Nama Panggilan </p>
-                            <input type="text" class="form-control" name="form[nama_panggilan]" placeholder="nama panggilan" value="<?= @$content['nama_panggilan_wanita']; ?>">
-
-                            <p class="lead"> Nama Ayah </p>
-                            <input type="text" class="form-control" name="form[nama_ayah]" placeholder="nama ayah" value="<?= @$content['nama_ayah_wanita']; ?>">
-
-                            <p class="lead"> Nama Ibu </p>
-                            <input type="text" class="form-control" name="form[nama_ibu]" placeholder="nama ibu" value="<?= @$content['nama_ibu_wanita']; ?>">
-
-                            <br><br>
-                            <button class="btn btn-primary" id="btnSaveFemale" type="submit">
-                                <span class="btn-label">
-                                    <i class="icon-action-redo"></i>
-                                </span>
-                                Save
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="card full-height">
-                    <div class="card-header">
-                        <div class="card-title">Foto Sampul</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card card-post card-round">
-                                    <img class="card-img" src="<?= base_url('image/serveImage/') . @$content['foto_sampul'] ?>" onerror="this.onerror=null;this.src='<?= base_url('/assets/img/couple.jpg') ?>'" alt="Card image cap">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="upload_image_sampul" class="btn btn-primary">
-                                    <span class="btn-label text-light">
-                                        <i class="icon-cloud-upload"></i>
-                                    </span>
-                                    <span class="text-light">Upload foto</span>
-                                    <input type="file" class="form-control-file" id="upload_image_sampul" style="display:none">
-                                </label>
+                    <div class="col-lg-6 d-flex align-items-stretch">
+                        <div class="card w-100 border position-relative overflow-hidden">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Identitas Mempelai Pria</h4>
+                                <form action="mempelai/save" method="post" class="form-pria">
+                                    <input type="hidden" name="form[jenis]" value="pria">
+                                    <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
+                                    <div class="col-12">
+                                        <label class="form-label mt-3">Nama Lengkap</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Masukkan nama lengkap" name="form[nama_lengkap]" value="<?= $content['nama_pria'] ?? ''; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label mt-3">Nama Panggilan</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Masukkan nama panggilan" name="form[nama_panggilan]" value="<?= $content['nama_panggilan_pria'] ?? ''; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label mt-3">Nama Ayah</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Masukkan nama ayah" name="form[nama_ayah]" value="<?= $content['nama_ayah_pria'] ?? ''; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label mt-3">Nama Ibu</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Masukkan nama ayah" name="form[nama_ibu]" value="<?= $content['nama_ibu_pria'] ?? ''; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="d-md-flex align-items-center">
+                                        <div class="mt-3 mt-md-0 ms-auto">
+                                            <button type="submit" class="justify-content-center w-100 btn mb-1 btn-rounded btn-primary d-flex align-items-center" id="btnSave">
+                                                Simpan
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -212,23 +147,120 @@
     </div>
 </div>
 
-<!-- Modal Croping image -->
-<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<!-- mempelai wanita -->
+<div class="row">
+    <div class="card-body">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab">
+                <div class="row">
+                    <div class="col-lg-6 d-flex align-items-stretch">
+                        <div class="card w-100 border position-relative overflow-hidden">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Mempelai Wanita</h4>
+                                <div class="text-center">
+                                    <img src="<?= base_url('image/serveImage/') . @$content['foto_wanita'] ?>" onerror="this.onerror=null;this.src='<?= base_url(); ?>cms/images/profile/user-2.jpg'" alt="modernize-img" class="img-fluid rounded-circle" width="240" height="240">
+                                    <div class="d-flex align-items-center justify-content-center my-4 gap-6">
+                                        <button class="btn btn-primary" id="btnUploadWanita">Upload</button>
+                                        <input class="form-control" type="file" style="display:none" id="upload_image_wanita" accept="image/png, image/jpeg, image/jpg" />
+                                    </div>
+                                    <p class="mb-0">Allowed JPG, JPEG or PNG. Max size of 800K</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex align-items-stretch">
+                        <div class="card w-100 border position-relative overflow-hidden">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Identitas Mempelai Wanita</h4>
+                                <form action="mempelai/save" method="post" class="form-wanita">
+                                    <input type="hidden" name="form[jenis]" value="wanita">
+                                    <input type="hidden" name="form[id]" value="<?= @$content['id']; ?>">
+                                    <div class="col-12">
+                                        <label class="form-label mt-3">Nama Lengkap</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Masukkan nama lengkap" name="form[nama_lengkap]" value="<?= $content['nama_wanita'] ?? ''; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label mt-3">Nama Panggilan</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Masukkan nama panggilan" name="form[nama_panggilan]" value="<?= $content['nama_panggilan_wanita'] ?? ''; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label mt-3">Nama Ayah</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Masukkan nama ayah" name="form[nama_ayah]" value="<?= $content['nama_ayah_wanita'] ?? ''; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <label class="form-label mt-3">Nama Ibu</label>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Masukkan nama ayah" name="form[nama_ibu]" value="<?= $content['nama_ibu_wanita'] ?? ''; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="d-md-flex align-items-center">
+                                        <div class="mt-3 mt-md-0 ms-auto">
+                                            <button type="submit" class="justify-content-center w-100 btn mb-1 btn-rounded btn-primary d-flex align-items-center" id="btnSaveFemale">
+                                                Simpan
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- foto sampul -->
+<div class="row">
+    <div class="card-body">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab">
+                <div class="row">
+                    <div class="col-lg-6 d-flex align-items-stretch">
+                        <div class="card w-100 border position-relative overflow-hidden">
+                            <div class="card-body p-4">
+                                <h4 class="card-title">Foto Sampul</h4>
+                                <div class="text-center">
+                                    <div class="card overflow-hidden mt-9">
+                                        <img class="rounded" src="<?= base_url('image/serveImage/') . @$content['foto_sampul'] ?>" onerror="this.onerror=null;this.src='<?= base_url(); ?>cms/images/backgrounds/profilebg.jpg'" alt="bg-card" height="220">
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center my-4 gap-6">
+                                        <button class="btn btn-primary" id="btnUploadSampul">Upload</button>
+                                        <input class="form-control" type="file" style="display:none" id="upload_image_sampul" accept="image/png, image/jpeg, image/jpg" />
+                                    </div>
+                                    <p class="mb-0">Allowed JPG, JPEG or PNG. Max size of 800K</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-xlg" tabindex="-1" aria-labelledby="bs-example-modal-lg" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
         <form method="post" class="imageSubmit" action="mempelai/upload">
             <input type="hidden" name="jenis" id="jenis">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Sesuaikan gambar sebelum di upload</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title" id="myLargeModalLabel">
+                        Extra Large modal
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="img-container">
                         <div class="row">
                             <div class="col-md-8">
-                                <img src="" id="sample_image" />
+                                <img alt="mempelai pria" src="" id="sample_image" />
                             </div>
                             <div class="col-md-4">
                                 <div class="preview"></div>
@@ -237,28 +269,43 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="crop" class="btn btn-primary">Crop</button>
-                    <button type="button" class="btn btn-danger" id="modalCropper" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn bg-danger-subtle text-danger  waves-effect text-start" data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="submit" class="btn bg-primary-subtle text-primary  waves-effect text-start" data-bs-dismiss="modal">
+                        Potong
+                    </button>
                 </div>
             </div>
         </form>
+        <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
 </div>
+
 <?= $this->endSection(); ?>
 
 <?= $this->section('js'); ?>
 <script src="https://unpkg.com/cropperjs"></script>
 <script>
+    $('#btnUploadPria').click(function() {
+        $('#upload_image').trigger('click');
+    });
+    $('#btnUploadWanita').click(function() {
+        $('#upload_image_wanita').trigger('click');
+    });
+    $('#btnUploadSampul').click(function() {
+        $('#upload_image_sampul').trigger('click');
+    });
     $(document).ready(function() {
-
-        let modal = $('#modal');
-
+        let modal = $('#modal-xlg');
         let image = document.getElementById('sample_image');
-
         let cropper;
+        let btn;
 
         $('#upload_image').change(function(event) {
-            $('#jenis').val('pria');
+            btn = 'btnUploadPria';
+            $('#jenis').val('pria')
             let files = event.target.files;
             let done = function(url) {
                 image.src = url;
@@ -275,6 +322,7 @@
         });
 
         $('#upload_image_wanita').change(function(event) {
+            btn = 'btnUploadWanita';
             $('#jenis').val('wanita');
             let files = event.target.files;
             let done = function(url) {
@@ -292,6 +340,7 @@
         });
 
         $('#upload_image_sampul').change(function(event) {
+            btn = 'btnUploadSampul';
             $('#jenis').val('sampul');
             let files = event.target.files;
             let done = function(url) {
@@ -354,61 +403,19 @@
                 formData.append('image', file);
                 formData.append('jenis', jns);
                 formData.append('aidi', '<?= @$content['id'] ?>');
-
-                $.ajax('mempelai/upload', {
-                    method: 'POST',
-                    dataType: "json",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(res) {
-                        if (res.code == 1) {
-                            let content = {};
-                            content.message = res.message;
-                            content.title = res.title;
-                            content.icon = "fas fa-check-circle";
-                            $("#modalCropper").trigger("click");
-                            $.notify(content, {
-                                type: "success",
-                                placement: {
-                                    from: "top",
-                                    align: "right",
-                                },
-                                delay: 2000,
-                            });
-                            setTimeout(function() {
-                                window.location.href = "mempelai";
-                            }, 1500);
-                        } else {
-                            content.message = res.message;
-                            content.title = res.title;
-                            content.icon = "fas fa-window-close";
-                            $.notify(content, {
-                                type: "danger",
-                                placement: {
-                                    from: "top",
-                                    align: "right",
-                                },
-                                delay: 2000,
-                            });
-                        }
-                    },
-                    error: function() {
-                        console.error('Upload error');
-                    },
-                });
+                uploadImageV2(formData, 'mempelai/upload', btn)
             }, 'image/jpeg');
         })
     })
 
-    $('.form-submit').submit(function(e) {
+    $('.form-pria').submit(function(e) {
         e.preventDefault();
-        saveData(this)
+        saveDataV2(this)
     });
 
-    $('.form-submit-female').submit(function(e) {
-        e.preventDefault()
-        saveData(this, 'btnSaveFemale')
+    $('.form-wanita').submit(function(e) {
+        e.preventDefault();
+        saveDataV2(this, 'btnSaveFemale')
     });
 </script>
 <?= $this->endSection(); ?>

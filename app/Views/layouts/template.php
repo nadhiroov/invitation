@@ -12,6 +12,9 @@
 
     <!-- Core Css -->
     <link rel="stylesheet" href="<?= base_url(); ?>cms/css/styles.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url(); ?>cms/libs/sweetalert2/dist/sweetalert2.min.css">
+    <?= $this->renderSection('css'); ?>
 
     <title>Modernize Bootstrap Admin</title>
 
@@ -198,17 +201,23 @@
 
 
     </div>
-    <div class="dark-transparent sidebartoggler"></div>
+    <script src="<?= base_url(); ?>cms/js/vendor.min.js"></script>
     <!-- Import Js Files -->
+    <div class="dark-transparent sidebartoggler"></div>
     <script src="<?= base_url(); ?>cms/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url(); ?>cms/libs/simplebar/dist/simplebar.min.js"></script>
     <script src="<?= base_url(); ?>cms/js/theme/app.init.js"></script>
     <script src="<?= base_url(); ?>cms/js/theme/theme.js"></script>
     <script src="<?= base_url(); ?>cms/js/theme/app.min.js"></script>
     <script src="<?= base_url(); ?>cms/js/theme/sidebarmenu.js"></script>
+    <script src="<?= base_url(); ?>/assets/js/myscript.js"></script>
+    <script src="<?= base_url(); ?>cms/js/plugins/toastr-init.js"></script>
+    <script src="<?= base_url(); ?>cms/libs/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <!-- solar icons -->
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+    <?= $this->renderSection('js'); ?>
+
 </body>
 
 </html>

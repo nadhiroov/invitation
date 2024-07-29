@@ -36,7 +36,7 @@ $routes->post('user/process', 'Users::process');
 //user
 
 //name
-$routes->add('/name', 'Firstname::index');
+$routes->get('/name', 'Firstname::index');
 $routes->get('/name/getData', 'Firstname::getData');
 $routes->get('/name/add', 'Firstname::add');
 $routes->post('/name/save', 'Firstname::process');

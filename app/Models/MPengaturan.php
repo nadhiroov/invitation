@@ -14,6 +14,9 @@ class MPengaturan extends Model
 	protected $protectFields        = true;
 	protected $allowedFields        = ['id_user', 'to', 'template', 'template', 'sampul', 'mempelai', 'acara', 'ucapan', 'galeri', 'cerita', 'lokasi', 'cerita'];
 
+	// protected $casts = [
+	// 	'to'	=> '?json-array'
+	// ];
 	// Method firstname
 	public function getListData($param = '')
 	{

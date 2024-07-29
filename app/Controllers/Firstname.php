@@ -16,20 +16,25 @@ class Firstname extends Core
 	public function index()
 	{
 		$this->view->setData(['menu_guest' => 'active', 'sub_nick' => 'active']);
-		return view('setting/nickname/index');
+		$data = $this->model->select('to')->where('id_user', $_SESSION['id'])->first();
+		$this->data['content'] = json_decode($data['to']);
+		return view('setting/nickname/index', $this->data);
 	}
 
 	public function add()
 	{
-		return view('setting/nickname/add');
+		return view('setting/nickname/modal');
 	}
 
 	public function edit($id)
 	{
 		$data = $this->model->getList();
-		$res = array_search($id, array_column($data['data'], '0'));
-		$edt['content'] = $data['data'][$res];
-		return view('setting/nickname/edit', $edt);
+		$index = array_search($id, $data['data']);
+		if ($index !== false) {
+			$this->data['content']['data'] = $id;
+			$this->data['content']['index'] = $index;
+		}
+		return view('setting/nickname/modal', $this->data);
 	}
 
 	public function getData()
@@ -44,32 +49,65 @@ class Firstname extends Core
 	public function process()
 	{
 		$data = $this->model->getList();
-		$id = $this->request->getvar('id');
-		if ($id != null) {
+		$index = $this->request->getvar('index');
+		if ($index != null) {
 			$data = $this->model->getList();
-			$find = array_search($id, array_column($data['data'], '0')); //mencari index yg di edit
-			$edited = [$find => [$this->request->getPost('name')]];
-			$res = array_replace($data['data'], $edited);
-			$data['data'] = $res;
+			$data['data'][$index] = $this->request->getPost('name');
+			$saveData = [
+				'to'	=> json_encode(array_values($data['data'])),
+				'id'	=> intval($data['id'])
+			];
 		} else {
-			$name = [$this->request->getPost('name')];
+			$name = $this->request->getPost('name');
 			if ($data != null) {
 				array_push($data['data'], $name);
 			} else {
 				$data['data'][] = $name;
 			}
+			$saveData = [
+				'to'	=> json_encode(array_values($data['data'])),
+				'id'	=> intval($data['id'])
+			];
 		}
-
-		$res = $this->model->saving($data);
-		echo json_encode($res);
+		try {
+			$this->model->save($saveData);
+			return json_encode([
+				'code' 		=> 1,
+				'message'	=> 'Data saved!!',
+				'title'		=> 'Success'
+			]);
+		} catch (\Exception $er) {
+			return json_encode([
+				'code' 		=> $er->getCode(),
+				'message'	=> $er->getMessage(),
+				'title'		=> 'Error'
+			]);
+		}
 	}
 
-	public function delete($name)
+	public function delete($name = '')
 	{
 		$data = $this->model->getList();
-		$res = array_search($name, array_column($data['data'], '0')); // mencari index tamu
-		unset($data['data'][$res]); // menghapus array by index
-		$res = $this->model->saving($data);
-		return json_encode($res);
+		$filteredData = array_filter($data['data'], function ($value) use ($name) {
+			return $value !== $name;
+		});
+		$saveData = [
+			'to'	=> json_encode(array_values($filteredData)),
+			'id'	=> intval($data['id'])
+		];
+		try {
+			$this->model->save($saveData);
+			return json_encode([
+				'code' 		=> 1,
+				'message'	=> 'Data saved!!',
+				'title'		=> 'Success'
+			]);
+		} catch (\Exception $er) {
+			return json_encode([
+				'code' 		=> $er->getCode(),
+				'message'	=> $er->getMessage(),
+				'title'		=> 'Error'
+			]);
+		}
 	}
 }

@@ -39,7 +39,7 @@ class Guest extends Core
 			$this->data['acara'] = json_decode($setting['jenis_acara']);
 			$this->data['to'] = $to;
 			$this->data['id'] = @$data['id'];
-			return view('guest/add', $this->data);
+			return view('guest/modal', $this->data);
 		}
 		echo '</div>
 		<div class="modal-body">
@@ -70,7 +70,7 @@ class Guest extends Core
 		$output = array(
 			"data" => $data
 		);
-		echo json_encode($output);
+		return json_encode($output);
 	}
 
 	/* public function process()

@@ -23,20 +23,22 @@ class MGuest extends Model
 		$data = $this->where('id_user', $_SESSION['id'])->findAll();
 		$records = [];
 		if ($data != null) {
-			$datas = json_decode($data[0]['visitors_names'], true);
-			foreach ($datas as $row) {
+			return json_decode($data[0]['visitors_names'], true);
+			/* foreach ($datas as $row) {
 				$records[] = array(
 					$row['to'],
 					$row['name'],
 					explode('#', $row['event']),
 					$row['gift'] == 0 ? 'Tidak' : 'Ya',
-					'<div class="form-button-action">
-					<button class="btn btn-link btn-primary btn-lg btn-clipboard" data-clipboard-text="' . base_url('attend/' . $data[0]['id_user'] . '/' . $row['id']) . '"><i class="icon-link"></i></button><span class="copy-message"></span>
-					<a href="#edit" data-toggle="modal" data-id="' . $row['id'] . '" class="btn btn-link btn-primary btn-lg" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
-					<a onclick="confirmDelete(this)" data-target="guest/delete/" data-id="' . $row['id'] . '" class="btn btn-link btn-danger confirmDelete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-times"></i></a>
+					'<div class="button-group">
+						<button type="button" class="btn mb-1 btn-secondary rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center"  data-bs-toggle="tooltip" data-bs-placement="top" title="copy link"><i class="fs-5 ti ti-copy"></i></button>
+
+						<button type="button" class="btn mb-1 btn-warning rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnEdit" data-id="' . $row['id'] . '" data-bs-toggle="modal" data-bs-target="#modal"><i class="fs-5 ti ti-edit"></i></button>
+
+						<button type="button" class="btn mb-1 btn-danger rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center" onclick="confirmDeleteV2(this)" data-id="' . $row['id'] . '" data-target="guest/delete"><i class="fs-5 ti ti-trash"></i></button>
 					</div>'
 				);
-			}
+			} */
 		}
 		return $records;
 	}

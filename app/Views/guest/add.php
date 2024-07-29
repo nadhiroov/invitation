@@ -19,8 +19,8 @@
                 <label>Kepada</label><br />
                 <?php foreach ($to['data'] as $row) : ?>
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="<?= $row[0]; ?>" name="param[optionTo]" class="custom-control-input" value="<?= $row[0]; ?>" required>
-                        <label class="custom-control-label" for="<?= $row[0]; ?>"><?= $row[0]; ?></label>
+                        <input type="radio" id="<?= $row; ?>" name="param[optionTo]" class="custom-control-input" value="<?= $row; ?>" required>
+                        <label class="custom-control-label" for="<?= $row; ?>"><?= $row; ?></label>
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -56,7 +56,7 @@ class Mempelai extends Core
 				'title'		=> 'Error'
 			];
 		}
-		echo json_encode($result);
+		return json_encode($result);
 	}
 
 	public function upload()
