@@ -58,7 +58,7 @@
                                     <button type="button" class="btn mb-1 bg-warning-subtle rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnEdit" data-id="<?= $key; ?>" data-bs-toggle="modal" data-bs-target="#modal">
                                         <i class="fs-5 ti ti-edit"></i>
                                     </button>
-                                    <button type="button" onclick="confirmDeleteV2(this, 'reload')" data-id="<?= $key; ?>" data-target="name/delete/" class="btn mb-1 bg-danger-subtle rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center">
+                                    <button type="button" onclick="confirmDeleteV2(this, 'reload')" data-id="<?= $key; ?>" data-target="name/delete/php" class="btn mb-1 bg-danger-subtle rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center">
                                         <i class="fs-5 ti ti-trash"></i>
                                     </button>
                                 </div>

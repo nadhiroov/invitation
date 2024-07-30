@@ -20,7 +20,7 @@
     <div class="form-group">
         <?php foreach ($acara as $row) : ?>
             <div class="form-check form-check-inline">
-                <input class="form-check-input primary check-light-primary" type="checkbox" id="<?= $row[0]; ?>" name="param[acara][<?= $row[0]; ?>]" value="<?= $row[0]; ?>" checked>
+                <input class="form-check-input primary check-light-primary" type="checkbox" id="<?= $row[0]; ?>" name="param[acara][<?= $row[0]; ?>]" value="<?= $row[0]; ?>"  <?= isset($content['event']) ? (strpos($content['event'], $row[0]) !== false ? 'checked' : '') : 'checked'; ?>>
                 <label class="form-check-label" for="<?= $row[0]; ?>"><?= $row[0]; ?></label>
             </div>
         <?php endforeach; ?>

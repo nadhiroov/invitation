@@ -41,10 +41,9 @@ class Guest extends Core
 			$this->data['id'] = @$data['id'];
 			return view('guest/modal', $this->data);
 		}
-		echo '</div>
-		<div class="modal-body">
-			<p class="text-danger">Max Guest Reached</p>
-		</div>';
+		echo '<div class="alert alert-danger text-danger" role="alert">
+                    <strong>Max guest reached </strong> upgrade your package
+                  </div>';
 	}
 
 	public function edit($id = '')
@@ -61,7 +60,7 @@ class Guest extends Core
 		$this->data['acara'] = json_decode($setting['jenis_acara']);
 		$this->data['to'] = $to;
 		$this->data['id_guest'] = $id;
-		return view('guest/edit', $this->data);
+		return view('guest/modal', $this->data);
 	}
 
 	public function getData()

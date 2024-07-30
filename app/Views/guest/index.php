@@ -38,7 +38,7 @@
     </div>
     <div class="card-body p-4">
         <div class="alert alert-primary text-primary" role="alert">
-            Maksimal <strong>30 tamu </strong>
+            Maksimal <strong><?= session()->max_user; ?> tamu </strong>
         </div>
         <div class="table-responsive">
             <table id="mytable" class="table table-striped table-bordered text-nowrap align-middle order-column">
@@ -112,6 +112,11 @@
             order: [
                 [1, "asc"]
             ],
+            columnDefs: [{
+                targets: 4,
+                orderable: false
+            }],
+            // dom: '<"top"<"clear">>rt<"bottom"lp<"clear">>',
             columns: [{
                     data: 'to'
                 },
@@ -135,11 +140,11 @@
                     render: function(data) {
                         return `
                         <div class="button-group">
-						<button type="button" class="btn mb-1 btn-secondary rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center"  data-bs-toggle="tooltip" title="copy link"><i class="fs-5 ti ti-copy"></i></button>
+						<button type="button" class="btn mb-1 btn-secondary rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center"  data-bs-toggle="tooltip" title="salin tautan"><i class="fs-5 ti ti-copy"></i></button>
 
-						<button type="button" class="btn mb-1 btn-warning rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnEdit" data-id="${data}" data-bs-toggle="modal" data-bs-target="#modal"><i class="fs-5 ti ti-edit"></i></button>
+						<button type="button" class="btn mb-1 btn-warning rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnEdit" id="pateok" data-id="${data}" data-bs-toggle="modal" data-bs-target="#modal" data-bs-toggle="tooltip" title="edit"><i class="fs-5 ti ti-edit"></i></button>
 
-						<button type="button" class="btn mb-1 btn-danger rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center" onclick="confirmDeleteV2(this)" data-id="${data}" data-target="guest/delete"><i class="fs-5 ti ti-trash"></i></button>
+						<button type="button" class="btn mb-1 btn-danger rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center" onclick="confirmDeleteV2(this)" data-id="${data}" data-target="guest/delete" data-bs-toggle="tooltip" title="hapus"><i class="fs-5 ti ti-trash"></i></button>
 					</div>
                         `
                     }
@@ -160,14 +165,14 @@
     });
 
     // edit click
-    $('.btnEdit').click(function(e) {
-        $('#myModalLabel').text('Edit data')
-        let id = $(this).data('id')
+    $('#modal').on('show.bs.modal', function(e) {
+        let id = $(e.relatedTarget).data('id')
         if (typeof id != 'undefined') {
+            $('#myModalLabel').text('Edit data')
             //menggunakan fungsi ajax untuk pengambilan data
             $.ajax({
                 type: 'get',
-                url: 'name/edit/' + id,
+                url: 'editGuest/' + id,
                 success: function(response) {
                     $('.content-data').html(response)
                 }
