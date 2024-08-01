@@ -20,7 +20,6 @@ class Guest extends Core
 
 	public function index()
 	{
-		$this->view->setData(['menu_guest' => 'active', 'sub_guest' => 'active']);
 		return view('guest/index');
 	}
 
@@ -71,32 +70,6 @@ class Guest extends Core
 		);
 		return json_encode($output);
 	}
-
-	/* public function process()
-	{
-		$data = $this->model->getList();
-		$id = intval($this->request->getPost('id'));
-		if ($id != null) {
-			$data = $this->model->getList();
-			$find = array_search($id, array_column($data['data'], '0')); //mencari index yg di edit
-			$edited = [$find => [$id, $this->request->getPost('name')]];
-			$res = array_replace($data['data'], $edited);
-			$data['data'] = $res;
-		} else {
-			$data_guest = [
-				intval(date('ymdHis')),
-				$this->request->getPost('name')
-			];
-			if ($data != null) {
-				array_push($data['data'], $data_guest);
-			} else {
-				$data['data'][] = $data_guest;
-			}
-		}
-
-		$res = $this->model->saving($data);
-		echo json_encode($res);
-	} */
 
 	public function process()
 	{
@@ -159,5 +132,14 @@ class Guest extends Core
 		unset($data['data'][$res]); // menghapus array by index
 		$res = $this->model->saving($data);
 		return json_encode($res);
+	}
+
+	public function text($code) {
+		// $data = $this->model->getList();
+		$id = session()->id;
+		return json_encode([
+			'status'	=> 1,
+			'message'	=> base_url("attent/$id/$code")
+		]);
 	}
 }

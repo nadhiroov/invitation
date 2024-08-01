@@ -1,5 +1,5 @@
 (function ($) {
-  "use strict";
+  ("use strict");
   /*------------------------------------------
         = ACTIVE POPUP IMAGE
     -------------------------------------------*/
@@ -41,7 +41,7 @@
   $(".thebegining").click(function () {
     $(this).hide(); //hide the begining
     $("#konten").show(); //show konten
-    $("#audio").get(0).play(); //play musik
+    // $("#audio").get(0).play(); //play musik
     document.documentElement.requestFullscreen(); //fullscreen
   });
 
@@ -166,20 +166,28 @@
   moment.locale("id"); //set indonesian format
 
   //output = Senin, 17 Agustus 2020
-  var date_resepsi = moment(tanggal_resepsi).format("dddd, Do MMMM YYYY");
-  var date_akad = moment(tanggal_akad).format("dddd, Do MMMM YYYY");
-
-  //output = 17 / 08 / 2020
-  var date_pernikahan = moment(tanggal_resepsi).format("DD / MM / YYYY"); //untuk sampul
-
-  $("#tanggal-acara-resepsi").html(date_resepsi);
-  $("#tanggal-acara-akad").html(date_akad);
-  $(".tanggal-weddingnya").html(date_pernikahan); //untuk sampul
+  /* if ($("#tanggal-acara-aqad").length > 0) {
+    let date = moment($("#tanggal-acara-aqad")).format("dddd, Do MMMM YYYY");
+    $("#tanggal-acara-aqad").html(date);
+  }
+  if ($("#tanggal-acara-resepsi").length > 0) {
+    let date2 = moment($("#tanggal-acara-resepsi")).format(
+      "dddd, Do MMMM YYYY"
+    );
+    $("#tanggal-acara-resepsi").html(date2);
+  }
+  if ($("#tanggal-acara-walimah").length > 0) {
+    let date3 = moment($("#tanggal-acara-walimah")).format(
+      "dddd, Do MMMM YYYY"
+    );
+    $("#tanggal-acara-walimah").html(date3);
+  } */
 
   /*=================
      ADD KOMENTAR
     ======================= */
   $("#submitKomen").on("click", function (event) {
+    alert("submit komen");
     $("#loading_").css("display", "inline");
     $("#submitKomen").css("display", "none");
 
@@ -188,10 +196,10 @@
     let id = $("#id").val();
 
     $.ajax({
-      url: base_url + "/add_komentar",
+      url: "/add_komentar",
       method: "POST",
       data: { id: id, nama: nama, komentar: komentar },
-        async: true,
+      async: true,
       dataType: "json",
       success: function (data) {
         let status = data.status;

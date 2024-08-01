@@ -10,13 +10,13 @@
     <div class="card-body px-4 py-3">
         <div class="row align-items-center">
             <div class="col-9">
-                <h4 class="fw-semibold mb-8">Pengaturan Tamu Undangan</h4>
+                <h4 class="fw-semibold mb-8">Respon Tamu Undangan</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a class="text-muted text-decoration-none" href="dashboard">Home</a>
                         </li>
-                        <li class="breadcrumb-item" aria-current="page">Tamu Undangan</li>
+                        <li class="breadcrumb-item" aria-current="page">Ucapan</li>
                     </ol>
                 </nav>
             </div>
@@ -37,25 +37,19 @@
         </div>
     </div>
     <div class="card-body p-4">
-        <div class="alert alert-primary text-primary" role="alert">
-            Maksimal <strong><?= session()->max_user; ?> tamu </strong>
-        </div>
         <input type="hidden" name="" id="foo" value="">
         <div class="table-responsive">
             <table id="mytable" class="table table-striped table-bordered text-nowrap align-middle order-column">
                 <thead class="text-dark fs-4">
                     <tr>
                         <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Kepada</h6>
+                            <h6 class="fs-4 fw-semibold mb-0">Nama</h6>
                         </th>
                         <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Nama Lengkap</h6>
+                            <h6 class="fs-4 fw-semibold mb-0">Pesan</h6>
                         </th>
                         <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Acara</h6>
-                        </th>
-                        <th>
-                            <h6 class="fs-4 fw-semibold mb-0">Hadiah</h6>
+                            <h6 class="fs-4 fw-semibold mb-0">Tanggal</h6>
                         </th>
                         <th>
                             <h6 class="fs-4 fw-semibold mb-0">Aksi</h6>

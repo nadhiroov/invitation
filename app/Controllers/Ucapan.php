@@ -15,7 +15,11 @@ class Ucapan extends Core
 
     public function index()
     {
-        //
+        return view('ucapan/index');
+    }
+
+    public function getData() {
+        
     }
 
     public function add_komen()
@@ -37,7 +41,7 @@ class Ucapan extends Core
             $return = $this->model->process($id, 'ucapan', $data);
         } else {
             $data = json_encode(array_values([$dataKomen]));
-            $return = $this->model->process($id, 'ucapan', $data, 'insert');            
+            $return = $this->model->process($id, 'ucapan', $data, 'insert');
         }
         echo json_encode($return);
     }

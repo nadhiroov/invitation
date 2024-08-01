@@ -14,20 +14,14 @@ class Acara extends Core
 
 	public function index()
 	{
-		// $dt   = new \DateTime('now');
-		// $time = Time::createFromInstance($dt, 'id_ID');
-		// dd($time->toLocalizedString('MMM d, yyyy'));
-		// dd(date('Y-M-d', strtotime($time)));
 		$res = $this->model->where('id_user', session()->id)->first();
-		// $this->model->delete(6);
 		$data = [];
 		if ($res != null) {
 			$res['acara'] = json_decode($res['acara'], true);
-			$data['akad'] = $res['acara']['akad'] ?? '';
+			$data['aqad'] = $res['acara']['aqad'] ?? '';
 			$data['resepsi'] = $res['acara']['resepsi'] ?? null;
-			$data['unduh'] = $res['acara']['unduh'] ?? null;
+			$data['walimah'] = $res['acara']['walimah'] ?? null;
 			}
-		// dd($data['akad']['tanggal']);
 		$this->view->setData(['menu_website' => 'active', 'sub_acara' => 'active']);
 		return view('acara/index', $data);
 	}

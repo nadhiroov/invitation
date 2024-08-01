@@ -73,7 +73,7 @@
 		?>
 
 		<!-- ============== MUSIK =============== -->
-		<audio loop src="<?php echo base_url() ?><?= $voice ?>" id="audio"></audio>
+		<!-- <audio loop src="<?php echo base_url() ?><?= $voice ?>" id="audio"></audio> -->
 
 		<!-- ============== SAMPUL =============== -->
 		<div id="sampul-konten" class="konten">
@@ -135,11 +135,14 @@
 			<div class="acaranya">
 				<?php foreach ($data['event'] as $row) : ?>
 					<?php
+					$row = strtolower($row);
+					$long = explode(',', $acara[$row]['alamat'])[0];
+					$lat = explode(',', $acara[$row]['alamat'])[1];
 					$tanggal =  $acara[$row]['tanggal'];
+					// $tanggal =  date('l, d F Y', strtotime($acara[$row]['tanggal']));
 					$jam =  $acara[$row]['jam'];
 					$tempat =  $acara[$row]['tempat'];
-					$alamat =  $acara[$row]['alamat'];
-					$link =  $acara[$row]['link'];
+					$link =  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3368.8049075400963!2d34.7824822488608!3d32.08574324875034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2zMzcuMDg1NzQzMjQ4NzUwMzQmJzg0Ljc4MjQ4MjIyODg2MDg!5e0!3m2!1sen!2sid!4v1664500882029!5m2!1sen!2sid?pb=!1m18!1m3!1d<zoom_level>!2d$long!3d$lat!2m3!1e0!2s!3s!3m2!1i1024!2i768!4f13.1!3m3!1m2!1d0x0!2d0!5e0!3m2!1sen!4v<timestamp>!5m2!1s1!2s0";
 					?>
 					<table class="tb-acara">
 						<thead>
@@ -152,7 +155,7 @@
 								<th class="tb-ic-acara"><i class="mdi mdi-calendar icon-acara"></th>
 								<th class="tb-ket-acara"> Tanggal</th>
 								<th class="tb-anu-acara">:</th>
-								<th class="tb-isi-acara" id="tanggal-acara-akad"><?= $tanggal; ?></th>
+								<th class="tb-isi-acara" id="tanggal-acara-<?= $row?>"><?= $tanggal; ?></th>
 							</tr>
 
 							<tr>
@@ -166,7 +169,7 @@
 								<th class="tb-ic-acara"><i class="mdi mdi-map-marker icon-acara"></th>
 								<th class="tb-ket-acara"> Tempat</th>
 								<th class="tb-anu-acara">:</th>
-								<th class="tb-isi-acara"><?= $tempat; ?><br><?= $alamat; ?></th>
+								<th class="tb-isi-acara"><?= $tempat; ?></th>
 							</tr>
 						</tbody>
 					</table>
@@ -230,7 +233,7 @@
 					<h2>Denah Lokasi <?= $row ?></h2>
 				</div>
 				<div class="col-12 maps">
-					<?= $acara[$row]['link'] ?>
+					<?= $acara[$row]['link'] ?? '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3368.8049075400963!2d34.779347606527104!3d32.08275326956897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4ca6193b7c1f%3A0xc1fb72a2c0963f90!2sTel%20Aviv-Yafo%2C%20Israel!5e0!3m2!1sen!2sid!4v1722526316328!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>' ?>
 				</div>
 			<?php endforeach; ?>
 		</div>
@@ -378,15 +381,7 @@
 
 
 <!-- mengirimkan data php ke javascript -->
-<script>
-	var base_url = '<?= base_url() ?>';
-</script>
-<script>
-	var tanggal_akad = '<?= $acara['Aqad']['tanggal']; ?>';
-</script>
-<script>
-	var tanggal_resepsi = '<?= $acara['Walimah']['tanggal']; ?>';
-</script>
+
 <!-- mengirimkan data php ke javascript -->
 
 <!-- JS AREA -->

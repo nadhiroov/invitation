@@ -50,9 +50,12 @@ $routes->post('/guest/save', 'Guest::process');
 $routes->get('/guest/add', 'Guest::add');
 $routes->get('/guest/delete/(:any)', 'Guest::delete/$1');
 $routes->get('/editGuest/(:any)', 'Guest::edit/$1');
+$routes->get('/getText/(:any)', 'Guest::text/$1');
 // $routes->get('/editGuest', 'Guest::edit');
 
 // Ucapan
+$routes->get('ucapan', 'Ucapan::index');
+$routes->get('ucapan/getData', 'Ucapan::getData');
 $routes->post('/add_komentar', 'Ucapan::add_komen');
 
 // attendance
