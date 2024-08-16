@@ -49,7 +49,7 @@
         = NAV BOTTOM BAR
     -------------------------------------------*/
 
-  var navItems = document.querySelectorAll(".mobile-bottom-nav__item");
+  let navItems = document.querySelectorAll(".mobile-bottom-nav__item");
   navItems.forEach(function (e, i) {
     e.addEventListener("click", function (e) {
       navItems.forEach(function (e2, i2) {
@@ -103,7 +103,7 @@
     $("#tutup").toggleClass("rotate");
   });
 
-  var $allContentDivs = $(
+  let $allContentDivs = $(
     "#sampul-konten, #mempelai-konten, #acara-konten, #album-konten, #ucapan-konten, #lokasi-konten, #cerita-konten"
   ).hide(); // Hide All Content Divs
 
@@ -113,20 +113,18 @@
 
   $("#sampul, #mempelai, #acara, #album, #ucapan, #lokasi, #cerita").click(
     function () {
-      var $contentDiv = $("#" + this.id + "-konten");
+      let $contentDiv = $("#" + this.id + "-konten");
 
       if (this.id == "sampul") {
         $("#imgbawah").hide();
         $(".dekorasi-sampul").show();
         $(".dekorasi-all").hide();
-        // $("#imgatas").hide();
       } else {
         $("#imgbawah").show();
         $(".dekorasi-sampul").hide();
         $(".dekorasi-all").show();
       }
-      if ($contentDiv.is(":visible")) {
-      } else {
+      if (!$contentDiv.is(":visible")) {
         $allContentDivs.hide(); // Hide All Divs
         $contentDiv.show(); // Show Div
       }
@@ -165,29 +163,10 @@
     ======================= */
   moment.locale("id"); //set indonesian format
 
-  //output = Senin, 17 Agustus 2020
-  /* if ($("#tanggal-acara-aqad").length > 0) {
-    let date = moment($("#tanggal-acara-aqad")).format("dddd, Do MMMM YYYY");
-    $("#tanggal-acara-aqad").html(date);
-  }
-  if ($("#tanggal-acara-resepsi").length > 0) {
-    let date2 = moment($("#tanggal-acara-resepsi")).format(
-      "dddd, Do MMMM YYYY"
-    );
-    $("#tanggal-acara-resepsi").html(date2);
-  }
-  if ($("#tanggal-acara-walimah").length > 0) {
-    let date3 = moment($("#tanggal-acara-walimah")).format(
-      "dddd, Do MMMM YYYY"
-    );
-    $("#tanggal-acara-walimah").html(date3);
-  } */
-
   /*=================
      ADD KOMENTAR
     ======================= */
   $("#submitKomen").on("click", function (event) {
-    alert("submit komen");
     $("#loading_").css("display", "inline");
     $("#submitKomen").css("display", "none");
 

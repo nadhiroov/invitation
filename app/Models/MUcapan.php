@@ -14,7 +14,7 @@ class MUcapan extends Model
     protected $allowedFields    = ['id_user', 'ucapan'];
 
     // Dates
-    protected $useTimestamps = false;
+
 
     public function getUcapan($param = '')
     {
@@ -79,5 +79,28 @@ class MUcapan extends Model
             }
         }
         return $return;
+    }
+
+    public function getUcapanV2($param = '') {
+        if (!empty($param)) {
+            $id_user = $param['id'];
+        } else {
+            $id_user = $_SESSION['id'];
+        }
+
+        $sql = "
+            SELECT jt.*
+            FROM ucapan
+            JOIN JSON_TABLE(ucapan, '$[*]' COLUMNS (
+              id FOR ORDINALITY,
+              name VARCHAR(10) PATH '$.name',
+              komentar VARCHAR(10) PATH '$.komen',
+              response VARCHAR(10) PATH '$.resp',
+              tanggal DATETIME PATH '$.date'
+            )) AS jt
+            WHERE ucapan.id_user = ?";
+
+        $query = $this->db->query($sql, [$id_user]);
+        return $query->getResultArray();
     }
 }

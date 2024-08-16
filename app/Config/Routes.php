@@ -57,6 +57,8 @@ $routes->get('/getText/(:any)', 'Guest::text/$1');
 $routes->get('ucapan', 'Ucapan::index');
 $routes->get('ucapan/getData', 'Ucapan::getData');
 $routes->post('/add_komentar', 'Ucapan::add_komen');
+$routes->get('ucapan/reply/(:any)', 'Ucapan::reply/$1');
+$routes->post('ucapan/reply', 'Ucapan::processReply');
 
 // attendance
 $routes->get('/attend/(:num)/(:any)', 'Attendance::open/$1/$2');

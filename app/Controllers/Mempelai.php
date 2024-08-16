@@ -142,7 +142,7 @@ class Mempelai extends Core
 	public function serveImage($filename)
 	{
 		$path = WRITEPATH . 'uploads/mempelai/' . $filename;
-
+		
 		if (file_exists($path)) {
 			return $this->response
 				->setHeader('Content-Type', mime_content_type($path))

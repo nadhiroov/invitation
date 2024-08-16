@@ -73,7 +73,7 @@
 		?>
 
 		<!-- ============== MUSIK =============== -->
-		<!-- <audio loop src="<?php echo base_url() ?><?= $voice ?>" id="audio"></audio> -->
+		<audio loop src="<?php echo base_url() ?><?= $voice ?>" id="audio"></audio>
 
 		<!-- ============== SAMPUL =============== -->
 		<div id="sampul-konten" class="konten">
@@ -87,10 +87,10 @@
 					</tr>
 					<tr>
 						<th style="position: relative;text-align: center;display:block;margin-top:40px">
-							<img src="<?= $mempelai['foto_sampul']; ?>" class="cover-foto" />
+							<img src="<?= base_url('image/serveImage/') . $mempelai['foto_sampul'] ?>" class="cover-foto" alt="foto-sampul" />
 
 							<!-- image border cover -->
-							<img src="<?= base_url() ?>/themes/tealflower/img/bg-flower.png" class="cover-border" /><br>
+							<img src="<?= base_url() ?>/themes/tealflower/img/bg-flower.png" class="cover-border" alt="bg-undangan" /><br>
 							<!-- image border cover -->
 
 						</th>
@@ -110,16 +110,16 @@
 		</div>
 		<!-- ============== MEMPELAI =============== -->
 		<div id="mempelai-konten" class="konten" style="display: none;">
-			<img src="<?php echo base_url() ?>/base/img/bismillah.png" class="mempelai-salam-pembuka" /><br>
+			<img src="<?php echo base_url() ?>/base/img/bismillah.png" class="mempelai-salam-pembuka" alt="foto-pembuka" /><br>
 			<p class="mempelai-intermezzo"><?= $salam_pembuka ?></p>
 
-			<img src="<?= $mempelai['foto_pria'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mpria.jpg' ?>'" class="mempelai-img" />
+			<img src="<?= base_url('image/serveImage/') . $mempelai['foto_pria'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mpria.jpg' ?>'" class="mempelai-img" alt="foto-pria" />
 
 			<h1 class="mempelai-pria-nama"><?php echo $mempelai['nama_pria']; ?></h1>
 			<p class="mempelai-pria-ortu"><?php echo "Putra " . $mempelai['nama_ayah_pria'] . " dan " . $mempelai['nama_ibu_pria']  ?></p>
 			<h1 class="dengan">dengan</h1>
 
-			<img src="<?= $mempelai['foto_wanita'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mwanita.jpg' ?>'" class="mempelai-img" />
+			<img src="<?= base_url('image/serveImage/') . $mempelai['foto_wanita'] ?>" onerror="this.onerror=null;this.src='<?= base_url() . '/assets/img/mwanita.jpg' ?>'" class="mempelai-img" alt="foto-wanita" />
 
 			<h1 class="mempelai-wanita-nama"><?php echo $mempelai['nama_wanita']; ?></h1>
 			<p class="mempelai-wanita-ortu"><?php echo "Putri " . $mempelai['nama_ayah_wanita'] . " dan " . $mempelai['nama_ibu_wanita']  ?></p>
@@ -139,7 +139,6 @@
 					$long = explode(',', $acara[$row]['alamat'])[0];
 					$lat = explode(',', $acara[$row]['alamat'])[1];
 					$tanggal =  $acara[$row]['tanggal'];
-					// $tanggal =  date('l, d F Y', strtotime($acara[$row]['tanggal']));
 					$jam =  $acara[$row]['jam'];
 					$tempat =  $acara[$row]['tempat'];
 					$link =  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3368.8049075400963!2d34.7824822488608!3d32.08574324875034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0!2zMzcuMDg1NzQzMjQ4NzUwMzQmJzg0Ljc4MjQ4MjIyODg2MDg!5e0!3m2!1sen!2sid!4v1664500882029!5m2!1sen!2sid?pb=!1m18!1m3!1d<zoom_level>!2d$long!3d$lat!2m3!1e0!2s!3s!3m2!1i1024!2i768!4f13.1!3m3!1m2!1d0x0!2d0!5e0!3m2!1sen!4v<timestamp>!5m2!1s1!2s0";
@@ -155,7 +154,7 @@
 								<th class="tb-ic-acara"><i class="mdi mdi-calendar icon-acara"></th>
 								<th class="tb-ket-acara"> Tanggal</th>
 								<th class="tb-anu-acara">:</th>
-								<th class="tb-isi-acara" id="tanggal-acara-<?= $row?>"><?= $tanggal; ?></th>
+								<th class="tb-isi-acara" id="tanggal-acara-<?= $row ?>"><?= $tanggal; ?></th>
 							</tr>
 
 							<tr>
@@ -214,7 +213,7 @@
 							</div>
 							<?php if (isset($row['resp']) && ($row['resp'] != null || $row['resp'] != '')) : ?>
 								<div class="col-12 komen-isi">
-									<?= \esc($row['resp']); ?>
+									<small><?= $mempelai['nama_panggilan_pria'] . ' & '. $mempelai['nama_panggilan_wanita']. ' : </small>re' . \esc($row['resp']); ?>
 								</div>
 							<?php endif; ?>
 						</div>

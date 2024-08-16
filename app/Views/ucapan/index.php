@@ -32,9 +32,6 @@
 <div class="card w-100 position-relative overflow-hidden">
     <div class="d-flex align-items-center justify-content-between mb-4 pb-8 px-4 py-3 border-bottom">
         <h4 class="card-title mb-0">Basic Table</h4>
-        <div class="d-flex align-items-center gap-2">
-            <button class="btn btn-primary btnAddNew" data-bs-toggle="modal" data-bs-target="#modal">Tambah baru</button>
-        </div>
     </div>
     <div class="card-body p-4">
         <input type="hidden" name="" id="foo" value="">
@@ -47,6 +44,9 @@
                         </th>
                         <th>
                             <h6 class="fs-4 fw-semibold mb-0">Pesan</h6>
+                        </th>
+                        <th>
+                            <h6 class="fs-4 fw-semibold mb-0">Balasan saya</h6>
                         </th>
                         <th>
                             <h6 class="fs-4 fw-semibold mb-0">Tanggal</h6>
@@ -66,17 +66,23 @@
 
 <!-- sample modal content -->
 <div id="modal" class="modal fade" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-scrollable modal-md">
         <div class="modal-content">
-            <form action="guest/save" method="post" class="form-submit">
+            <form action="ucapan/reply" method="post" class="form-submit">
                 <div class="modal-header d-flex align-items-center">
                     <h4 class="modal-title" id="myModalLabel">
-                        Medium Modal
+                        Detail balasan
                     </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body content-data">
-
+                    <div class="col-12">
+                        <label class="form-label mt-3">Balasan saya</label>
+                        <div class="form-group">
+                            <input type="text" id="input-response" class="form-control" placeholder="Masukkan balasan" name="form[balasan]">
+                            <input type="hidden" id="input-idRecord" name="form[idRecord]">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn bg-danger-subtle text-danger waves-effect" data-bs-dismiss="modal">
@@ -96,51 +102,50 @@
 
 <?= $this->section('js'); ?>
 <script src="<?= base_url(); ?>cms/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?= base_url(); ?>/assets/js/clipboard.min.js"></script>
 <script>
     $(document).ready(function() {
         $("#mytable").DataTable({
             pageLength: 10,
             ajax: {
-                "url": "guest/getData",
+                "url": "ucapan/getData",
                 "type": "GET",
             },
             order: [
-                [1, "asc"]
+                [3, "desc"]
             ],
             columnDefs: [{
                 targets: 4,
                 orderable: false
             }],
             columns: [{
-                    data: 'to'
+                    data: 'name'
                 },
                 {
-                    data: 'name',
+                    data: 'komen',
                 },
                 {
-                    data: 'event',
+                    data: 'resp',
+                },
+                {
+                    data: 'date',
                     render: function(data) {
-                        return data.split("#")
+                        // Assuming 'data' is in ISO format or any other date format that can be parsed by new Date()
+                        var date = new Date(data);
+                        var options = {
+                            day: '2-digit',
+                            month: 'long',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        };
+                        return date.toLocaleDateString('id-ID', options).replace(',', '');
                     }
                 },
                 {
-                    data: 'gift',
+                    data: 'idRecord',
                     render: function(data) {
-                        return data == 1 ? 'Ya' : 'Tidak'
-                    }
-                },
-                {
-                    data: 'id',
-                    render: function(data) {
-                        let link = `<?= base_url('attend/' . session()->id . '/'); ?>${data}`;
                         return `
-                        <div class="button-group">
-						<button type="button" class="btn mb-1 btn-secondary rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnCopy" data-clipboard-target="#foo" data-bs-toggle="tooltip" title="salin tautan" data-id="${link}"><i class="fs-5 ti ti-copy"></i></button>
-
-						<button type="button" class="btn mb-1 btn-warning rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnEdit" data-id="${data}" data-bs-toggle="modal" data-bs-target="#modal" data-bs-toggle="tooltip" title="edit"><i class="fs-5 ti ti-edit"></i></button>
-
-						<button type="button" class="btn mb-1 btn-danger rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center" onclick="confirmDeleteV2(this)" data-id="${data}" data-target="guest/delete" data-bs-toggle="tooltip" title="hapus"><i class="fs-5 ti ti-trash"></i></button>
+						<button type="button" class="btn mb-1 btn-warning rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnEdit" data-id="${data}" data-bs-toggle="modal" data-bs-target="#modal" data-bs-toggle="tooltip" title="balas"><i class="fs-5 ti ti-edit"></i></button>
 					</div>
                         `
                     }
@@ -160,25 +165,17 @@
         });
     })
 
-    let clipboard = new ClipboardJS('.btnCopy')
-    $(document).on('click', '.btnCopy', function(e) {
-        console.log(clipboard)
-        let link = $(this).data('id')
-        $('#foo').val(link)
-        toastr.success('tautan tersalin', 'success');
-    })
-
     // edit click
     $('#modal').on('show.bs.modal', function(e) {
         let id = $(e.relatedTarget).data('id')
         if (typeof id != 'undefined') {
-            $('#myModalLabel').text('Edit data')
-            //menggunakan fungsi ajax untuk pengambilan data
             $.ajax({
                 type: 'get',
-                url: 'editGuest/' + id,
+                dataType: "json",
+                url: 'ucapan/reply/' + id,
                 success: function(response) {
-                    $('.content-data').html(response)
+                    $('#input-response').val(response.resp)
+                    $('#input-idRecord').val(response.idRecord)
                 }
             })
         }
