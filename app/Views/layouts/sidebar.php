@@ -17,7 +17,7 @@
             <ul id="sidebarnav">
                 <?php if ($_SESSION['permission'] == 1) : ?>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="" id="get-url" aria-expanded="false">
+                        <a class="sidebar-link" href="dashboard" id="get-url" aria-expanded="false">
                             <span>
                                 <i class="ti ti-aperture"></i>
                             </span>
@@ -54,7 +54,7 @@
 
                 <?php if ($_SESSION['permission'] == 2) : ?>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="" id="get-url" aria-expanded="false">
+                        <a class="sidebar-link" href="dashboard" id="get-url" aria-expanded="false">
                             <span>
                                 <i class="ti ti-aperture"></i>
                             </span>

@@ -6,7 +6,7 @@ class Home extends BaseController
 {
 	public function index(): string
 	{
-		return view('layout/front');
+		return view('landingPage');
 	}
 
 	public function welcome() : string {

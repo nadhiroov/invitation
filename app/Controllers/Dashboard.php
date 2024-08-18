@@ -9,6 +9,6 @@ class Dashboard extends Core
 	public function index()
 	{
 		$this->view->setData(['menu_dashboard' => 'active']);
-		return view('layout/template');
+		return view('dashboard');
 	}
 }
