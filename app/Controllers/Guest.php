@@ -75,12 +75,9 @@ class Guest extends Core
 	{
 		$data = $this->model->getList();
 		$param = $this->request->getPost('param');
-		// acara
 		foreach ($param['acara'] as $key => $val) {
 			$event[] = $key;
 		}
-		// var_dump(implode('#', $event));
-		// die;
 		if (isset($param['id_guest'])) {
 			$new_data = [
 				'id'	=> $param['id_guest'],

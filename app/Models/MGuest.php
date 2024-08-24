@@ -24,21 +24,6 @@ class MGuest extends Model
 		$records = [];
 		if ($data != null) {
 			return json_decode($data[0]['visitors_names'], true);
-			/* foreach ($datas as $row) {
-				$records[] = array(
-					$row['to'],
-					$row['name'],
-					explode('#', $row['event']),
-					$row['gift'] == 0 ? 'Tidak' : 'Ya',
-					'<div class="button-group">
-						<button type="button" class="btn mb-1 btn-secondary rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center"  data-bs-toggle="tooltip" data-bs-placement="top" title="copy link"><i class="fs-5 ti ti-copy"></i></button>
-
-						<button type="button" class="btn mb-1 btn-warning rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnEdit" data-id="' . $row['id'] . '" data-bs-toggle="modal" data-bs-target="#modal"><i class="fs-5 ti ti-edit"></i></button>
-
-						<button type="button" class="btn mb-1 btn-danger rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center" onclick="confirmDeleteV2(this)" data-id="' . $row['id'] . '" data-target="guest/delete"><i class="fs-5 ti ti-trash"></i></button>
-					</div>'
-				);
-			} */
 		}
 		return $records;
 	}
