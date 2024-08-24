@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?= base_url(); ?>cms/libs/sweetalert2/dist/sweetalert2.min.css">
     <?= $this->renderSection('css'); ?>
 
-    <title>Modernize Bootstrap Admin</title>
+    <title>Nikah Yuuk</title>
 
 </head>
 
