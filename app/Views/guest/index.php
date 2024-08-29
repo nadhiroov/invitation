@@ -142,7 +142,7 @@
                         let link = `<?= base_url('attend/' . session()->id . '/'); ?>${data}`;
                         return `
                         <div class="button-group">
-						<button type="button" class="btn mb-1 btn-secondary rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnCopy" data-clipboard-target="#foo" data-bs-toggle="tooltip" title="salin tautan" data-id="${link}"><i class="fs-5 ti ti-copy"></i></button>
+						<button type="button" class="btn mb-1 btn-secondary rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnCopy" data-clipboard-target="#foo" data-bs-toggle="tooltip" title="salin tautan" data-id="${data}"><i class="fs-5 ti ti-copy"></i></button>
 
 						<button type="button" class="btn mb-1 btn-warning rounded-circle round-40 btn-sm d-inline-flex align-items-center justify-content-center btnEdit" data-id="${data}" data-bs-toggle="modal" data-bs-target="#modal" data-bs-toggle="tooltip" title="edit"><i class="fs-5 ti ti-edit"></i></button>
 
@@ -168,10 +168,24 @@
 
     let clipboard = new ClipboardJS('.btnCopy')
     $(document).on('click', '.btnCopy', function(e) {
-        console.log(clipboard)
-        let link = $(this).data('id')
-        $('#foo').val(link)
-        toastr.success('tautan tersalin', 'success');
+        let id = $(this).data('id')
+        alert(id)
+        $.ajax({
+            type: 'get',
+            url: 'getLink/' + id,
+            dataType: "json",
+            success: function(response) {
+                
+                console.log(`success: ${response}`)
+                toastr.success('tautan tersalin', 'success');
+                // $('.content-data').html(response)
+            },
+            error: function(er) {
+                console.log(`error ${er}`)
+                toastr.success('gagal menyalink tautan', 'error');
+            }
+        })
+        // $('#foo').val(link)
     })
 
     // edit click

@@ -29,7 +29,7 @@ class Settings extends Migration
             'jenis_acara' => [
                 'type' => 'JSON',
                 'null' => true,
-                'default' => '[["Aqad"], ["Walimah"],["Unduh mantu"]]',
+                'default' => '[["Aqad"], ["Unduh Mantu"],["Resepsi"]]',
             ],
             'template' => [
                 'type' => 'TINYINT',

@@ -131,12 +131,34 @@ class Guest extends Core
 		return json_encode($res);
 	}
 
-	public function text($code) {
-		// $data = $this->model->getList();
-		$id = session()->id;
+	public function link($id) {
+		$data = $this->model->attend(session()->id, $id);
+		$link = base_url('attend/' . session()->id . '/'). $id;
+		$text = "
+		Assalamu'alaikum Wr. Wb
+        Bismillahirahmanirrahim.
+
+        Yth. $data[to] $data[name]
+ 
+        Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan kami :
+ 
+        Nazlah & Faraby
+ 
+        Berikut link undangan kami untuk info lengkap dari acara bisa kunjungi :
+  
+        $link
+        
+        Merupakan suatu kebahagiaan bagi kami apabila $data[to] berkenan untuk hadir dan memberikan doa restu.
+        
+        Mohon maaf perihal undangan hanya di bagikan melalui pesan ini. Terima kasih banyak atas perhatiannya.
+        
+        Wassalamu'alaikum Wr. Wb.
+        Terima Kasih.
+		";
 		return json_encode([
 			'status'	=> 1,
-			'message'	=> base_url("attent/$id/$code")
+			'data'		=> $text
+			// 'message'	=> base_url("attent/$id/$code")
 		]);
 	}
 }

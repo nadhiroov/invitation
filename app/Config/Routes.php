@@ -50,7 +50,7 @@ $routes->post('/guest/save', 'Guest::process');
 $routes->get('/guest/add', 'Guest::add');
 $routes->get('/guest/delete/(:any)', 'Guest::delete/$1');
 $routes->get('/editGuest/(:any)', 'Guest::edit/$1');
-$routes->get('/getText/(:any)', 'Guest::text/$1');
+$routes->get('/getLink/(:any)', 'Guest::link/$1');
 // $routes->get('/editGuest', 'Guest::edit');
 
 // Ucapan

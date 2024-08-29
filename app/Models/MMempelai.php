@@ -27,7 +27,6 @@ class MMempelai extends Model
 		} else {
 			$id = $_SESSION['id'];
 		}
-		$res = $this->where('id_user', $id)->findAll();
-		return $res[0];
+		return $this->where('id_user', $id)->first();
 	}
 }
