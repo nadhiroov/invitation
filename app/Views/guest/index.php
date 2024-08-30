@@ -166,27 +166,53 @@
         });
     })
 
-    let clipboard = new ClipboardJS('.btnCopy')
+    let clipboard;
+
+    // Initialize ClipboardJS
+    clipboard = new ClipboardJS('.btnCopy', {
+        text: function(trigger) {
+            return trigger.getAttribute('data-clipboard-text');
+        }
+    });
+
+    // clipboard.on('success', function(e) {
+    //     toastr.success('Tautan tersalin', 'Success');
+    //     e.clearSelection();
+    // });
+
+    // clipboard.on('error', function(e) {
+    //     toastr.error('Gagal menyalin tautan', 'Error');
+    // });
+
+    // Handle button click to fetch data and set it for ClipboardJS
     $(document).on('click', '.btnCopy', function(e) {
-        let id = $(this).data('id')
-        alert(id)
+        let button = $(this);
+        let id = button.data('id');
+
         $.ajax({
             type: 'get',
-            url: 'getLink/' + id,
+            url: 'getLink/' + id, // Replace with your actual URL
             dataType: "json",
             success: function(response) {
-                
-                console.log(`success: ${response}`)
-                toastr.success('tautan tersalin', 'success');
-                // $('.content-data').html(response)
+                let tempTextarea = $('<textarea>');
+                $('body').append(tempTextarea);
+                tempTextarea.val(response.data).select();
+
+                // Use the document's execCommand to copy the text
+                document.execCommand('copy');
+                tempTextarea.remove();
+                toastr.success('Tautan tersalin', 'Success')
             },
             error: function(er) {
-                console.log(`error ${er}`)
-                toastr.success('gagal menyalink tautan', 'error');
+                console.log(`error ${er}`);
+                toastr.error('Gagal menyalin tautan', 'Error');
+
+                // Re-enable the button
+                button.prop('disabled', false);
             }
-        })
-        // $('#foo').val(link)
-    })
+        });
+    });
+
 
     // edit click
     $('#modal').on('show.bs.modal', function(e) {
