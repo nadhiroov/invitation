@@ -145,7 +145,6 @@
 
 <?= $this->section('js'); ?>
 <script src="<?= base_url(); ?>cms/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-<!-- <script src="<?= base_url(); ?>cms/js/plugin/sweetalert/sweetalert.min.js"></script> -->
 <script>
     $(function() {
         let tipe = document.getElementById('tipe').value;
