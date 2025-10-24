@@ -3,9 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\MAcara;
-use CodeIgniter\I18n\Time;
 
-class Acara extends Core
+class Acara extends BaseController
 {
 	public function __construct()
 	{

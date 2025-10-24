@@ -197,6 +197,8 @@
                 let tempTextarea = $('<textarea>');
                 $('body').append(tempTextarea);
                 tempTextarea.val(response.data).select();
+                console.log(response.data);
+                alert('Tautan: ' + response.data);
 
                 // Use the document's execCommand to copy the text
                 document.execCommand('copy');

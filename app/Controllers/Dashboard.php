@@ -6,14 +6,15 @@ use App\Controllers\BaseController;
 use App\Models\MGuest;
 use App\Models\MUcapan;
 
-class Dashboard extends Core
+class Dashboard extends BaseController
 {
 	protected $ucapan;
 	protected $guest;
+	protected $data;
 
 	public function __construct()
 	{
-		parent::__construct();
+		// parent::__construct();
 		$this->guest = new MGuest();
 		$this->ucapan = new MUcapan();
 		// $this->setting = new MPengaturan();
@@ -23,7 +24,8 @@ class Dashboard extends Core
 	public function index()
 	{
 		$this->view->setData(['menu_dashboard' => 'active']);
-		$this->data['totalGuest'] = count((array)$this->guest->getList()['data']);
+		// dd((array)$this->guest->getList());
+		$this->data['totalGuest'] = (array)$this->guest->getList() == [] ? '0' : count((array)$this->guest->getList()['data']);
 		$this->data['totalComment'] = @$this->ucapan->select('json_length(ucapan) as total')->where('id_user', session()->id)->first()['total'];
 		$this->data['lastComment'] = $this->ucapan
 			->select('jt.*, DATE_FORMAT(jt.date, "%Y-%c-%d")')

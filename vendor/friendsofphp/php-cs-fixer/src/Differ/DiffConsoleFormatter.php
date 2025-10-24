@@ -20,7 +20,11 @@ use Symfony\Component\Console\Formatter\OutputFormatter;
 /**
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
+ * @readonly
+ *
  * @internal
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 final class DiffConsoleFormatter
 {
@@ -45,7 +49,7 @@ final class DiffConsoleFormatter
         return \sprintf(
             $template,
             implode(
-                PHP_EOL,
+                \PHP_EOL,
                 array_map(
                     static function (string $line) use ($isDecorated, $lineTemplate): string {
                         if ($isDecorated) {

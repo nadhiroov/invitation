@@ -5,13 +5,12 @@ namespace App\Controllers;
 use App\Models\MGuest;
 use App\Models\MPengaturan;
 
-class Guest extends Core
+class Guest extends BaseController
 {
 	protected $setting;
 
 	public function __construct()
 	{
-		parent::__construct();
 		$this->model = new MGuest();
 		$this->setting = new MPengaturan();
 		helper('text');

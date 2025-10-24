@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\MUser;
 
-class Signin extends Core
+class Signin extends BaseController
 {
 	protected $session;
 	public function __construct()

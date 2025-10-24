@@ -5,11 +5,12 @@ namespace App\Controllers;
 use App\Models\MFirstname;
 use App\Models\MPengaturan;
 
-class Firstname extends Core
+class Firstname extends BaseController
 {
+	protected $data;
+
 	public function __construct()
 	{
-		parent::__construct();
 		$this->model = new MPengaturan();
 	}
 

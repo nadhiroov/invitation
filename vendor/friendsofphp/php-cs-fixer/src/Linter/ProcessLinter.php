@@ -26,6 +26,8 @@ use Symfony\Component\Process\Process;
  * @author Dariusz Rumiński <dariusz.ruminski@gmail.com>
  *
  * @internal
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise.
  */
 final class ProcessLinter implements LinterInterface
 {
@@ -35,10 +37,8 @@ final class ProcessLinter implements LinterInterface
 
     /**
      * Temporary file for code linting.
-     *
-     * @var null|string
      */
-    private $temporaryFile;
+    private ?string $temporaryFile = null;
 
     /**
      * @param null|string $executable PHP executable, null for autodetection

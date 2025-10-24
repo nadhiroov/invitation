@@ -8,6 +8,7 @@ use App\Controllers\BaseController;
 
 class Coba extends BaseController
 {
+	protected $table;
 	public function __construct()
 	{
 		$this->model = new M_coba();

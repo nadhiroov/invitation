@@ -6,7 +6,7 @@ use App\Controllers\BaseController;
 
 class Core extends BaseController
 {
-	protected $view;
+	// protected $view;
 	protected $model;
 	protected $data;
 	

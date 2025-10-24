@@ -9,16 +9,16 @@ use App\Models\MPengaturan;
 use App\Models\MUcapan;
 use DateTime;
 
-class Attendance extends Core
+class Attendance extends BaseController
 {
     protected $setting;
     protected $mempelai;
     protected $acara;
     protected $ucapan;
+    protected $data;
 
     public function __construct()
     {
-        parent::__construct();
         $this->model = new MGuest();
         $this->setting = new MPengaturan();
         $this->mempelai = new MMempelai();
@@ -60,6 +60,7 @@ class Attendance extends Core
             $param['name'] = $this->data['data']['name'];
             $this->data['ucapan'] = $this->ucapan->getUcapan($param);
             $this->data['ucapan'] = empty($this->data['ucapan']) ? null : $this->data['ucapan'][0];
+            dd($this->data['data']['event']);
             return view('themes/tealflower', $this->data);
         } else {
             echo 'Link tidak valid';
