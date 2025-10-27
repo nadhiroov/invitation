@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?= base_url(); ?>cms/css/styles.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url(); ?>cms/libs/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <?= $this->renderSection('css'); ?>
 
     <title>Nikah Yuuk</title>
@@ -199,7 +200,6 @@
             </div>
         </div>
 
-
     </div>
     <script src="<?= base_url(); ?>cms/js/vendor.min.js"></script>
     <!-- Import Js Files -->
@@ -215,7 +215,7 @@
     <script src="<?= base_url(); ?>cms/libs/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <!-- solar icons -->
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.3.2/dist/iconify-icon.min.js"></script>
     <?= $this->renderSection('js'); ?>
 
 </body>

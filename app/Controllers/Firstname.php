@@ -19,6 +19,7 @@ class Firstname extends BaseController
 		$this->view->setData(['menu_guest' => 'active', 'sub_nick' => 'active']);
 		$data = $this->model->select('to')->where('id_user', $_SESSION['id'])->first();
 		$this->data['content'] = json_decode($data['to']);
+		// dd($this->data['content']);
 		return view('setting/nickname/index', $this->data);
 	}
 

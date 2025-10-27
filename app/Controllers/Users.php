@@ -2,15 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Models\MPengaturan;
 use App\Models\Muser;
 
 class Users extends Core
 {
-
+	protected $setting;
 	public function __construct()
 	{
 		parent::__construct();
 		$this->model = new Muser();
+		$this->setting = new MPengaturan();
 	}
 
 	public function index()
@@ -36,11 +38,26 @@ class Users extends Core
 	public function process()
 	{
 		$form = $this->request->getPost('form');
-		if (isset($form['password'])) {
+		$rules = [
+			'fullname' => 'required',
+			'username' => 'required|min_length[3]|max_length[20]',
+			'password' => 'required|min_length[6]',
+		];
+
+		if (! $this->validateData($form, $rules)) {
+			return json_encode([
+				'code' 		=> 0,
+				'title'		=> 'Validation Error',
+				'message'	=> $this->validator->listErrors()
+			]);
+		}
+		if (isset($form['password']) && $form['password'] != '') {
 			$form['password'] = password_hash($form['password'], PASSWORD_DEFAULT);
 		}
 		try {
 			$this->model->save($form);
+			$dataSetting['id_user'] = $this->model->getInsertID();
+			$this->setting->save($dataSetting);
 			return json_encode([
 				'code' 		=> 1,
 				'message'	=> 'success',
@@ -87,8 +104,8 @@ class Users extends Core
 		$param = $_POST['rowid'];
 		$data = $this->model->getListData($param);
 		$output = array(
-            "data" => $data
-        );
-        echo json_encode($output);
+			"data" => $data
+		);
+		echo json_encode($output);
 	}
 }

@@ -3,16 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\MGuest;
+use App\Models\MMempelai;
 use App\Models\MPengaturan;
 
 class Guest extends BaseController
 {
 	protected $setting;
+	protected $mempelai;
 
 	public function __construct()
 	{
 		$this->model = new MGuest();
 		$this->setting = new MPengaturan();
+		$this->mempelai = new MMempelai();
 		helper('text');
 		helper('array');
 	}
@@ -132,6 +135,7 @@ class Guest extends BaseController
 
 	public function link($id) {
 		$data = $this->model->attend(session()->id, $id);
+		$mempelai = $this->mempelai->getMempelai();
 		$link = base_url('attend/' . session()->id . '/'). $id;
 		$text = "
 		Assalamu'alaikum Wr. Wb
@@ -141,7 +145,7 @@ class Guest extends BaseController
  
         Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan kami :
  
-        Nazlah & Faraby
+        $mempelai[nama_panggilan_pria] & $mempelai[nama_panggilan_wanita]
  
         Berikut link undangan kami untuk info lengkap dari acara bisa kunjungi :
   

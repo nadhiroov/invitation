@@ -24,7 +24,7 @@ class Settings extends Migration
             'to' => [
                 'type' => 'JSON',
                 'null' => true,
-                'default' => '[["Bapak dan Ibu"],["Bapak Sekeluarga"],["Bapak"],["Ibu"]]',
+                'default' => '["Bapak dan Ibu","Bapak Sekeluarga","Bapak","Ibu"]',
             ],
             'jenis_acara' => [
                 'type' => 'JSON',

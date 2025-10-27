@@ -87,7 +87,7 @@
 					</tr>
 					<tr>
 						<th style="position: relative;text-align: center;display:block;margin-top:40px">
-							<img src="<?= base_url('image/serveImage/') . $mempelai['foto_sampul'] ?>" class="cover-foto" alt="foto-sampul" />
+							<img src="<?= base_url('image/serveImage/') . $mempelai['foto_sampul'] ?>" onerror="this.onerror=null;this.src='<?= base_url(); ?>assets/img/zawaj.png'" class="cover-foto" alt="foto-sampul" />
 
 							<!-- image border cover -->
 							<img src="<?= base_url() ?>/themes/tealflower/img/bg-flower.png" class="cover-border" alt="bg-undangan" /><br>
@@ -213,7 +213,7 @@
 							</div>
 							<?php if (isset($row['resp']) && ($row['resp'] != null || $row['resp'] != '')) : ?>
 								<div class="col-12 komen-isi">
-									<small><?= $mempelai['nama_panggilan_pria'] . ' & '. $mempelai['nama_panggilan_wanita']. ' : </small>re' . \esc($row['resp']); ?>
+									<small><?= $mempelai['nama_panggilan_pria'] . ' & ' . $mempelai['nama_panggilan_wanita'] . ' : </small>' . \esc($row['resp']); ?>
 								</div>
 							<?php endif; ?>
 						</div>

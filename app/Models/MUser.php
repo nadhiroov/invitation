@@ -11,7 +11,7 @@ class Muser extends Model
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['fullname', 'username', 'password', ''];
+	protected $allowedFields        = ['fullname', 'username', 'password'];
 
 	// Dates
 	protected $useTimestamps        = true;
@@ -29,10 +29,10 @@ class Muser extends Model
 				$row['fullname'],
 				$row['username'],
 				$row['max_user'],
-				$row['email'],
+				$row['email'] ?? '-',
 				'<div class="form-button-action">
-					<a href="#edit" data-toggle="modal" data-id="'.$row['id'].'" class="btn btn-link btn-primary btn-lg" data-toggle="tooltip" title="Detail"><i class="fa fa-edit"></i></a>
-					<a onclick="confirmDelete(this)" data-target="user/delete/" data-id="' . $row['id'] . '" class="btn btn-link btn-danger confirmDelete" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-times"></i></a>
+					<a href="#edit" data-toggle="modal" data-id="'.$row['id'].'" class="btn bg-warning-subtle text-warning" data-toggle="tooltip" title="Edit"><i class="ti ti-edit fs-4 me-2"></i></a>
+					<a onclick="confirmDelete(this)" data-target="user/delete/" data-id="' . $row['id'] . '" class="btn bg-danger-subtle text-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="ti ti-trash fs-4 me-2"></i></a>
 				</div>'
 			);
 		}

@@ -238,6 +238,7 @@ function saveDataV2(formSelection, idBtnSave = "btnSave") {
           }, 2000);
         }
       } else {
+
         toastr.error(res.message, res.title);
       }
       setTimeout(() => {
