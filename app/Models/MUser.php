@@ -4,14 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Muser extends Model
+class MUser extends Model
 {
 	protected $table                = 'users';
 	protected $primaryKey           = 'id';
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = true;
 	protected $protectFields        = true;
-	protected $allowedFields        = ['fullname', 'username', 'password'];
+	protected $allowedFields        = ['fullname', 'username', 'password', 'permission', 'max_user', 'email'];
 
 	// Dates
 	protected $useTimestamps        = true;

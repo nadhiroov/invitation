@@ -91,7 +91,12 @@
                                 <input name="form[password]" type="text" class="form-control" placeholder="fill a secure password">
                             </div>
                         </div>
-
+                        <div class="col-sm-12">
+                            <div class="form-group form-group-default">
+                                <label>Max user</label>
+                                <input name="form[max_user]" type="text" class="form-control" placeholder="fill max user">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

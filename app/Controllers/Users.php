@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\MPengaturan;
-use App\Models\Muser;
+use App\Models\MUser;
 
 class Users extends Core
 {
@@ -11,7 +11,7 @@ class Users extends Core
 	public function __construct()
 	{
 		parent::__construct();
-		$this->model = new Muser();
+		$this->model = new MUser();
 		$this->setting = new MPengaturan();
 	}
 
